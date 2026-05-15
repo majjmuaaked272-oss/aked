@@ -1,0 +1,3721 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>حساب قياسات المطابخ - Luxury Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<meta name="msapplication-navbutton-color" content="#000000">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+
+
+<!-- خط Tajawal -->
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================
+   المتغيرات العامة (الألوان، الظلال)
+============================ */
+
+
+
+
+
+:root{
+  --gold: #c9a44c;
+  --gold-2: #f6e27a;
+  --white: #ffffff;
+  --black: #000000;
+  --light-gray: #666666;
+  --hover-shadow:0 15px 30px rgba(201,164,76,0.5);
+}
+
+/* ============================
+   إعادة ضبط أساسية (RESET)
+============================ */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cairo','Segoe UI', Tahoma, sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+
+html, body {
+  height: 100%;
+  direction: rtl;
+}
+
+/* ============================
+   جسم الصفحة (الخلفية والنصوص)
+============================ */
+body{
+  background: var(--white) !important;
+  color: var(--black) !important;
+  overflow-x: hidden;
+  font-family: 'Cairo','Segoe UI', Tahoma, sans-serif;
+}
+
+/* ============================
+   شريط التمرير
+============================ */
+::-webkit-scrollbar{ width: 8px; }
+::-webkit-scrollbar-thumb{ background: var(--gold); border-radius: 10px; }
+
+/* ============================
+   الهيدر
+============================ */
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background:#fff;
+  border-bottom:1px solid rgba(191,163,108,0.35);
+  box-shadow: 0 20px 20px rgba(0,0,0,0.12);
+  z-index: 7000;
+}
+.header-top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--gold);
+  z-index: 2000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+.header-container {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+}
+header h1 {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--gold) !important;
+  text-shadow: none !important;
+}
+nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+nav a {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold) !important;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 6px;
+  transition: .3s ease;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg,var(--gold),var(--gold-2)) !important;
+  transition: .35s ease;
+}
+nav a:hover { color: var(--gold); }
+nav a:hover::after{ width:100%; }
+.admin-btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  background:linear-gradient(135deg,#BFA36C,#D4B873);
+  border-radius:50%;
+  color:#fff;
+  transition: transform .3s, box-shadow .3s;
+}
+.admin-btn:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(191,163,108,0.4); }
+.admin-btn svg { width:22px; height:22px; }
+
+/* ============================
+   هيكل الصفحة الرئيسي
+============================ */
+main{
+  padding: 140px 60px;
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ============================
+   جزء التحكم/المدخلات
+============================ */
+.controls{
+  flex: 1;
+  min-width: 320px;
+}
+.controls h2{
+  font-size: 42px;
+  color: var(--black);
+  margin-bottom: 30px;
+}
+.controls h3{
+  font-size: 22px;
+  color: var(--black);
+  margin-top:20px;
+  margin-bottom:10px;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+.option-btn {
+  position: relative;
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+.option-btn:hover {
+  color: var(--gold);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(201, 164, 76, 0.4), 0 5px 15px rgba(201, 164, 76, 0.2);
+}
+.option-btn.active {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(201, 164, 76, 0.3);
+}
+.option-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+  transform: translateX(-50%);
+}
+.option-btn:hover::after,
+.option-btn.active::after {
+  width: 40%;
+}
+
+/* ============================
+   الحقول النصية و textarea و select
+============================ */
+input,
+input[type="text"],
+input:not([type]),
+textarea,
+select {
+  display: block;
+  width: 100%;
+max-width: 160px;   
+  padding: 8px 10px;  
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fefefe;
+  color: #000;
+  font-size: 13px; 
+  line-height: 1.4;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+input::placeholder,
+textarea::placeholder,
+select::placeholder { color: var(--light-gray); }
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 10px rgba(201,164,76,0.3);
+}
+
+/* ============================
+   النصوص داخل اللوحات / labels
+============================ */
+label, h2, h3, .info-label, .info-value, .info-note, .controls h2, .controls h3 {
+  color: var(--black);
+}
+
+/* ============================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   أزرار الإجراءات
+============================ */
+button.calculate, button.print {
+  margin: 15px 10px;
+  padding: 16px 40px;
+  background: var(--gold);
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: .4s;
+  box-shadow: 0 5px 20px rgba(201,164,76,0.4);
+}
+button.calculate:hover, button.print:hover { box-shadow: 0 15px 30px rgba(201,164,76,0.6); }
+button.save {
+  padding: 12px 28px;
+  background: linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:#000;
+  border:none;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 8px 30px rgba(201,164,76,0.25);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+button.save:hover{ transform: translateY(-3px); box-shadow:0 18px 40px rgba(201,164,76,0.35); }
+.btn-reset{
+  background:transparent;
+  border:2px solid var(--gold);
+  color:var(--gold);
+  padding:12px 22px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:700;
+  transition:.3s;
+}
+.btn-reset:hover{ background:var(--gold); color:#000; box-shadow:var(--hover-shadow); }
+
+/* ============================
+   منطقة عرض النتيجة
+============================ */
+.result{
+  font-size: 28px;
+  color: var(--gold);
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ============================
+   تجاوب (Responsive)
+============================ */
+@media (max-width: 900px){
+  main{ padding: 140px 20px; gap:18px; flex-direction:column; }
+  .header-container{ padding: 14px 20px; }
+}
+
+
+
+
+
+
+
+textarea {
+  width: 100%;         /* يجعل الحقل يملأ المساحة المتاحة */
+  max-width: 600px;    /* أقصى عرض يمكن أن يصل له */
+  min-height: 200px;   /* ارتفاع كبير للحقل */
+  font-size: 16px;     /* تكبير النص */
+  padding: 16px 18px;  /* مساحة داخلية مريحة */
+  border-radius: 10px; /* حواف مستديرة */
+  border: 1px solid #ccc;
+  background: #fefefe;
+  color: #000;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+  resize: vertical;    /* يسمح فقط بتغيير الارتفاع وليس العرض */
+}
+
+
+header nav a {
+  color: #8f6840 !important;
+}
+
+header nav a:hover {
+  color:  rgb(160, 117, 31) !important;
+}
+
+/* إذا تريد تغيير خط التحديد أسفل الرابط عند المرور أيضاً */
+header nav a::after {
+  background: #BFA36C!important;
+}
+
+
+
+/* ============================ 
+   الخط الذهبي المتحرك أعلى الهيدر من اليسار لليمين
+============================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0; /* نبدأ من اليسار */
+  height: 4px;
+background:#BFA36C;
+  width: 0%; /* الطول يبدأ 0% */
+  transform-origin: left; /* نقطة التمدد من اليسار */
+  z-index: 9999;
+  transition: width 0.1s ease;
+}
+
+.modal,
+.modal-content {
+  overflow: hidden !important;
+}
+
+/* إخفاء شريط التمرير مع بقاء التمرير يعمل */
+html {
+  scrollbar-width: none;       /* Firefox */
+}
+
+body {
+  -ms-overflow-style: none;    /* IE و Edge القديم */
+}
+
+body::-webkit-scrollbar {
+  display: none;               /* Chrome, Safari, Edge */
+}
+
+
+.save-message {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-40px);
+  background: linear-gradient(90deg, #111, #222);
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.save-message.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== عداد المتريال العصري ===== */
+.material-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: #fef9f1; /* خلفية فاتحة */
+  border: 1px solid #e2d7a1; /* حد خفيف */
+  box-shadow: 0 4px 12px rgba(201,164,76,0.2);
+  transition: all 0.25s ease;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* تأثير عند المرور على العداد */
+.material-qty:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(201,164,76,0.35);
+}
+
+/* أزرار + و - */
+.material-qty button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gold);
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 3px 10px rgba(201,164,76,0.3);
+  transition: all 0.2s ease;
+}
+
+/* تأثير hover للزر */
+.material-qty button:hover {
+  background: var(--gold-2);
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(201,164,76,0.4);
+}
+
+/* تأثير الضغط على الزر */
+.material-qty button:active {
+  transform: scale(0.95);
+}
+
+/* رقم الكمية */
+.material-qty span,
+.material-qty .qty-count {
+  min-width: 36px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  border-radius: 10px;
+  padding: 4px 0;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* نسخة صغيرة للشاشات الصغيرة */
+@media (max-width: 600px) {
+  .material-qty { gap: 4px; padding: 3px 6px; border-radius: 16px; }
+  .material-qty button { width: 28px; height: 28px; font-size: 16px; }
+  .material-qty span, .material-qty input { min-width: 30px; font-size: 14px; }
+}
+
+
+
+
+
+
+/* ===== زر فخم كبير مع ظل ذهبي عند Hover ===== */
+button.calculate,
+button.save {
+  position: relative;
+  z-index: 9999;
+
+  padding: 12px 28px; /* حجم أكبر */
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  /* لون جديد للزر */
+  background: linear-gradient(135deg, #BFA36C, #FFD966);
+  color: #fff;
+
+  /* ظل أساسي */
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.25),
+    0 8px 20px rgba(0,0,0,0.20);
+
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* عند تمرير الماوس */
+button.calculate:hover,
+button.save:hover {
+  transform: translateY(-5px); /* يطفو للأمام */
+  box-shadow:
+    0 0 12px #FFD700,  /* ضل ذهبي حول الزر */
+    0 8px 20px rgba(0,0,0,0.25),
+    0 14px 40px rgba(0,0,0,0.18);
+  background: linear-gradient(135deg, #FFD966, #FFC700); /* يلمع أكثر */
+}
+
+/* عند الضغط */
+button.calculate:active,
+button.save:active {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 8px #FFD700,
+    0 4px 10px rgba(0,0,0,0.25);
+}
+
+
+/* المودال الأساسي */
+#adminModal {
+  position: fixed;        /* يطفو فوق كل شيء */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* خلفية نصف شفافة */
+  display: none;          /* مخفي بالافتراضي */
+  justify-content: center; /* توسيط المحتوى أفقياً */
+  align-items: center;    /* توسيط المحتوى عمودياً */
+  z-index: 1000;          /* فوق كل العناصر */
+}
+
+/* عند فتح المودال */
+#adminModal.show {
+  display: flex;          /* يظهر كنوافذ منبثقة */
+}
+
+/* صندوق المحتوى الداخلي */
+#adminModal .modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px; /* يمكن تعديل الحجم */
+  max-width: 90%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+/* زر الإغلاق */
+#closeAdminModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+
+
+
+
+
+
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.admin-modal.show {
+  display: flex;
+}
+
+.admin-box {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== ADMIN MODAL (FINAL APPLIED) ===== */
+
+#adminModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+#adminModal.show {
+  display: flex;
+}
+
+/* ===== MODAL BOX ===== */
+#adminModal .modal-box {
+  background: linear-gradient(180deg,#ffffff,#fbfbfb);
+  border-radius: 18px;
+  padding: 28px 30px;
+  max-width: 420px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 30px 80px rgba(18,18,18,0.25);
+  animation: slideUp 0.35s ease;
+  position: relative;
+  border: 1px solid rgba(191,163,108,0.08);
+  text-align: right;
+}
+
+.admin-btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  background:linear-gradient(135deg,#BFA36C,#D4B873);
+  border-radius:50%;
+  color:#fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.admin-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(191,163,108,0.4);
+}
+.admin-btn svg {
+  width:22px;
+  height:22px;
+}
+
+#adminModal .modal-box input{
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid #ddd; margin-top:6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= ADMIN MODAL ================= */
+/* تنسيق نافذة الأدمن المنبثقة بالكامل */
+
+/* ===== خلفية النافذة (التعتيم) ===== */
+#adminModal {
+  position: fixed;              /* تثبيت العنصر فوق الصفحة ولا يتحرك مع السك롤 */
+  inset: 0;                     /* top/right/bottom/left = 0 → يملأ الشاشة */
+  background: rgba(0,0,0,0.45); /* لون أسود شفاف لتعتيم الخلفية */
+  backdrop-filter: blur(6px);   /* ضبابية لما خلف النافذة */
+  display: none;                /* إخفاء النافذة افتراضياً */
+  justify-content: center;      /* توسيط المحتوى أفقياً */
+  align-items: center;          /* توسيط المحتوى عمودياً */
+  z-index: 9999;                /* ضمان ظهورها فوق كل العناصر */
+  padding: 24px;                /* مسافة من أطراف الشاشة */
+  animation: fadeIn 0.3s ease;  /* حركة ظهور تدريجية */
+}
+
+/* عند إضافة class show يتم إظهار النافذة */
+#adminModal.show {
+  display: flex;                /* تفعيل flex لإظهارها */
+}
+
+/* ===== صندوق النافذة الأبيض ===== */
+#adminModal .modal-box {
+  background: linear-gradient(180deg,#ffffff,#fbfbfb); /* خلفية متدرجة */
+  border-radius: 18px;          /* تدوير الزوايا */
+  padding: 28px 30px;           /* مسافة داخلية */
+  max-width: 420px;             /* أقصى عرض للصندوق */
+  width: 100%;                  /* عرض مرن حسب الشاشة */
+  text-align: right;            /* محاذاة النص لليمين (عربي) */
+  position: relative;           /* للسماح بوضع زر الإغلاق داخله */
+  border: 1px solid rgba(191,163,108,0.08); /* إطار خفيف */
+  box-shadow: 0 30px 80px rgba(18,18,18,0.25); /* ظل للصندوق */
+  animation: slideUp 0.35s ease; /* حركة صعود عند الظهور */
+}
+
+/* ===== عنوان النافذة ===== */
+#adminModal .modal-box h2 {
+  font-size: 20px;              /* حجم الخط */
+  font-weight: 900;             /* سماكة الخط */
+  color: #BFA36C;               /* لون ذهبي */
+  margin-bottom: 18px;          /* مسافة أسفل العنوان */
+}
+
+/* ===== زر الإغلاق (X) ===== */
+#adminModal .close {
+  position: absolute;           /* وضعه داخل الصندوق بشكل حر */
+  top: 18px;                    /* من الأعلى */
+  right: 355px;                  /* من اليمين */
+  width: 44px;                  /* عرض الزر */
+  height: 44px;                 /* ارتفاع الزر */
+  border-radius: 50%;           /* جعله دائري */
+  border: none;                 /* إزالة الإطار */
+  background: linear-gradient(135deg,#000000,#000000); /* تدرج ذهبي */
+  color: #fff;                  /* لون النص أبيض */
+  font-size: 24px;              /* حجم رمز X */
+  font-weight: 700;             /* سماكة الرمز */
+  cursor: pointer;              /* شكل يد عند المرور */
+  display: flex;                /* لتوسيط الرمز */
+  align-items: center;          /* توسيط عمودي */
+  justify-content: center;      /* توسيط أفقي */
+  line-height: 1;               /* ضبط ارتفاع السطر */
+  transition: transform 0.3s, background 0.3s; /* حركة ناعمة */
+}
+
+/* تأثير عند المرور على زر الإغلاق */
+#adminModal .close:hover {
+  background: linear-gradient(135deg,#D4B873,#BFA36C); /* عكس التدرج */
+  transform: scale(1.1);        /* تكبير خفيف */
+}
+
+/* ===== حقول الإدخال ===== */
+#adminModal input {
+  width: 100% !important;
+  height: 46px !important;
+  padding: 0 14px !important;
+  border-radius: 12px !important;
+  border: 1px solid #E8E8E8 !important;
+  background: #fff !important;
+  font-family: 'Tajawal','Segoe UI',Tahoma,sans-serif !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+  margin-top: 10px !important;
+  transition: 0.25s !important;
+}
+
+/* عند التركيز على الحقل */
+#adminModal input:focus {
+  outline: none;                /* إزالة الإطار الأزرق الافتراضي */
+  border-color: #BFA36C;        /* إطار ذهبي */
+  box-shadow: 0 6px 20px rgba(191,163,108,0.12); /* ظل خفيف */
+}
+
+/* ===== منطقة الأزرار ===== */
+#adminModal .modal-actions {
+  display: flex;                /* ترتيب الأزرار أفقياً */
+  align-items: center;          /* محاذاة عمودية */
+  gap: 12px;                    /* مسافة بين الأزرار */
+  margin-top: 20px;             /* مسافة أعلى */
+  padding-top: 12px;            /* مسافة داخلية أعلى */
+  border-top: 1px solid #f3f3f3;/* خط فاصل */
+}
+
+/* عنصر فارغ لدفع الأزرار */
+#adminModal .modal-actions .spacer {
+  flex: 1;                      /* يأخذ المساحة الفارغة */
+}
+
+/* ===== زر عام ===== */
+#adminModal .btn {
+  padding: 10px 20px;           /* حجم الزر */
+  border-radius: 12px;          /* تدوير الزوايا */
+  border: none;                 /* بدون إطار */
+  font-weight: 700;             /* خط عريض */
+  cursor: pointer;              /* يد عند المرور */
+  transition: 0.35s;            /* حركة ناعمة */
+}
+
+/* زر ذهبي */
+#adminModal .btn.gold {
+  background: linear-gradient(135deg,#BFA36C,#D4B873);
+  color: #fff;
+}
+
+/* زر رمادي */
+#adminModal .btn.gray {
+  background: #e0e0e0;
+  color: #333;
+}
+
+/* تأثير المرور على الأزرار */
+#adminModal .btn:hover {
+  transform: translateY(-2px);  /* ارتفاع بسيط */
+  box-shadow: 0 10px 30px rgba(0,0,0,.12); /* ظل */
+}
+
+/* ===== رسالة الخطأ ===== */
+#adminMsg {
+  margin-top: 12px;             /* مسافة من الأعلى */
+  font-size: 14px;              /* حجم الخط */
+  color: #C0392B;               /* لون أحمر */
+  font-weight: 700;             /* خط عريض */
+}
+
+/* ===== الحركات ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }          /* بداية شفافة */
+  to   { opacity: 1; }          /* نهاية ظاهرة */
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; } /* من أسفل */
+  to   { transform: translateY(0); opacity: 1; }    /* للمكان الطبيعي */
+}
+
+/* ===== إخفاء شريط التمرير ===== */
+#adminModal,
+#adminModal * {
+  scrollbar-width: none;        /* إخفاء السك롤 في فايرفوكس */
+}
+
+#adminModal::-webkit-scrollbar,
+#adminModal *::-webkit-scrollbar {
+  display: none;                /* إخفاء السك롤 في كروم */
+}
+
+
+
+
+
+#adminModal input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid #E8E8E8;
+  background: #fff;
+  font-family: 'Tajawal','Segoe UI',Tahoma,sans-serif;
+  font-size: 14px;       /* تأكد نفس الحجم */
+  box-sizing: border-box;
+  margin-top: 10px;
+  transition: 0.25s;
+}
+
+
+
+
+
+#adminModal input {
+  width: 100% !important;           /* يملأ الصندوق بالكامل */
+  height: 30px ;          /* إجبار الطول الجديد */
+  min-height: 60px !important;      /* يمنع أي CSS آخر من تقليله */
+  padding: 0 14px !important;       /* المسافة الداخلية */
+  border-radius: 12px !important;   /* الزوايا */
+  border: 1px solid #E8E8E8 !important;
+  background: #fff !important;
+  font-family: 'Tajawal','Segoe UI',Tahoma,sans-serif !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important; /* يحسب padding والإطار داخل الارتفاع */
+  margin-top: 10px !important;
+}
+#adminModal input {
+  width: 100% !important;       /* يملأ الصندوق بالكامل */
+  max-width: 400px !important;  /* أقصى عرض متساوي */
+  height: 46px !important;      /* الارتفاع */
+  padding: 0 14px !important;
+  box-sizing: border-box !important;
+}
+
+
+#adminModal input {
+  width: 100% !important;         /* عرض كامل */
+  max-width: 400px !important;    /* أقصى عرض */
+  height: 40px !important;        /* الارتفاع النهائي الصغير */
+  min-height: 0 !important;       /* يلغي أي حد أدنى */
+  padding: 0 10px !important;     /* مسافة داخلية صغيرة لتناسب الارتفاع */
+  border-radius: 8px !important;  
+  border: 1px solid #E8E8E8 !important;
+  background: #fff !important;
+  font-family: 'Tajawal','Segoe UI',Tahoma,sans-serif !important;
+  font-size: 14px !important;
+  line-height: 14px !important;   /* مهم لتقليل المسافة الداخلية للنص */
+  box-sizing: border-box !important;
+  margin-top: 8px !important;
+}
+
+.admin-btn svg {
+  fill: #fff !important; /* يجعل أي أيقونة داخل الزر بيضاء */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* أجهزة لوحية كبيرة (آيباد أفقي) */
+@media (max-width:1024px) {
+  .page { grid-template-columns: 1fr 320px; padding:0 12px; }
+}
+
+/* أجهزة لوحية صغيرة وهاتف كبير */
+@media (max-width:820px) {
+  header { padding:0 12px; }
+  .page { grid-template-columns: 1fr; margin-top:120px; padding:0 12px; }
+  .sidebar { order:2; }
+  .list .item { grid-template-columns: 1fr 1fr; }
+  .field .label { min-width:120px; font-size:12px; }
+}
+
+
+
+
+/* هواتف صغيرة */
+@media (max-width:480px) {
+  .field { flex-direction:column; align-items:flex-start; gap:6px; }
+  .field .label { text-align:left; }
+  .actions { flex-direction:column; gap:6px; }
+  nav.header-nav { flex-direction:column; gap:6px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   DARK ORANGE THEME — المطابخ (نسخة مظلمة برتقالية كاملة)
+   استبدل كل محتوى <style> بهذا الملف
+============================================================ */
+
+/* ===== خط Cairo ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+
+/* ===== المتغيرات الأساسية ===== */
+:root {
+  --orange:        #e8833a;
+  --orange-2:      #f5a55c;
+  --orange-glow:   #ff9a4d;
+  --orange-deep:   #c05e1a;
+  --bg-main:       #0d0d0d;
+  --bg-card:       #161616;
+  --bg-hover:      #1e1e1e;
+  --bg-input:      #1a1a1a;
+  --border:        rgba(232, 131, 58, 0.2);
+  --border-active: rgba(232, 131, 58, 0.7);
+  --text:          #e8e2d9;
+  --text-dim:      #8a8278;
+  --text-muted:    #555050;
+  --white:         #ffffff;
+  --black:         #000000;
+  --hover-shadow:  0 15px 35px rgba(232, 131, 58, 0.35);
+  --card-shadow:   0 8px 32px rgba(0, 0, 0, 0.6);
+  --glow-sm:       0 0 12px rgba(232, 131, 58, 0.25);
+  --glow-md:       0 0 24px rgba(232, 131, 58, 0.4);
+  --glow-lg:       0 0 40px rgba(232, 131, 58, 0.55);
+}
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  direction: rtl;
+}
+
+/* ===== Body ===== */
+body {
+  background: var(--bg-main) !important;
+  color: var(--text) !important;
+  overflow-x: hidden;
+}
+
+/* خلفية شبكية خفية للعمق */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(232,131,58,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,131,58,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-card); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--orange), var(--orange-deep));
+  border-radius: 10px;
+}
+html { scrollbar-width: none; }
+body { -ms-overflow-style: none; }
+body::-webkit-scrollbar { display: none; }
+
+/* ===== شريط التقدم العلوي ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), var(--orange-2));
+  width: 0%;
+  transform-origin: left;
+  z-index: 9999;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px var(--orange);
+}
+
+/* ===== Header ===== */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  z-index: 7000;
+}
+
+.header-top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--orange);
+  z-index: 2000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+}
+
+header h1 {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--orange) !important;
+  text-shadow: var(--glow-sm);
+}
+
+/* ===== Navigation ===== */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+nav a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim) !important;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-2));
+  transition: width 0.35s ease;
+}
+
+nav a:hover {
+  color: var(--orange) !important;
+}
+
+nav a:hover::after { width: 100%; }
+
+/* زر الأدمن ===== */
+.admin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  border-radius: 50%;
+  color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--border-active);
+}
+
+.admin-btn:hover {
+  transform: scale(1.1) rotate(8deg);
+  box-shadow: var(--glow-md);
+}
+
+.admin-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff !important;
+}
+
+/* ===== Main Layout ===== */
+main {
+  padding: 130px 60px 60px;
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Controls Panel ===== */
+.controls {
+  flex: 1;
+  min-width: 320px;
+}
+
+.controls h2 {
+  font-size: 38px;
+  color: var(--text);
+  margin-bottom: 28px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+/* خط برتقالي تحت العنوان الرئيسي */
+.controls h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), transparent);
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+.controls h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+
+/* ===== Option Buttons ===== */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 4px;
+}
+
+.option-btn {
+  position: relative;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+.option-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(232,131,58,0.05));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.option-btn:hover {
+  color: var(--orange);
+  border-color: var(--border-active);
+  transform: translateY(-4px);
+  box-shadow: var(--hover-shadow);
+  background: var(--bg-hover);
+}
+
+.option-btn:hover::before { opacity: 1; }
+
+.option-btn.active {
+  color: var(--orange);
+  border-color: var(--orange);
+  background: rgba(232,131,58,0.08);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-sm), 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.option-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background: var(--orange);
+  transition: width 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.option-btn:hover::after,
+.option-btn.active::after { width: 50%; }
+
+/* ===== Inputs, Textarea, Select ===== */
+input,
+input[type="text"],
+input:not([type]),
+textarea,
+select {
+  display: block;
+  width: 100%;
+  max-width: 160px;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder { color: var(--text-muted); }
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--orange);
+  background: rgba(232,131,58,0.04);
+  box-shadow: var(--glow-sm), inset 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* ===== Textarea الكبيرة ===== */
+textarea {
+  width: 100%;
+  max-width: 600px;
+  min-height: 180px;
+  font-size: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  resize: vertical;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* ===== Labels & Headings ===== */
+label,
+.info-label,
+.info-value,
+.info-note {
+  color: var(--text);
+}
+
+/* ===== Action Buttons ===== */
+button.calculate,
+button.print {
+  position: relative;
+  margin: 12px 8px;
+  padding: 13px 34px;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(232,131,58,0.3), 0 1px 0 rgba(255,255,255,0.05) inset;
+  letter-spacing: 0.5px;
+  z-index: 9999;
+}
+
+button.calculate:hover,
+button.print:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-lg), 0 8px 24px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+}
+
+button.calculate:active,
+button.print:active {
+  transform: translateY(-1px);
+}
+
+button.save {
+  position: relative;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(232,131,58,0.25), 0 1px 0 rgba(255,255,255,0.05) inset;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 9999;
+}
+
+button.save:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glow-md), 0 10px 30px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+}
+
+button.save:active { transform: translateY(-1px); }
+
+.btn-reset {
+  background: transparent;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  padding: 10px 22px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.btn-reset:hover {
+  background: var(--orange);
+  color: var(--black);
+  box-shadow: var(--hover-shadow);
+}
+
+/* ===== Result Display ===== */
+.result {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--orange);
+  text-shadow: var(--glow-sm);
+  margin-top: 18px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* ===== عداد المتريال ===== */
+.material-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  transition: all 0.25s ease;
+  font-family: 'Cairo', sans-serif;
+}
+
+.material-qty:hover {
+  transform: scale(1.04);
+  box-shadow: var(--glow-sm), 0 6px 16px rgba(0,0,0,0.4);
+  border-color: var(--border-active);
+}
+
+.material-qty button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 3px 8px rgba(232,131,58,0.3);
+  transition: all 0.2s ease;
+}
+
+.material-qty button:hover {
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+  transform: scale(1.12);
+  box-shadow: var(--glow-sm);
+}
+
+.material-qty button:active { transform: scale(0.93); }
+
+.material-qty span,
+.material-qty .qty-count {
+  min-width: 34px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg-input);
+  border-radius: 8px;
+  padding: 4px 0;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+}
+
+/* ===== لوحة المعلومات (kitchenInfo) ===== */
+#kitchenInfo {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--card-shadow) !important;
+  color: var(--text) !important;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* اضف تمييزاً فوقي */
+#kitchenInfo::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), var(--orange-2), transparent);
+}
+
+#kitchenInfo h2 {
+  color: var(--orange) !important;
+  text-shadow: var(--glow-sm);
+}
+
+#currentDate { color: var(--text-muted) !important; }
+
+#customerNameHeader { color: var(--orange) !important; }
+
+#kitchenInfoContent {
+  color: var(--text-dim) !important;
+}
+
+/* خطوط المعلومات ===== */
+.info-line {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(232,131,58,0.06);
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.info-label {
+  color: var(--orange) !important;
+  font-weight: 700;
+}
+
+.info-value {
+  color: var(--text) !important;
+}
+
+.info-note {
+  color: var(--text-dim) !important;
+  font-size: 13px;
+  font-style: italic;
+  white-space: pre-line;
+}
+
+/* السعر الكلي في infoBox */
+#totalPrice {
+  color: var(--orange) !important;
+  text-shadow: var(--glow-sm);
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+
+/* ===== رسالة الحفظ ===== */
+.save-message {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-40px);
+  background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+  border: 1px solid var(--border-active);
+  color: var(--text);
+  padding: 14px 22px;
+  border-radius: 12px;
+  box-shadow: var(--glow-md), 0 12px 30px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.save-message .icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.save-message.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== Admin Modal ===== */
+#adminModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+#adminModal.show { display: flex; }
+
+#adminModal .modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 30px;
+  max-width: 400px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: var(--glow-sm), 0 30px 80px rgba(0,0,0,0.8);
+  animation: slideUp 0.35s ease;
+  position: relative;
+  text-align: right;
+}
+
+/* شريط لوني علوي */
+#adminModal .modal-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), var(--orange-2));
+  border-radius: 16px 16px 0 0;
+}
+
+#adminModal .modal-box h2 {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--orange);
+  margin-bottom: 18px;
+  text-shadow: var(--glow-sm);
+}
+
+/* زر الإغلاق */
+#adminModal .close {
+  position: absolute;
+  top: 16px;
+  right: 355px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-hover);
+  color: var(--text-dim);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+#adminModal .close:hover {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  border-color: var(--orange);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: var(--glow-sm);
+}
+
+/* حقول الإدخال داخل المودال */
+#adminModal input {
+  width: 100% !important;
+  max-width: 400px !important;
+  height: 42px !important;
+  min-height: 0 !important;
+  padding: 0 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  background: var(--bg-input) !important;
+  color: var(--text) !important;
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 14px !important;
+  line-height: normal !important;
+  box-sizing: border-box !important;
+  margin-top: 8px !important;
+  transition: 0.25s !important;
+}
+
+#adminModal input:focus {
+  outline: none !important;
+  border-color: var(--orange) !important;
+  box-shadow: var(--glow-sm) !important;
+  background: rgba(232,131,58,0.04) !important;
+}
+
+#adminModal label {
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* أزرار المودال */
+#adminModal .modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+#adminModal .modal-actions .spacer { flex: 1; }
+
+#adminModal .btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#adminModal .btn.gold {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(232,131,58,0.3);
+}
+
+#adminModal .btn.gold:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-md);
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+}
+
+#adminModal .btn.gray {
+  background: var(--bg-hover);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+#adminModal .btn.gray:hover {
+  background: var(--bg-input);
+  color: var(--text);
+  border-color: var(--border-active);
+}
+
+#adminMsg {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+/* رسائل النجاح */
+#adminMsg[style*="green"] {
+  color: #2ecc71 !important;
+}
+
+/* ===== إخفاء السكرول داخل المودال ===== */
+#adminModal, #adminModal * {
+  scrollbar-width: none;
+}
+#adminModal::-webkit-scrollbar,
+#adminModal *::-webkit-scrollbar { display: none; }
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  main { padding: 130px 20px 40px; gap: 20px; flex-direction: column; }
+  .header-container { padding: 14px 20px; }
+  header h1 { font-size: 20px; }
+}
+
+@media (max-width: 820px) {
+  .header-container { padding: 12px 16px; }
+  .controls h2 { font-size: 28px; }
+}
+
+@media (max-width: 600px) {
+  .material-qty { gap: 4px; padding: 3px 6px; }
+  .material-qty button { width: 26px; height: 26px; font-size: 14px; }
+  .material-qty span { min-width: 28px; font-size: 13px; }
+  nav { gap: 14px; }
+  nav a { font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .options { gap: 8px; }
+  .option-btn { padding: 8px 16px; font-size: 13px; }
+  button.calculate, button.save { width: 100%; margin: 8px 0; text-align: center; }
+}
+
+</style>
+
+
+</head>
+<body>
+
+
+
+<header>
+
+
+  <div class="scroll-progress"></div>
+
+    
+    <div class="header-container">
+      <h1>المطابخ </h1>
+      <nav>
+       <a href="index.html">الرئيسية</a>
+       <a href="#">مطابخ</a>
+       <a href="#"> ------</a>
+       <a href="#">------ </a>
+       <a href="coming-soon.html">قيد الأنشاء
+         </a>
+      <!-- استبدل هذا الرابط الحالي -->
+<!-- <a href="#">الأدمن</a> -->
+
+<!-- برابط أيقونة -->
+<a href="#" class="admin-btn" title="الأدمن" aria-label="الأدمن">
+  <!-- رمز مفتاح SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M3 8a5 5 0 1 1 9.9 1H15v3h-3v-3h1.1a5 5 0 0 1-10.1-1zM8 1a7 7 0 0 0-7 7 7 7 0 0 0 7 7 7 7 0 0 0 7-7 7 7 0 0 0-7-7z"/>
+  </svg>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+      </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<main>
+<div class="controls">
+<h2>حساب القياسات </h2>
+
+
+
+
+
+<h3>اسم الزبون</h3>
+<input type="text" id="clientName" placeholder="اسم الزبون">
+
+
+<h3>نوع الخشب</h3>
+<div class="options" id="woodOptions"></div>
+
+<h3>عدد الطوابق</h3>
+
+<div class="options" id="floorsOptions"></div>
+
+
+
+<h3>الإضافات</h3>
+<div class="options" id="extrasOptions"></div>
+<div id="extrasInputs" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;"></div>
+
+<h3>المتريال</h3>
+<div class="options" id="materialsOptions"></div>
+<textarea class="notes" placeholder="إضافة ملاحظة عامة"></textarea>
+
+<div style="margin-top:20px;">
+<div style="margin-top:20px;">
+  <div style="display:flex; align-items:center; gap:20px;">
+    <button class="calculate" onclick="calculate()">احسب المجموع</button>
+
+    <!-- مكان عرض السعر مقابِل زر الحساب -->
+    <div id="result" class="result">—</div>
+  </div>
+
+  <!-- زر الحفظ تحت زر الحساب -->
+  <div style="margin-top:12px;">
+  <button class="save" id="saveBtn">حفظ</button>
+
+  </div>
+</div>
+
+
+ <div class="result" id="result"> </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ===== لوحة المعلومات التفاعلية A4 - ألوان جديدة ===== -->
+<div id="kitchenInfo" style="
+    flex:0 0 400px;
+    position:relative;
+    background:linear-gradient(180deg,#ffffff,#f9f9f9); /* خلفية فاتحة */
+    border-radius:12px;
+    padding:20px;
+    color:#333; /* لون النصوص الأساسي */
+    box-shadow:0 8px 30px rgba(0,0,0,0.1); /* ظل خفيف */
+    font-family:'Cairo',sans-serif;
+">
+
+  <!-- رأس اللوحة -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+    <div style="font-size:12px;color:#999;" id="currentDate"></div> <!-- لون رمادي فاتح -->
+    <div id="customerNameHeader" style="font-size:12px; color:#c9a44c; font-weight:600;">—</div> <!-- ذهبي -->
+  </div>
+
+  <!-- عنوان الشركة -->
+  <h2 style="text-align:center;color:#c9a44c;margin:0;font-weight:900;letter-spacing:1px;">
+    شركة   <B>أكد</B>
+  </h2>
+
+  <!-- الخطين الافقيين -->
+  <div style="position:relative;height:20px;margin:10px 0;">
+    <div style="position:absolute;top:50%;left:0;width:100%;height:2px;background:#c9a44c;transform:translateY(-50%);"></div>
+    <div style="position:absolute;top:0;right:50%;width:2px;height:100%;background:#c9a44c;transform:translateX(50%);"></div>
+  </div>
+
+  <!-- المحتوى الحي -->
+  <div id="kitchenInfoContent" style="text-align:center;font-size:16px;line-height:1.8;color:#555;">
+    <!-- نصوص المحتوى ستكون رمادية داكنة لسهولة القراءة على الخلفية البيضاء -->
+  </div>
+
+</div>
+
+<!-- رسالة الحفظ -->
+<div id="saveMessage" class="save-message" aria-hidden="true" role="status">
+  <div class="icon">✓</div>
+  <div class="text">
+    <div>تم حفظ بيانات المطبخ</div>
+    <div style="font-weight:600; font-size:12px; opacity:.9;">تم الحفظ بنجاح في المتصفح</div>
+  </div>
+</div>
+
+
+<!-- Admin Password Modal -->
+<div id="adminModal" class="modal" aria-hidden="true">
+  <div class="modal-box" style="max-width:420px;text-align:right;">
+    <button class="close" id="closeAdminModal">✕</button>
+    <h2>تسجيل الدخول للأدمن</h2>
+    <div id="adminStep1">
+      <label>أدخل كلمة المرور:</label>
+      <input type="password" id="adminPassword" placeholder="كلمة المرور">
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button id="adminLoginBtn" class="btn gold">دخول</button>
+        <button id="adminChangeBtn" class="btn gray">تغيير كلمة المرور</button>
+      </div>
+    </div>
+    
+    <div id="adminStep2" style="display:none;">
+      <label>أدخل كلمة المرور القديمة:</label>
+      <input type="password" id="oldPassword" placeholder="كلمة المرور القديمة">
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button id="verifyOldBtn" class="btn gold">تحقق</button>
+      </div>
+    </div>
+    
+    <div id="adminStep3" style="display:none;">
+      <label>أدخل كلمة المرور الجديدة:</label>
+      <input type="password" id="newPassword" placeholder="كلمة المرور الجديدة">
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button id="saveNewBtn" class="btn gold">حفظ</button>
+      </div>
+    </div>
+    
+    <p id="adminMsg" style="color:red; margin-top:12px;"></p>
+  </div>
+</div>
+
+
+</main>
+<script>
+/* ===== دالة التقريب للأعلى (موحدة) ===== */
+function calcRoundedLength(value) {
+  if (!value) return 0;
+  const v = parseFloat(
+    value.replace(/[٠-٩]/g, d => "0123456789"[d.charCodeAt(0) - 1632])
+         .replace(/[^0-9.]/g,'')
+  );
+  if (isNaN(v) || v <= 0) return 0;
+  return Math.ceil(v);
+}
+
+
+
+
+
+function setLine(key, label, value = "", isNote = false) {
+  let div = infoLines[key];
+  if (!div) {
+    div = document.createElement("div");
+    div.className = isNote ? "info-note" : "info-line";
+    infoBox.appendChild(div);
+    infoLines[key] = div;
+  }
+
+  if (isNote) {
+    div.textContent = value;
+    return;
+  }
+
+  // إيقاف أي كتابة سابقة
+  if (div._typingInterval) clearInterval(div._typingInterval);
+
+  div.innerHTML = `<span class="info-label">${label}</span>: <span class="info-value"></span>`;
+  const valueSpan = div.querySelector(".info-value");
+  valueSpan.textContent = "";
+
+  // إزالة أي HTML موجود مسبقاً
+  let plainText = value.replace(/<[^>]*>/g, "").trim();
+
+  // نحول أي m بعد رقم إلى صغير باستخدام span
+  const formatUnits = txt => txt.replace(/(\d+)\s*m/gi, '$1<span style="font-size:0.65em;">m</span>');
+
+  let index = 0;
+  div._typingInterval = setInterval(() => {
+    let textToShow = plainText.slice(0, index + 1);
+    textToShow = formatUnits(textToShow); // نطبق تصغير الحرف أثناء الكتابة التدريجية
+    valueSpan.innerHTML = textToShow;
+    index++;
+    if (index >= plainText.length) clearInterval(div._typingInterval);
+  }, 30);
+}
+
+function removeLine(key) {
+  if (infoLines[key]) {
+    infoLines[key].remove();
+    delete infoLines[key];
+  }
+}
+
+/* ===== التاريخ والاسم في الهيدر ===== */
+function updateDate() {
+  const d = new Date();
+  document.getElementById("currentDate").textContent =
+    d.toLocaleDateString() + " " + d.toLocaleTimeString();
+}
+setInterval(updateDate, 1000);
+updateDate();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const clientNameInput = document.getElementById("clientName");
+  const customerHeader = document.getElementById("customerNameHeader");
+
+  if (clientNameInput && customerHeader) {
+    clientNameInput.addEventListener("input", function () {
+      const name = this.value.trim();
+      customerHeader.textContent = name !== "" ? name : "—";
+    });
+  }
+
+ const notesTextarea = document.querySelector("textarea.notes");
+if (notesTextarea) {
+  // إضافة - عند بداية الكتابة
+  notesTextarea.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault(); // منع السلوك الافتراضي
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+      const value = this.value;
+      // أضف سطر جديد يبدأ بـ "-"
+      this.value = value.substring(0, start) + "\n- " + value.substring(end);
+      this.selectionStart = this.selectionEnd = start + 3; // مكان المؤشر بعد -
+      // تحديث اللوحة
+      setLine("notes", "ملاحظات", this.value, true);
+    }
+  });
+
+  // إضافة - إذا كان النص فارغ عند أول كتابة
+  notesTextarea.addEventListener("input", () => {
+    if (!notesTextarea.value.startsWith("- ")) {
+      notesTextarea.value = "- " + notesTextarea.value;
+    }
+    setLine("notes", "ملاحظات", notesTextarea.value, true);
+  });
+}
+
+});
+
+
+
+/* ===== إنشاء أزرار الطوابق (اختيار متعدد + إخفاء السعر داخل الزر) ===== */
+function renderFloorButtons() {
+  floorsOptionsBox.innerHTML = "";
+  (data.floors || []).forEach((f, idx) => {
+    const b = document.createElement("button");
+    b.className = "option-btn";
+    b.textContent = f.name; // نعرض الاسم فقط، بدون السعر
+    b.dataset.id = f.id;
+
+    b.onclick = () => {
+      // تفعيل الزر/إلغاء التفعيل للزر الحالي
+      b.classList.toggle("active");
+
+      if (b.classList.contains("active")) {
+        // تم اختيار الطابق، نضيفه للوحة infoBox
+        setLine("floor_" + f.id, `طابق: ${f.name}`, "-", false);
+        createFloorInputsForSelected(f); // إنشاء مدخلات L/W/H للطابق
+      } else {
+        // تم إلغاء اختيار الطابق
+        removeLine("floor_" + f.id);
+        const grp = document.getElementById("inputs_" + f.id);
+        if (grp) grp.remove();
+      }
+    };
+
+    floorsOptionsBox.appendChild(b);
+  });
+
+  // إذا لم يكن هناك طوابق
+  if (!data.floors || data.floors.length === 0) {
+    const hint = document.createElement("div");
+    hint.style.color = "#ccc";
+    hint.style.fontSize = "13px";
+    hint.style.marginTop = "6px";
+    hint.textContent = "لم يتم تعريف أي طوابق بعد — أضف طوابق من صفحة الأدمن.";
+    floorsOptionsBox.appendChild(hint);
+  }
+}
+
+/* إنشاء مدخلات L/W/H لكل طابق مختار (اختيار متعدد) */
+function createFloorInputsForSelected(f) {
+  // تحقق إذا كانت المدخلات موجودة مسبقاً للطابق
+  if (document.getElementById("inputs_" + f.id)) return;
+
+  const group = document.createElement("div");
+  group.id = "inputs_" + f.id;
+  group.style.display = "flex";
+  group.style.flexWrap = "wrap";
+  group.style.gap = "8px";
+  group.style.marginTop = "6px";
+
+  const length = document.createElement("input");
+  length.placeholder = `L (${f.name}) (م)`;
+  length.dataset.field = "L";
+
+  const width = document.createElement("input");
+  width.placeholder = `W (${f.name}) (م)`;
+  width.dataset.field = "W";
+
+  const height = document.createElement("input");
+  height.placeholder = `H (${f.name}) (م)`;
+  height.dataset.field = "H";
+
+  group.append(length, width, height);
+  floorsOptionsBox.appendChild(group);
+
+ 
+}
+
+
+/* ===== عرض أنواع الخشب (data.woods) ===== */
+function renderWoodOptions() {
+  woodBox.innerHTML = "";
+  (data.woods || []).forEach((w, i) => {
+    const b = document.createElement("button");
+    b.className = "option-btn";
+    b.textContent = w.name || (`خشب ${i+1}`);
+    b.onclick = () => {
+      document.querySelectorAll("#woodOptions .option-btn").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      selectedWood = w;
+      setLine("wood", "نوع الخشب", w.name || "—");
+      selectionCount++;
+      revealPart();
+    };
+    woodBox.appendChild(b);
+  });
+
+  if (!data.woods || data.woods.length === 0) {
+    const hint = document.createElement("div");
+    hint.style.color = "#ccc";
+    hint.style.fontSize = "13px";
+    hint.style.marginTop = "6px";
+    hint.textContent = "لم يتم إضافة أنواع خشب بعد — أضفها من صفحة الأدمن.";
+    woodBox.appendChild(hint);
+  }
+}
+
+/* ===== الإضافات (extras) ===== */
+function renderExtras() {
+  extrasOptions.innerHTML = "";
+  extrasInputs.innerHTML = "";
+  (data.extras || []).forEach(e => {
+    const b = document.createElement("button");
+    b.className = "option-btn";
+    b.textContent = e.name || "إضافة";
+    const key = "extra_" + e.name.replace(/\s+/g,'_');
+
+    b.onclick = () => {
+      b.classList.toggle("active");
+      if (extrasSelected.includes(e)) {
+        extrasSelected = extrasSelected.filter(x => x !== e);
+        removeLine(key);
+        const el = document.getElementById(key);
+        if (el) el.remove();
+      } else {
+        extrasSelected.push(e);
+        setLine(key, `إضافة: ${e.name}`, "-");
+        const inp = document.createElement("input");
+        inp.id = key;
+        inp.placeholder = `طول ${e.name} (م)`;
+        extrasInputs.appendChild(inp);
+        inp.addEventListener("input", () => {
+          const r = calcRoundedLength(inp.value);
+          setLine(key, `إضافة: ${e.name}`, r ? `${r} <span style="font-size:0.8em;">m</span>` : "-");
+        });
+      }
+      selectionCount++;
+      revealPart();
+    };
+
+    extrasOptions.appendChild(b);
+  });
+
+  if (!data.extras || data.extras.length === 0) {
+    const hint = document.createElement("div");
+    hint.style.color = "#ccc";
+    hint.style.fontSize = "13px";
+    hint.style.marginTop = "6px";
+    hint.textContent = "لا توجد إضافات معرفة حالياً.";
+    extrasOptions.appendChild(hint);
+  }
+}
+
+
+
+
+
+/* ===== المتريال ===== */
+function renderMaterials() {
+  materialsBox.innerHTML = "";
+
+  (data.materials || []).forEach(m => {
+
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "flex";
+    wrapper.style.flexDirection = "column";
+    wrapper.style.alignItems = "center";
+
+    const b = document.createElement("button");
+    b.className = "option-btn";
+    b.textContent = m.name || "متريال";
+
+    const key = "material_" + m.name.replace(/\s+/g,'_');
+
+    // عنصر المتريال المخزن فعلياً
+    const materialItem = {
+      ...m,
+      qty: 1
+    };
+
+    const qtyBox = document.createElement("div");
+    qtyBox.className = "material-qty";
+    qtyBox.style.display = "none";
+
+    const minus = document.createElement("button");
+    minus.textContent = "−";
+
+    const number = document.createElement("span");
+    number.textContent = materialItem.qty;
+
+    const plus = document.createElement("button");
+    plus.textContent = "+";
+
+    qtyBox.append(minus, number, plus);
+
+    minus.onclick = () => {
+      if (materialItem.qty > 1) {
+        materialItem.qty--;
+        number.textContent = materialItem.qty;
+        setLine(key, "متريال", `${m.name} × ${materialItem.qty}`);
+      }
+    };
+
+    plus.onclick = () => {
+      materialItem.qty++;
+      number.textContent = materialItem.qty;
+      setLine(key, "متريال", `${m.name} × ${materialItem.qty}`);
+    };
+
+    b.onclick = () => {
+      b.classList.toggle("active");
+
+      if (b.classList.contains("active")) {
+        materialItem.qty = 1;
+        number.textContent = 1;
+        qtyBox.style.display = "flex";
+
+        materialsSelected.push(materialItem);
+        setLine(key, "متريال", `${m.name} × 1`);
+      } else {
+        qtyBox.style.display = "none";
+        materialsSelected = materialsSelected.filter(x => x !== materialItem);
+        removeLine(key);
+      }
+    };
+
+    wrapper.append(b, qtyBox);
+    materialsBox.appendChild(wrapper);
+  });
+}
+
+
+
+
+
+
+
+
+/* ===== كشف الأقسام (تأثير بصري بسيط يعتمد على عدد الاختيارات) ===== */
+function revealPart() {
+  const parts = document.querySelectorAll(".kitchen-part");
+  if (!parts || parts.length === 0) return;
+  const toShow = Math.min(Math.floor(selectionCount * parts.length / 5), parts.length);
+  parts.forEach((p, i) => p.style.opacity = i < toShow ? 1 : 0.25);
+}
+
+/* ===== الحساب النهائي ===== */
+function calculate() {
+  let total = 0;
+
+  // ===== حساب الطوابق =====
+  (data.floors || []).forEach(f => {
+    const group = document.getElementById("inputs_" + f.id);
+    if (!group) return; // إذا لم يوجد مدخلات لا يحدث شيء
+
+    const l = calcRoundedLength(group.children[0].value);
+    const w = calcRoundedLength(group.children[1].value);
+    const h = calcRoundedLength(group.children[2].value);
+
+    // سعر هذا الطابق حسب نوع الخشب
+    const pricePerUnit =
+      selectedWood && selectedWood.prices && selectedWood.prices[f.id]
+        ? Number(selectedWood.prices[f.id])
+        : 0;
+
+    total += (l) * pricePerUnit;
+  });
+
+  // ===== حساب الإضافات =====
+  extrasSelected.forEach(x => {
+    const inp = document.getElementById(
+      "extra_" + x.name.replace(/\s+/g, "_")
+    );
+    if (inp) {
+      const len = calcRoundedLength(inp.value);
+      if (len) total += len * Number(x.price || 0);
+    }
+  });
+
+  // ===== حساب المتريال =====
+  materialsSelected.forEach(x => {
+    total += Number(x.price || 0) * (x.qty || 1);
+  });
+
+  // ===== عرض السعر =====
+  document.getElementById("result").textContent =
+    total.toLocaleString() + " د.ع";
+
+  let priceDiv = document.getElementById("totalPrice");
+  if (!priceDiv) {
+    priceDiv = document.createElement("div");
+    priceDiv.id = "totalPrice";
+    priceDiv.style.cssText = `
+      text-align:center;
+      color:#c9a44c;
+      font-size:22px;
+      font-weight:700;
+      margin-top:20px;
+    `;
+    infoBox.appendChild(priceDiv);
+  }
+
+  priceDiv.innerHTML = "السعر الكلي: " + total.toLocaleString() + " د.ع";
+}
+
+
+
+
+
+
+/* ===== INIT: عرض كل الخيارات المحمّلة من localStorage ===== */
+function initPageFromStorage() {
+  // إذا كان data فارغ، نستخدم الهيكل الافتراضي
+  if (!data || typeof data !== 'object') {
+    console.warn("بيانات kitchenAdmin غير موجودة أو تالفة. استخدم بيانات فارغة.");
+  }
+
+  renderWoodOptions();
+  renderFloorButtons();
+  renderExtras();
+  renderMaterials();
+}
+
+initPageFromStorage();
+
+
+window.addEventListener('scroll', () => {
+  const line = document.getElementById('headerTopLine');
+  const scrollTop = window.scrollY;                // مقدار التمرير من الأعلى
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = Math.min(scrollTop / docHeight, 1); // من 0 إلى 1
+  line.style.transform = `scaleX(${scrollPercent})`;       // يزداد الطول مع Scroll
+});
+
+
+
+
+
+
+
+
+
+function saveKitchenData() {
+  // 🔹 هنا تضع كود الحفظ (localStorage أو غيره)
+
+  const msg = document.getElementById('saveMessage');
+
+  // إظهار الرسالة
+  msg.classList.add('show');
+
+  // إخفاؤها بعد 3 ثواني
+  setTimeout(() => {
+    msg.classList.remove('show');
+  }, 3000);
+}
+
+
+
+
+
+/* تحويل كل الأزرار إلى زر توقيع */
+function upgradeButtonsToSignature(){
+  const buttons = document.querySelectorAll(
+    '.option-btn, button.calculate, button.print'
+  );
+
+  buttons.forEach(btn=>{
+    if(btn.classList.contains('signature-btn')) return;
+
+    const text = btn.textContent;
+    btn.textContent = "";
+
+    btn.classList.add('signature-btn');
+
+    const span = document.createElement('span');
+    span.textContent = text;
+
+    const spark = document.createElement('div');
+    spark.className = 'signature-spark';
+
+    btn.append(span, spark);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', upgradeButtonsToSignature);
+
+
+
+
+
+
+document.querySelectorAll('div').forEach(el => {
+  const style = getComputedStyle(el);
+
+  const isFloating =
+    style.position === 'absolute' ||
+    style.position === 'fixed';
+
+  const isTransparent =
+    parseFloat(style.opacity) < 0.5 ||
+    style.background.includes('rgba') ||
+    style.backdropFilter !== 'none';
+
+  const isAnimated =
+    style.animationName !== 'none' ||
+    style.transitionDuration !== '0s';
+
+  if (isFloating && isTransparent && isAnimated) {
+    el.remove();
+  }
+});
+
+
+
+
+
+
+
+
+// ===== دالة عرض الرسالة التفاعلية =====
+function showSaveMessage(clientName, totalText) {
+  let msg = document.getElementById('saveMessage');
+  if (!msg) {
+    msg = document.createElement('div');
+    msg.id = 'saveMessage';
+    msg.className = 'save-message';
+    msg.innerHTML = `
+      <div class="icon">✓</div>
+      <div class="text">
+        <div class="line-client">العميل: <span class="typing"></span></div>
+        <div class="line-price">السعر: <span class="typing"></span></div>
+      </div>
+    `;
+    document.body.appendChild(msg);
+  }
+
+  msg.classList.add('show');
+  msg.setAttribute('aria-hidden','false');
+
+  // كتابة النص تدريجياً
+  const clientSpan = msg.querySelector('.line-client .typing');
+  const priceSpan = msg.querySelector('.line-price .typing');
+
+  function typeText(element, text, delay = 40) {
+    element.textContent = '';
+    let i = 0;
+    const interval = setInterval(() => {
+      element.textContent += text[i];
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, delay);
+  }
+
+  typeText(clientSpan, clientName || '—');
+  typeText(priceSpan, totalText || '0 د.ع');
+
+  // اختفاء الرسالة بعد 4 ثواني
+  clearTimeout(window.__saveMsgTimeout);
+  window.__saveMsgTimeout = setTimeout(() => {
+    msg.classList.remove('show');
+    msg.setAttribute('aria-hidden','true');
+  }, 4000);
+}
+
+// ===== تعديل saveData() لاستخدام الرسالة التفاعلية =====
+function collectKitchenRecord() {
+  const clientName = (document.getElementById('clientName')?.value || '').trim();
+  const notes = (document.querySelector('textarea.notes')?.value || '').trim();
+  const totalText = (document.getElementById('result')?.textContent || '0 د.ع').trim();
+  const digitsOnly = totalText.replace(/[^0-9]/g, '');
+  const totalAmount = digitsOnly ? Number(digitsOnly) : 0;
+
+  const floors = [];
+  document.querySelectorAll('[id^="inputs_"]').forEach(group => {
+    const id = group.id.replace("inputs_", "");
+    const name = (data.floors.find(f => String(f.id) === String(id))?.name) || `طابق ${id}`;
+    const L = parseFloat(group.children[0].value) || 0;
+    const W = parseFloat(group.children[1].value) || 0;
+    const H = parseFloat(group.children[2].value) || 0;
+    floors.push({ name, L, W, H });
+  });
+
+  const extras = extrasSelected.map(e => {
+    const val = document.getElementById("extra_" + e.name.replace(/\s+/g,'_'))?.value || "-";
+    return { name: e.name, value: val };
+  });
+
+  const materials = materialsSelected.map(m => ({ name: m.name, qty: m.qty || 1 }));
+
+  // ✅ أضف نوع الخشب هنا
+  const woodType = selectedWood?.name || null;
+
+  return { clientName, notes, totalText, totalAmount, floors, extras, materials, woodType };
+}
+
+
+
+/* حفظ على Firebase (يتضمن totalAmount الآن) */
+async function saveToFirebase() {
+  const saveBtn = document.getElementById("saveBtn");
+  if (!saveBtn) return;
+
+  saveBtn.disabled = true;
+  try {
+    const record = collectKitchenRecord();
+
+    // إضافة الحقل createdAt كما كان
+    await addDoc(kitchensCol, {
+      ...record,
+      createdAt: serverTimestamp()
+    });
+
+    // عرض رسالة حفظ جميلة
+    showSaveMessage(record.clientName, record.totalText);
+
+  } catch (err) {
+    console.error("Firebase save error:", err);
+    showSaveMessage("خطأ في الحفظ", "❌ تحقق من Console");
+  } finally {
+    saveBtn.disabled = false;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+<!-- ضع هذا السكربت في أسفل صفحة المطابخ (استبدل السكربتات القديمة) -->
+<script type="module">
+  // Firebase imports
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import {
+    getFirestore, collection, doc, getDoc, onSnapshot,
+    addDoc, updateDoc, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+  // Firebase config (استخدم نفس إعداداتك)
+const firebaseConfig = {
+  apiKey: "AIzaSyDXaE9TwULY1qHj_fSTUI2d0jvC5Y5u1TI",
+  authDomain: "averg-aked.firebaseapp.com",
+  databaseURL: "https://averg-aked-default-rtdb.firebaseio.com",
+  projectId: "averg-aked",
+  storageBucket: "averg-aked.firebasestorage.app",
+  messagingSenderId: "421708534064",
+  appId: "1:421708534064:web:0da1394f7f056f8a5bf8f5",
+  measurementId: "G-Q0WT14XHTP"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // collection for kitchens (where we save individual kitchen records)
+  const kitchensCol = collection(db, "kitchens");
+
+  // Admin doc that contains woods, extras, materials, floors
+  // تأكد إنك في Firebase أنشأت collection "admin" و document id "kitchenAdmin"
+  const adminDocRef = doc(db, "admin", "kitchenAdmin");
+
+  // -----------------------
+  // عناصر DOM
+  // -----------------------
+  const woodBox = document.getElementById("woodOptions");
+  const floorsOptionsBox = document.getElementById("floorsOptions");
+  const extrasOptions = document.getElementById("extrasOptions");
+  const extrasInputs = document.getElementById("extrasInputs");
+  const materialsBox = document.getElementById("materialsOptions");
+  const infoBox = document.getElementById("kitchenInfoContent");
+
+  const clientNameEl = document.getElementById("clientName");
+  const notesEl = document.querySelector("textarea.notes");
+  const resultEl = document.getElementById("result");
+  const customerHeader = document.getElementById("customerNameHeader");
+  const saveBtnEl = document.getElementById("saveBtn");
+
+  // -----------------------
+  // state (البيانات الآن ستأتي من Firestore)
+  // -----------------------
+  let data = { woods: [], extras: [], materials: [], floors: [] }; // سيُعاد كتابتها من Firestore
+  let selectionCount = 0;
+  let selectedWood = null;
+  let extrasSelected = [];
+  let materialsSelected = [];
+  window.extrasSelected = extrasSelected;
+  window.materialsSelected = materialsSelected;
+  const infoLines = {}; // داخلي للـ info box
+
+  // ===== helpers (لمسات صغيرة: rounding, typing lines, dispatchInput) =====
+  function calcRoundedLength(value) {
+    if (!value) return 0;
+    const v = parseFloat(
+      value.replace(/[٠-٩]/g, d => "0123456789"[d.charCodeAt(0) - 1632])
+           .replace(/[^0-9.]/g,'')
+    );
+    if (isNaN(v) || v <= 0) return 0;
+    return v;  // <<< استخدم القيمة الأصلية بدون تقريب
+}
+
+
+  function setLine(key, label, value = "", isNote = false) {
+    let div = infoLines[key];
+    if (!div) {
+      div = document.createElement("div");
+      div.className = isNote ? "info-note" : "info-line";
+      infoBox.appendChild(div);
+      infoLines[key] = div;
+    }
+    if (isNote) {
+      div.textContent = value;
+      return;
+    }
+    if (div._typingInterval) clearInterval(div._typingInterval);
+    div.innerHTML = `<span class="info-label">${label}</span>: <span class="info-value"></span>`;
+    const valueSpan = div.querySelector(".info-value");
+    valueSpan.textContent = "";
+    let plainText = (value || "").replace(/<[^>]*>/g, "").trim();
+    const formatUnits = txt => txt.replace(/(\d+)\s*m/gi, '$1<span style="font-size:0.65em;">m</span>');
+    let index = 0;
+    div._typingInterval = setInterval(() => {
+      let textToShow = plainText.slice(0, index + 1);
+      textToShow = formatUnits(textToShow);
+      valueSpan.innerHTML = textToShow;
+      index++;
+      if (index >= plainText.length) clearInterval(div._typingInterval);
+    }, 30);
+  }
+
+  function removeLine(key) {
+    if (infoLines[key]) {
+      infoLines[key].remove();
+      delete infoLines[key];
+    }
+  }
+
+  function dispatchInput(el){
+    if(!el) return;
+    const ev = new Event('input', { bubbles:true });
+    el.dispatchEvent(ev);
+  }
+
+  // ===== render functions (نفس الدوال لكن تعتمد على المتغير data) =====
+  function renderWoodOptions() {
+    if(!woodBox) return;
+    woodBox.innerHTML = "";
+    (data.woods || []).forEach((w, i) => {
+      const b = document.createElement("button");
+      b.className = "option-btn";
+      b.textContent = w.name || (`خشب ${i+1}`);
+      b.addEventListener('click', () => {
+        document.querySelectorAll("#woodOptions .option-btn").forEach(x => x.classList.remove("active"));
+        b.classList.add("active");
+        selectedWood = w;
+        setLine("wood", "نوع الخشب", w.name || "—");
+        selectionCount++;
+        revealPart();
+      });
+      woodBox.appendChild(b);
+    });
+    if (!data.woods || data.woods.length === 0){
+      const hint = document.createElement("div");
+      hint.style.color = "#ccc"; hint.style.fontSize = "13px"; hint.style.marginTop = "6px";
+      hint.textContent = "لم يتم إضافة أنواع خشب بعد — أضفها من صفحة الأدمن.";
+      woodBox.appendChild(hint);
+    }
+  }
+
+  function renderFloorButtons() {
+    if(!floorsOptionsBox) return;
+    floorsOptionsBox.innerHTML = "";
+    (data.floors || []).forEach((f) => {
+      const b = document.createElement("button");
+      b.className = "option-btn";
+      b.textContent = f.name;
+      b.dataset.id = f.id || String(Math.random()).slice(2);
+
+      b.addEventListener('click', () => {
+        b.classList.toggle("active");
+        if (b.classList.contains("active")) {
+          setLine("floor_" + f.id, `طابق: ${f.name}`, "-", false);
+          createFloorInputsForSelected(f, b.dataset.id);
+        } else {
+          removeLine("floor_" + f.id);
+          const grp = document.getElementById("inputs_" + b.dataset.id);
+          if (grp) grp.remove();
+        }
+      });
+
+      floorsOptionsBox.appendChild(b);
+    });
+
+    if (!data.floors || data.floors.length === 0) {
+      const hint = document.createElement("div");
+      hint.style.color = "#ccc";
+      hint.style.fontSize = "13px";
+      hint.style.marginTop = "6px";
+      hint.textContent = "لم يتم تعريف أي طوابق بعد — أضف طوابق من صفحة الأدمن.";
+      floorsOptionsBox.appendChild(hint);
+    }
+  }
+
+  function createFloorInputsForSelected(f, datasetId){
+    const id = datasetId || (f.id || String(Math.random()).slice(2));
+    if(document.getElementById("inputs_" + id)) return;
+
+    const group = document.createElement("div");
+    group.id = "inputs_" + id;
+    group.style.display = "flex";
+    group.style.flexWrap = "wrap";
+    group.style.gap = "8px";
+    group.style.marginTop = "6px";
+    group.setAttribute('data-name', f.name || '');
+
+    const length = document.createElement("input");
+    length.placeholder = `L (${f.name}) (م)`;
+    length.dataset.field = "L";
+
+    const width = document.createElement("input");
+    width.placeholder = `W (${f.name}) (م)`;
+    width.dataset.field = "W";
+
+    const height = document.createElement("input");
+    height.placeholder = `H (${f.name}) (م)`;
+    height.dataset.field = "H";
+
+    group.append(length, width, height);
+    floorsOptionsBox.appendChild(group);
+
+   const updateLine = () => {
+  const l = length.value || "-";
+  const w = width.value || "-";
+  const h = height.value || "-";
+  const formatM = val => val === "-" ? "-" : `${val} <span style="font-size:0.8em;">m</span>`;
+
+  // نوع الخشب المختار
+  const woodName = selectedWood?.name || "لم يتم تحديد";
+
+  setLine(
+    "floor_" + (f.id || id),
+    `طابق: ${f.name} — أبعاد`,
+    `L: ${formatM(l)} | W: ${formatM(w)} | H: ${formatM(h)} | خشب: ${woodName}`
+  );
+};
+
+[length, width, height].forEach(inp => inp.addEventListener("input", updateLine));
+
+
+  }
+
+  function renderExtras() {
+    if(!extrasOptions || !extrasInputs) return;
+    extrasOptions.innerHTML = "";
+    extrasInputs.innerHTML = "";
+    (data.extras || []).forEach(e => {
+      const b = document.createElement("button");
+      b.className = "option-btn";
+      b.textContent = e.name || "إضافة";
+      const key = "extra_" + e.name.replace(/\s+/g,'_');
+
+      b.addEventListener('click', () => {
+        b.classList.toggle("active");
+        if (extrasSelected.includes(e)) {
+          extrasSelected = extrasSelected.filter(x => x !== e);
+          removeLine(key);
+          const el = document.getElementById(key);
+          if (el) el.remove();
+        } else {
+          extrasSelected.push(e);
+          setLine(key, `إضافة: ${e.name}`, "-");
+          const inp = document.createElement("input");
+          inp.id = key;
+          inp.placeholder = `طول ${e.name} (م)`;
+          extrasInputs.appendChild(inp);
+          inp.addEventListener("input", () => {
+            const r = calcRoundedLength(inp.value);
+            setLine(key, `إضافة: ${e.name}`, r ? `${r} <span style="font-size:0.8em;">m</span>` : "-");
+          });
+        }
+        selectionCount++;
+        revealPart();
+      });
+
+      extrasOptions.appendChild(b);
+    });
+
+    if (!data.extras || data.extras.length === 0) {
+      const hint = document.createElement("div");
+      hint.style.color = "#ccc";
+      hint.style.fontSize = "13px";
+      hint.style.marginTop = "6px";
+      hint.textContent = "لا توجد إضافات معرفة حالياً.";
+      extrasOptions.appendChild(hint);
+    }
+  }
+
+  function renderMaterials() {
+    if(!materialsBox) return;
+    materialsBox.innerHTML = "";
+    (data.materials || []).forEach(m => {
+      const wrapper = document.createElement("div");
+      wrapper.style.display = "flex";
+      wrapper.style.flexDirection = "column";
+      wrapper.style.alignItems = "center";
+
+      const b = document.createElement("button");
+      b.className = "option-btn";
+      b.textContent = m.name || "متريال";
+
+      const key = "material_" + m.name.replace(/\s+/g,'_');
+      const materialItem = { ...m, qty: 1 };
+
+      const qtyBox = document.createElement("div");
+      qtyBox.className = "material-qty";
+      qtyBox.style.display = "none";
+
+      const minus = document.createElement("button"); minus.textContent = "−";
+      const number = document.createElement("span"); number.textContent = materialItem.qty;
+      const plus = document.createElement("button"); plus.textContent = "+";
+
+      qtyBox.append(minus, number, plus);
+
+      minus.addEventListener('click', () => {
+        if (materialItem.qty > 1) {
+          materialItem.qty--;
+          number.textContent = materialItem.qty;
+          setLine(key, "متريال", `${m.name} × ${materialItem.qty}`);
+        }
+      });
+
+
+      plus.addEventListener('click', () => {
+        materialItem.qty++;
+        number.textContent = materialItem.qty;
+        setLine(key, "متريال", `${m.name} × ${materialItem.qty}`);
+      });
+
+      b.addEventListener('click', () => {
+        b.classList.toggle("active");
+        if (b.classList.contains("active")) {
+          materialItem.qty = 1;
+          number.textContent = 1;
+          qtyBox.style.display = "flex";
+          materialsSelected.push(materialItem);
+          setLine(key, "متريال", `${m.name} × 1`);
+        } else {
+          qtyBox.style.display = "none";
+          materialsSelected = materialsSelected.filter(x => x !== materialItem);
+          removeLine(key);
+        }
+      });
+
+      wrapper.append(b, qtyBox);
+      materialsBox.appendChild(wrapper);
+    });
+  }
+
+  function revealPart() {
+    const parts = document.querySelectorAll(".kitchen-part");
+    if (!parts || parts.length === 0) return;
+    const toShow = Math.min(Math.floor(selectionCount * parts.length / 5), parts.length);
+    parts.forEach((p, i) => p.style.opacity = i < toShow ? 1 : 0.25);
+  }
+
+
+
+
+
+
+
+
+ 
+
+  
+  function calculate() {
+  let total = 0;
+
+  // helper: يحول نص الطول (يدعم الأرقام العربية والفاصلة) إلى قيمة عشرية
+  function parseLength(value) {
+    if (value === null || typeof value === 'undefined') return 0;
+    const normalized = String(value)
+      .trim()
+      .replace(/[٠-٩]/g, d => "0123456789"[d.charCodeAt(0) - 1632]) // أرقام عربية -> لاتينية
+      .replace(/،/g, '.') // فاصلة عربية -> نقطة
+      .replace(/,/g, '.')  // فاصلة إنجليزية -> نقطة
+      .replace(/[^0-9.]/g, ''); // إزالة أي رموز غير الأرقام والنقطة
+    const v = parseFloat(normalized);
+    return isNaN(v) ? 0 : v;
+  }
+
+  // ===== حساب الطوابق (باستخدام طول عشري فعلي) =====
+  (data.floors || []).forEach(f => {
+    const group = Array.from(document.querySelectorAll('[id^="inputs_"]')).find(g => {
+      if (g.id === "inputs_" + (f.id || '')) return true;
+      return Array.from(g.querySelectorAll('input')).some(i => (i.placeholder || '').includes(f.name));
+    });
+    if (!group) return;
+
+    // نقرأ القيم كما هي (قد تكون عشرية)
+    const l = parseLength(group.children[0].value);
+    const w = parseLength(group.children[1].value);
+    const h = parseLength(group.children[2].value);
+
+    const pricePerUnit = selectedWood && selectedWood.prices && selectedWood.prices[f.id]
+      ? Number(selectedWood.prices[f.id])
+      : 0;
+
+    // حسب منطقك الأصلي: السعر يعتمد على الطول (L). إذا تريد L*W أو L*W*H، عدّل السطر التالي.
+    total += (l) * pricePerUnit;
+  });
+
+  // ===== حساب الإضافات (باستخدام القيم العشرية) =====
+  extrasSelected.forEach(x => {
+    const inp = document.getElementById("extra_" + x.name.replace(/\s+/g, "_"));
+    if (inp) {
+      const len = parseLength(inp.value);
+      if (len) total += len * Number(x.price || 0);
+    }
+  });
+
+  // ===== حساب المتريال =====
+  materialsSelected.forEach(x => {
+    total += Number(x.price || 0) * (x.qty || 1);
+  });
+
+  // تقريب المجموع النهائي لأقرب دينار (يمكنك إزالة Math.round إذا تريد عرض كسور)
+  total = Math.round(total);
+
+  // عرض السعر في العنصر الرئيسي (المربع أعلى) إن وُجد
+  if (resultEl) resultEl.textContent = total.toLocaleString() + " د.ع";
+
+  // ===== تحديث السعر مع إبقائه دائماً في أسفل infoBox =====
+  let priceDiv = document.getElementById("totalPrice");
+  if (!priceDiv) {
+    priceDiv = document.createElement("div");
+    priceDiv.id = "totalPrice";
+    // نستخدم نفس ستايلك الحالي بدون تغييره جوهرياً
+    priceDiv.style.cssText = `
+      text-align:center;
+      color:#c9a44c;
+      font-size:22px;
+      font-weight:700;
+      margin-top:20px;
+    `;
+  }
+
+  priceDiv.innerHTML = "السعر الكلي: " + total.toLocaleString() + " د.ع";
+
+  // ضع العنصر في أسفل الـ infoBox دائماً (سينقله إذا كان موجوداً في مكان آخر)
+  if (typeof infoBox !== 'undefined' && infoBox) {
+    if (infoBox.lastElementChild !== priceDiv) {
+      infoBox.appendChild(priceDiv);
+    }
+  }
+}
+window.calculate = calculate;
+
+
+  // showSaveMessage helper (كما في سكربتك)
+  function showSaveMessage(clientName, totalText, woodName = "لم يتم تحديد") {
+  let msg = document.getElementById('saveMessage');
+  if (!msg) {
+    msg = document.createElement('div');
+    msg.id = 'saveMessage';
+    msg.className = 'save-message';
+    msg.innerHTML = `
+      <div class="icon">✓</div>
+      <div class="text">
+        <div class="line-client">العميل: <span class="typing"></span></div>
+        <div class="line-wood">نوع الخشب: <span class="typing"></span></div>
+        <div class="line-price">السعر: <span class="typing"></span></div>
+      </div>
+    `;
+    document.body.appendChild(msg);
+  }
+  msg.classList.add('show'); 
+  msg.setAttribute('aria-hidden','false');
+
+  const clientSpan = msg.querySelector('.line-client .typing');
+  const woodSpan   = msg.querySelector('.line-wood .typing');
+  const priceSpan  = msg.querySelector('.line-price .typing');
+
+  function typeText(element, text, delay = 30) {
+    element.textContent = '';
+    let i = 0;
+    const interval = setInterval(() => {
+      element.textContent += (text && text[i]) ? text[i] : '';
+      i++;
+      if (i >= (text || '').length) clearInterval(interval);
+    }, delay);
+  }
+
+  typeText(clientSpan, clientName || '—');
+  typeText(woodSpan, woodName || '—');
+  typeText(priceSpan, totalText || '0 د.ع');
+
+  clearTimeout(window.__saveMsgTimeout);
+  window.__saveMsgTimeout = setTimeout(() => {
+    msg.classList.remove('show');
+    msg.setAttribute('aria-hidden','true');
+  }, 3000);
+}
+
+  window.showSaveMessage = showSaveMessage;
+
+  // collectKitchenRecord & saveToFirebase (يدعم إضافة أو تحديث)
+function collectKitchenRecord() {
+    const clientName = (clientNameEl?.value || '').trim();
+    const notes = (notesEl?.value || '').trim();
+    const totalText = (resultEl?.textContent || '0 د.ع').trim();
+    const digitsOnly = (totalText || '').replace(/[^0-9]/g, '');
+    const totalAmount = digitsOnly ? Number(digitsOnly) : 0;
+
+    // الطوابق
+    const floors = [];
+    document.querySelectorAll('[id^="inputs_"]').forEach(group => {
+        const id = group.id.replace("inputs_", "");
+        const name = group.getAttribute('data-name') || `طابق ${id}`;
+        const L = parseFloat(group.children[0].value) || 0;
+        const W = parseFloat(group.children[1].value) || 0;
+        const H = parseFloat(group.children[2].value) || 0;
+        floors.push({ name, L, W, H });
+    });
+
+    // الإضافات
+    const extras = extrasSelected.map(e => {
+        const val = document.getElementById("extra_" + e.name.replace(/\s+/g,'_'))?.value || "-";
+        return { name: e.name, value: val };
+    });
+
+    // المواد
+    const materials = materialsSelected.map(m => ({ name: m.name, qty: m.qty || 1 }));
+
+    // ✅ نوع الخشب
+    const woodType = selectedWood?.name || null;
+
+    return { clientName, notes, totalText, totalAmount, floors, extras, materials, woodType };
+}
+
+  window.collectKitchenRecord = collectKitchenRecord;
+
+  async function saveToFirebase(editingIdArg) {
+    const saveBtn = saveBtnEl;
+    if (!saveBtn) return;
+    saveBtn.disabled = true;
+    try {
+      const record = collectKitchenRecord();
+      if(editingIdArg || window.editingId){
+        const idToUse = editingIdArg || window.editingId;
+        const docRef = doc(db, 'kitchens', idToUse);
+        await updateDoc(docRef, { ...record, updatedAt: serverTimestamp() });
+      } else {
+        await addDoc(kitchensCol, { ...record, createdAt: serverTimestamp() });
+      }
+      showSaveMessage(record.clientName, record.totalText);
+    } catch (err) {
+      console.error("Firebase save error:", err);
+      showSaveMessage("خطأ في الحفظ", "❌ فتح Console");
+    } finally {
+      saveBtn.disabled = false;
+    }
+  }
+  window.saveToFirebase = saveToFirebase;
+
+  // helpers to find option buttons (used by loadKitchenForEdit)
+  function textEqual(a, b){
+    if(!a || !b) return false;
+    return a.trim().replace(/\s+/g,' ') === b.trim().replace(/\s+/g,' ');
+  }
+  function findOptionButton(container, name){
+    if(!container) return null;
+    const btns = Array.from(container.querySelectorAll(".option-btn"));
+    return btns.find(b => textEqual(b.textContent, name) || textEqual((b.dataset && b.dataset.id) || '', name));
+  }
+
+  // load a kitchen record (edit) - unchanged logic, uses findOptionButton
+  async function loadKitchenForEdit(id){
+    try{
+      if(!id) return;
+      const ref = doc(db, "kitchens", id);
+      const snap = await getDoc(ref);
+      if(!snap.exists()){
+        alert("المطبخ غير موجود");
+        return;
+      }
+      const d = snap.data();
+
+      if(clientNameEl) clientNameEl.value = d.clientName || "";
+      if(customerHeader) customerHeader.textContent = d.clientName || "—";
+      if(notesEl) { notesEl.value = d.notes || ""; dispatchInput(notesEl); }
+      if(resultEl) {
+        if(d.totalText) resultEl.textContent = d.totalText;
+        else if(typeof d.totalAmount !== 'undefined') resultEl.textContent = (Number(d.totalAmount || 0)).toLocaleString() + " د.ع";
+      }
+
+      // wood
+      const possibleWoodKeys = ['wood', 'woodName', 'selectedWood', 'selectedWoodName'];
+      let woodName = null;
+      for(const k of possibleWoodKeys){
+        if(d[k]) { woodName = d[k]; break; }
+      }
+      if(woodName){
+        const b = findOptionButton(woodBox, String(woodName));
+        if(b && !b.classList.contains('active')) b.click();
+      }
+
+      // floors, extras, materials (كما في سكربتك)...
+      (d.floors || []).forEach(f => {
+        const btn = findOptionButton(floorsOptionsBox, f.name);
+        if(btn && !btn.classList.contains('active')) btn.click();
+        setTimeout(()=>{
+          let group = null;
+          if(btn && btn.dataset && btn.dataset.id) group = document.getElementById("inputs_" + btn.dataset.id);
+          if(!group){
+            const candidates = Array.from(floorsOptionsBox.querySelectorAll('div[id^="inputs_"]'));
+            group = candidates.find(g => Array.from(g.querySelectorAll('input')).some(i => (i.placeholder||'').includes(f.name)));
+          }
+          if(group){
+            const inputs = group.querySelectorAll('input');
+            if(inputs[0]) { inputs[0].value = f.L || ""; dispatchInput(inputs[0]); }
+            if(inputs[1]) { inputs[1].value = f.W || ""; dispatchInput(inputs[1]); }
+            if(inputs[2]) { inputs[2].value = f.H || ""; dispatchInput(inputs[2]); }
+          }
+        }, 80);
+      });
+
+      (d.extras || []).forEach(e => {
+        const btn = findOptionButton(extrasOptions, e.name);
+        if(btn && !btn.classList.contains('active')) btn.click();
+        setTimeout(()=>{
+          const key = "extra_" + String(e.name).replace(/\s+/g,'_');
+          const inp = document.getElementById(key);
+          if(inp){
+            inp.value = e.value || "";
+            dispatchInput(inp);
+          } else if(extrasInputs){
+            const newInp = document.createElement('input');
+            newInp.id = key;
+            newInp.placeholder = `طول ${e.name} (م)`;
+            newInp.value = e.value || "";
+            extrasInputs.appendChild(newInp);
+            dispatchInput(newInp);
+          }
+        }, 80);
+      });
+
+      (d.materials || []).forEach(m => {
+        const btn = findOptionButton(materialsBox, m.name);
+        if(btn && !btn.classList.contains('active')) btn.click();
+        setTimeout(()=>{
+          let wrapper = btn ? btn.parentElement : null;
+          if(!wrapper){
+            const candidates = Array.from(materialsBox.children || []);
+            wrapper = candidates.find(w => textEqual((w.querySelector('.option-btn')?.textContent||''), m.name));
+          }
+          if(wrapper){
+            const numberSpan = wrapper.querySelector('.material-qty span');
+            if(numberSpan){
+              numberSpan.textContent = String(m.qty || 1);
+              const found = window.materialsSelected && window.materialsSelected.find(x => x.name === m.name);
+              if(found) found.qty = Number(m.qty || 1);
+            }
+          }
+        }, 120);
+      });
+
+      setTimeout(()=> { if(typeof window.calculate === 'function') window.calculate(); }, 250);
+      window.editingId = id;
+
+    } catch(err){
+      console.error("loadKitchenForEdit error:", err);
+      alert("خطأ في تحميل بيانات المطبخ");
+    }
+  }
+
+  // bind save button
+  function bindSaveButton(){
+    if(!saveBtnEl) return;
+    saveBtnEl.removeEventListener && saveBtnEl.removeEventListener('click', saveBtnHandler);
+    saveBtnEl.addEventListener('click', saveBtnHandler);
+  }
+  async function saveBtnHandler(){
+    const id = window.editingId || null;
+    await saveToFirebase(id);
+  }
+  bindSaveButton();
+
+  // upgrade buttons (signature style)
+  function upgradeButtonsToSignature(){
+    const buttons = document.querySelectorAll('.option-btn, button.calculate, button.print');
+    buttons.forEach(btn=>{
+      if(btn.classList.contains('signature-btn')) return;
+      const text = btn.textContent;
+      btn.textContent = "";
+      btn.classList.add('signature-btn');
+      const span = document.createElement('span'); span.textContent = text;
+      const spark = document.createElement('div'); spark.className = 'signature-spark';
+      btn.append(span, spark);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=> setTimeout(upgradeButtonsToSignature, 120));
+
+  // -----------------------
+  // Subscription: قراءة البيانات من Firestore (admin/kitchenAdmin)
+  // -----------------------
+  function subscribeToAdminDoc() {
+    // نستخدم onSnapshot لتحديث تلقائي عند تغيّر الأدمن
+    onSnapshot(adminDocRef, snap => {
+      if (!snap.exists()) {
+        console.warn("admin/kitchenAdmin not found in Firestore — انتبه لموجود الوثيقة");
+        return;
+      }
+      data = snap.data() || { woods: [], extras: [], materials: [], floors: [] };
+
+      // Render after we received admin data
+      renderWoodOptions();
+      renderFloorButtons();
+      renderExtras();
+      renderMaterials();
+
+      // upgrade style for any new buttons
+      setTimeout(upgradeButtonsToSignature, 60);
+
+      console.log("تم تحديث خيارات الأدمن من Firestore", data);
+    }, err => {
+      console.error("Firestore admin doc snapshot error:", err);
+    });
+  }
+
+  // Start subscription
+  subscribeToAdminDoc();
+
+  // إذا كانت الصفحة فتحت مع id -> نحمل بيانات المطبخ للتحرير
+  const params = new URLSearchParams(window.location.search);
+  const editId = params.get("id");
+  if(editId){
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', ()=> loadKitchenForEdit(editId));
+    } else {
+      loadKitchenForEdit(editId);
+    }
+  }
+
+  console.log("kitchens page initialized and subscribed to admin/kitchenAdmin");
+
+
+
+
+  window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+const adminBtn = document.querySelector('.admin-btn');
+const adminModal = document.getElementById('adminModal');
+const closeAdminModal = document.getElementById('closeAdminModal');
+const adminLoginBtn = document.getElementById('adminLoginBtn');
+const adminChangeBtn = document.getElementById('adminChangeBtn');
+
+const adminStep1 = document.getElementById('adminStep1');
+const adminStep2 = document.getElementById('adminStep2');
+const adminStep3 = document.getElementById('adminStep3');
+
+const adminPasswordInput = document.getElementById('adminPassword');
+const oldPasswordInput = document.getElementById('oldPassword');
+const newPasswordInput = document.getElementById('newPassword');
+const verifyOldBtn = document.getElementById('verifyOldBtn');
+const saveNewBtn = document.getElementById('saveNewBtn');
+const adminMsg = document.getElementById('adminMsg');
+
+// كلمة المرور الاحتياطية
+const backupPass = "272311";
+
+// دالة لضمان وجود مستند admin
+async function ensureAdminDoc() {
+    const docRef = doc(db,"config","admin");
+    const snap = await getDoc(docRef);
+    if(!snap.exists()){
+        // إنشاء المستند مع كلمة المرور الاحتياطية
+        await setDoc(docRef, { password: backupPass });
+        return backupPass;
+    }
+    return snap.data().password || backupPass;
+}
+
+// دالة لجلب كلمة المرور من Firebase
+async function getAdminPassword() {
+    try {
+        return await ensureAdminDoc();
+    } catch(err) {
+        console.error('Failed to get admin password', err);
+        return backupPass;
+    }
+}
+
+// فتح المودال
+adminBtn.addEventListener('click', ()=> {
+    adminModal.classList.add('show');
+    adminStep1.style.display='block';
+    adminStep2.style.display='none';
+    adminStep3.style.display='none';
+    adminMsg.textContent = '';
+    adminPasswordInput.value='';
+});
+
+// إغلاق المودال
+closeAdminModal.addEventListener('click', ()=> adminModal.classList.remove('show'));
+
+// تسجيل الدخول
+adminLoginBtn.addEventListener('click', async ()=>{
+    const pass = adminPasswordInput.value.trim();
+    const savedPass = await getAdminPassword();
+    if(pass === savedPass || pass === backupPass){
+        adminModal.classList.remove('show');
+        window.location.href = 'admin.html';
+    } else {
+        adminMsg.textContent = 'كلمة المرور غير صحيحة';
+    }
+});
+
+// تغيير كلمة المرور
+adminChangeBtn.addEventListener('click', ()=>{
+    adminStep1.style.display='none';
+    adminStep2.style.display='block';
+    adminStep3.style.display='none';
+    adminPasswordInput.value='';
+    adminMsg.textContent = '';
+});
+
+// تحقق كلمة المرور القديمة
+verifyOldBtn.addEventListener('click', async ()=>{
+    const oldPass = oldPasswordInput.value.trim();
+    const savedPass = await getAdminPassword();
+    if(oldPass === savedPass || oldPass === backupPass){
+        adminStep2.style.display='none';
+        adminStep3.style.display='block';
+        oldPasswordInput.value='';
+        adminMsg.textContent='';
+    } else {
+        adminMsg.textContent = 'كلمة المرور القديمة غير صحيحة';
+    }
+});
+
+// حفظ كلمة المرور الجديدة
+saveNewBtn.addEventListener('click', async ()=>{
+    const newPass = newPasswordInput.value.trim();
+    if(newPass.length < 4){
+        adminMsg.textContent = 'كلمة المرور الجديدة يجب أن تكون 4 أحرف على الأقل';
+        return;
+    }
+    try{
+        const docRef = doc(db,"config","admin");
+        await setDoc(docRef, { password: newPass }); // setDoc لإنشاء أو تعديل المستند
+        adminMsg.style.color='green';
+        adminMsg.textContent='تم تحديث كلمة المرور بنجاح';
+        setTimeout(()=>{
+            adminModal.classList.remove('show');
+            adminMsg.style.color='red';
+            adminStep1.style.display='block';
+            adminStep2.style.display='none';
+            adminStep3.style.display='none';
+        },1200);
+    }catch(err){
+        console.error(err);
+        adminMsg.textContent='فشل تحديث كلمة المرور';
+    }
+});
+
+
+
+
+
+  
+  window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

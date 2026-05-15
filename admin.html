@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>لوحة الأدمن — Luxury Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#040404;
+    --panel:#0b0b0b;
+    --muted:#1f1f1f;
+    --gold:#c9a44c;
+    --gold-2:#ffd966;
+    --glass: rgba(255,255,255,0.03);
+    --accent-shadow: 0 12px 36px rgba(201,164,76,0.12);
+    --radius:12px;
+    --gap:18px;
+    --text:#f3f3f3;
+    --muted-text:#bfbfbf;
+    --danger:#e04b4b;
+    --input-h:44px;
+    --max-width:1300px;
+    --field-gap:10px;
+  }
+
+  /* Reset */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(180deg,#040404,#090909);
+    color:var(--text);
+    direction:rtl;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.5;
+  }
+
+  /* Header */
+  header{
+    position:fixed; inset:0 auto auto 0; height:72px;
+    width:100%; display:flex; align-items:center;
+    background:rgba(0,0,0,0.75); border-bottom:1px solid var(--muted);
+    z-index:1200; padding:0 20px;
+    backdrop-filter: blur(6px);
+  }
+  .header-inner{ width:100%; max-width:var(--max-width); margin:0 auto; display:flex; gap:16px; align-items:center; justify-content:space-between; }
+  .brand{ display:flex; align-items:center; gap:14px }
+  .logo {
+    font-weight:900; color:var(--gold); font-size:20px; letter-spacing:1px;
+  }
+  nav.header-nav{ display:flex; gap:14px; align-items:center }
+  nav.header-nav a{
+    color:var(--text); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:8px;
+    transition: all .18s ease;
+  }
+  nav.header-nav a:hover{ color:var(--gold); background:rgba(255,255,255,0.02) }
+
+  /* admin icon button */
+  .admin-btn{
+    width:44px; height:44px; border-radius:999px; display:inline-grid; place-items:center;
+    background: linear-gradient(135deg,var(--gold),#d4b873);
+    color:#fff; box-shadow:var(--accent-shadow); border:none; cursor:pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .admin-btn:hover{ transform:scale(1.06) }
+
+  /* Page container */
+  .page {
+    max-width:var(--max-width); margin:106px auto 60px auto; padding: 0 18px;
+    display:grid; grid-template-columns: 1fr 360px; gap:28px;
+  }
+
+  /* Main column */
+  .main { display:flex; flex-direction:column; gap:var(--gap); }
+
+  /* Sidebar */
+  .sidebar { display:flex; flex-direction:column; gap:var(--gap); position:relative; }
+
+  /* Card */
+  .card{
+    background: linear-gradient(180deg,#0a0a0a,#070707);
+    border:1px solid var(--muted);
+    padding:18px;
+    border-radius:var(--radius);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  }
+  .card h3{ color:var(--gold); margin-bottom:10px; font-size:18px }
+  .card .muted { color:var(--muted-text); font-size:13px; margin-top:8px }
+
+  /* NEW: Form field wrapper (consistent styled inputs) */
+  .field {
+    display:flex;
+    gap:var(--field-gap);
+    align-items:center;
+    margin-top:12px;
+    width:100%;
+  }
+  /* label appears on the right (rtl) */
+  .field .label {
+    min-width:140px;
+    color:var(--muted-text);
+    font-weight:700;
+    font-size:13px;
+    text-align:right;
+  }
+  .field .control {
+    flex:1;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  /* uniform input look */
+  .control input[type="text"],
+  .control input[type="number"],
+  .control textarea,
+  .control select {
+    width:100%;
+    padding:10px 12px;
+    height:var(--input-h);
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:#070707;
+    color:var(--text);
+    font-size:14px;
+    transition: box-shadow .15s, border-color .12s;
+  }
+  .control textarea { height:92px; padding-top:10px; resize:vertical; }
+  .control input:focus, .control textarea:focus, .control select:focus {
+    outline:none; border-color:var(--gold); box-shadow:0 8px 28px rgba(191,163,108,0.08);
+  }
+  /* small helper text */
+  .field .hint { color:var(--muted-text); font-size:12px; margin-top:6px }
+
+  /* improved list items with inline editable fields */
+  .list { display:flex; flex-direction:column; gap:10px; margin-top:10px }
+  .list .item {
+    display:grid; grid-template-columns: 1fr 140px 48px; gap:10px; align-items:center;
+    background:var(--glass); padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.02);
+  }
+  .list .item input.name { font-weight:700; background:#090909; border:1px solid rgba(255,255,255,0.03); height:40px; padding:8px 10px; color:var(--text); }
+  .list .item input.price { width:100%; height:40px; padding:8px 10px; text-align:left; font-weight:700; border-radius:8px; background:#090909; border:1px solid rgba(255,255,255,0.03); color:var(--text); }
+  .list .item button { height:38px; width:40px; border-radius:8px; border:none; background:rgba(255,0,0,0.12); color:var(--danger); font-weight:800; cursor:pointer }
+
+  /* gallery cards: tighten layout */
+  .gallery-grid{ display:grid; gap:12px; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); margin-top:12px }
+  .img-card{
+    background:#0b0b0b; border-radius:10px; padding:12px; border:1px solid var(--muted);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .img-card img{ width:100%; height:130px; object-fit:cover; border-radius:8px; border:1px solid rgba(255,255,255,0.03) }
+  .img-card input, .img-card textarea{ background:#090909; border:1px solid rgba(255,255,255,0.03); padding:8px 10px; border-radius:8px; color:var(--text); width:100%; }
+  .img-card textarea{ min-height:64px; resize:vertical; }
+
+  /* Floors special layout */
+  .floor-card{ display:flex; flex-direction:column; gap:8px; padding:10px; border-radius:10px; background:#080808; border:1px solid var(--muted) }
+  .floor-top{ display:flex; gap:8px; align-items:center; justify-content:space-between }
+  .floor-top input { flex:1; height:40px; padding:8px 10px; border-radius:8px; background:#090909; border:1px solid rgba(255,255,255,0.03); color:var(--text) }
+
+  .floor-wood-row{ display:flex; gap:8px; align-items:center }
+  .floor-wood-row span{ min-width:120px; color:var(--gold); font-weight:700; }
+  .floor-wood-row input{ width:120px; height:36px; padding:6px 8px; border-radius:8px; background:#090909; border:1px solid rgba(255,255,255,0.03); color:var(--text) }
+
+  /* Sidebar summary */
+  .summary{ display:flex; flex-direction:column; gap:12px; margin-top:8px }
+  .stat{ background:#070707; padding:12px; border-radius:10px; border:1px solid var(--muted); display:flex; justify-content:space-between; align-items:center }
+  .stat strong{ color:var(--gold); font-size:18px }
+
+  /* Buttons row (consistent) */
+  .actions { display:flex; gap:10px; justify-content:flex-end; align-items:center; margin-top:14px; flex-wrap:wrap }
+  .btn {
+    padding:10px 18px; border-radius:10px; border:none; cursor:pointer; font-weight:800;
+    background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:#000;
+    box-shadow:var(--accent-shadow); transition:transform .12s ease;
+  }
+  .btn.secondary{ background:transparent; color:var(--text); border:1px solid var(--muted) }
+  .btn.danger{ background:var(--danger); color:#fff }
+  .btn.small{ padding:7px 10px; font-weight:700; border-radius:8px }
+
+  /* Responsive */
+  @media (max-width:1024px){
+    .page{ grid-template-columns: 1fr 320px; padding:0 12px }
+  }
+  @media (max-width:820px){
+    header{ padding:0 12px }
+    .page{ grid-template-columns: 1fr; margin-top:120px; padding:0 12px }
+    .sidebar{ order:2 }
+    .list .item { grid-template-columns: 1fr 1fr; }
+    .list .item input.price { text-align:left; }
+  }
+
+
+  
+/* small UX tweak: nicer number input spin visibility */
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none;    /* Chrome, Safari, Edge */
+  appearance: none;            /* standard */
+  margin: 0;                   /* إزالة أي هوامش افتراضية */
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.input-row input[type="text"],
+.input-row input[type="number"] {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #090909;
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-row input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  width: 120px;
+}
+
+.input-row input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 6px 20px rgba(201,164,76,0.12);
+}
+
+.input-row .btn {
+  height: 40px;
+  padding: 0 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  box-shadow: var(--accent-shadow);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.input-row .btn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .input-row input,
+  .input-row .btn {
+    width: 100%;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="logo">شركة المقسطين</div>
+      <nav class="header-nav" aria-label="رابط سريع">
+
+        <a href="index.html" aria-label="الرئيسية">الرئيسية</a>
+       
+      </nav>
+    </div>
+
+    <div style="display:flex;gap:12px;align-items:center">
+      <button class="admin-btn" title="لوحة الأدمن" aria-label="الأدمن">
+        <!-- user icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 8a3 3 0 100-6 3 3 0 000 6z" fill="#fff"/>
+          <path d="M2 14s1.5-4 6-4 6 4 6 4H2z" fill="#fff"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- Gallery -->
+    <section class="card" aria-labelledby="gallery-title">
+      <h3 id="gallery-title">إدارة معرض الأعمال</h3>
+
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <label style="flex:1;display:flex;gap:8px;align-items:center">
+          <input id="imageInput" type="file" accept="image/*" multiple style="display:none">
+          <button class="btn small" id="pickFilesBtn" type="button">اختيار صور</button>
+          <button class="btn" type="button" onclick="addImages()">رفع وحفظ</button>
+          <button class="btn secondary" type="button" onclick="clearGallery()">مسح الكل</button>
+        </label>
+        <div class="muted-block" style="margin-left:auto">الصور تحفظ محلياً في المتصفح (localStorage)</div>
+      </div>
+
+      <div id="galleryPreview" class="gallery-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- Kitchen Management -->
+    <section class="card" aria-labelledby="kitchen-title">
+      <h3 id="kitchen-title">إعدادات المطابخ</h3>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <!-- Woods -->
+        <div>
+          <div class="field">
+            <div class="label">أضف نوع خشب</div>
+            <div class="control">
+              <input id="newWoodName" placeholder="اسم الخشب" type="text" aria-label="اسم الخشب">
+              <button class="btn small" onclick="addWoodFromInput()" type="button">أضف</button>
+              <button class="btn secondary" onclick="addWood()" type="button">إضافة سريعة</button>
+            </div>
+          </div>
+          <div class="muted-block">قائمة الأنواع ستستخدم عند تحديد أسعار الطوابق.</div>
+          <div class="list" id="woods" aria-live="polite"></div>
+        </div>
+
+        <!-- Floors -->
+        <div>
+          <div class="field">
+            <div class="label">أضف طابق (زر يظهر في صفحة المطابخ)</div>
+            <div class="control">
+              <input id="floorNameInput" placeholder="مثال: طابق واحد" type="text" aria-label="اسم الطابق">
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="btn" onclick="addFloorOption()" type="button">إضافة طابق</button>
+            <button class="btn secondary" onclick="renderFloorsAdmin()" type="button">عرض الطوابق</button>
+            <button class="btn danger" onclick="clearAllFloors()" type="button">مسح الطوابق</button>
+          </div>
+
+          <div id="floorList" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <!-- Extras & Materials -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px">
+
+  <!-- الإضافات -->
+  <div>
+    <h3 style="margin-bottom:8px">الإضافات</h3>
+    <div class="list" id="extras"></div>
+
+    <div class="input-row">
+      <input id="newExtraName" placeholder="اسم الإضافة" type="text" aria-label="اسم الإضافة">
+      <input id="newExtraPrice" placeholder="السعر" type="number" aria-label="سعر الإضافة">
+      <button class="btn small" onclick="addExtraFromInput()" type="button">أضف</button>
+    </div>
+  </div>
+
+  <!-- المتريال -->
+  <div>
+    <h3 style="margin-bottom:8px">المتريال</h3>
+    <div class="list" id="materials"></div>
+
+    <div class="input-row">
+      <input id="newMaterialName" placeholder="اسم المتريال" type="text" aria-label="اسم المتريال">
+      <input id="newMaterialPrice" placeholder="السعر" type="number" aria-label="سعر المتريال">
+      <button class="btn small" onclick="addMaterialFromInput()" type="button">أضف</button>
+    </div>
+  </div>
+    </section>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-labelledby="sidebar-title">
+    <div class="card" id="sidebar-summary">
+      <h3 id="sidebar-title">خلاصة سريعة</h3>
+      <div class="summary">
+        <div class="stat"><div>عدد صور المعرض</div><strong id="statImages">0</strong></div>
+        <div class="stat"><div>عدد الأنواع</div><strong id="statWoods">0</strong></div>
+        <div class="stat"><div>عدد الطوابق</div><strong id="statFloors">0</strong></div>
+      </div>
+      <div class="muted-block">التغييرات تحفظ على Firestore (المتريال/الطوابق/الأنواع) — والصور في localStorage.</div>
+    </div>
+
+    <div class="card">
+      <h3>إجراءات سريعة</h3>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn" onclick="renderAll()" type="button">تحديث العرض</button>
+        <button class="btn secondary" onclick="clearGallery()" type="button">مسح معرض الصور</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- Firebase + Script -->
+<script type="module">
+  /* سكربت الإدارة: جاهز للعمل محلياً (localStorage) وبإمكانه المزامنة مع Firestore إن قمت بوضع إعداداتك */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDXaE9TwULY1qHj_fSTUI2d0jvC5Y5u1TI",
+  authDomain: "averg-aked.firebaseapp.com",
+  databaseURL: "https://averg-aked-default-rtdb.firebaseio.com",
+  projectId: "averg-aked",
+  storageBucket: "averg-aked.firebasestorage.app",
+  messagingSenderId: "421708534064",
+  appId: "1:421708534064:web:0da1394f7f056f8a5bf8f5",
+  measurementId: "G-Q0WT14XHTP"
+};
+  let db = null, adminDocRef = null;
+  try {
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    adminDocRef = doc(db, "admin", "kitchenAdmin");
+  } catch(e) {
+    console.warn("Firebase init failed or skipped — using local fallback only.", e);
+    db = null; adminDocRef = null;
+  }
+
+  // DOM refs
+  const imageInput = document.getElementById('imageInput');
+  const pickFilesBtn = document.getElementById('pickFilesBtn');
+  const galleryPreview = document.getElementById('galleryPreview');
+  const woodsBox = document.getElementById('woods');
+  const extrasBox = document.getElementById('extras');
+  const materialsBox = document.getElementById('materials');
+  const floorList = document.getElementById('floorList');
+
+  const statImages = document.getElementById('statImages');
+  const statWoods = document.getElementById('statWoods');
+  const statFloors = document.getElementById('statFloors');
+
+  const LOCAL_GALLERY_KEY = 'luxuryGallery';
+  const LOCAL_KITCHEN_KEY = 'luxuryKitchenAdmin_local';
+
+  let kitchen = { woods: [], extras: [], materials: [], floors: [] };
+
+  /* Gallery (local) */
+  function loadGallery(){
+    const data = JSON.parse(localStorage.getItem(LOCAL_GALLERY_KEY) || '[]');
+    galleryPreview.innerHTML = '';
+    data.forEach((it,i)=>{
+      const div = document.createElement('div'); div.className='img-card';
+      const img = document.createElement('img'); img.src = it.src; img.alt = it.name || 'صورة';
+      const nameInput = document.createElement('input');
+      nameInput.placeholder = 'اسم الصورة';
+      nameInput.value = it.name || '';
+      // descInput declared after but used in handler — it's fine because handler runs later
+      const descInput = document.createElement('textarea');
+      descInput.placeholder = 'تفاصيل الصورة';
+      descInput.value = it.desc || '';
+
+      nameInput.addEventListener('change', ()=> updateImage(i, nameInput.value, descInput.value));
+      descInput.addEventListener('change', ()=> updateImage(i, nameInput.value, descInput.value));
+
+      const actions = document.createElement('div'); actions.style.display = 'flex'; actions.style.justifyContent = 'flex-end';
+      actions.style.gap = '8px';
+      const delBtn = document.createElement('button'); delBtn.className='btn small'; delBtn.textContent='حذف';
+      delBtn.addEventListener('click', ()=> deleteImage(i));
+
+      actions.appendChild(delBtn);
+      div.appendChild(img);
+      div.appendChild(nameInput);
+      div.appendChild(descInput);
+      div.appendChild(actions);
+      galleryPreview.appendChild(div);
+    });
+    statImages.textContent = data.length;
+  }
+  window.updateImage = (i,name,desc) => {
+    const data = JSON.parse(localStorage.getItem(LOCAL_GALLERY_KEY) || '[]');
+    if(!data[i]) return;
+    data[i].name = name || '';
+    data[i].desc = desc || '';
+    localStorage.setItem(LOCAL_GALLERY_KEY, JSON.stringify(data));
+    loadGallery();
+  };
+  window.deleteImage = (i) => {
+    const data = JSON.parse(localStorage.getItem(LOCAL_GALLERY_KEY) || '[]');
+    data.splice(i,1);
+    localStorage.setItem(LOCAL_GALLERY_KEY, JSON.stringify(data));
+    loadGallery();
+  };
+  function addImages(){
+    const files = [...(imageInput.files||[])];
+    if(!files.length) { alert('اختر صوراً أولاً'); return; }
+    let data = JSON.parse(localStorage.getItem(LOCAL_GALLERY_KEY) || '[]');
+    files.forEach(f=>{
+      const r = new FileReader();
+      r.onload = e=>{
+        data.push({ src:e.target.result, name:'', desc:'' });
+        localStorage.setItem(LOCAL_GALLERY_KEY, JSON.stringify(data));
+        loadGallery();
+      };
+      r.readAsDataURL(f);
+    });
+    imageInput.value='';
+  }
+  window.addImages = addImages;
+  function clearGallery(){ if(!confirm('مسح كل صور المعرض؟')) return; localStorage.removeItem(LOCAL_GALLERY_KEY); loadGallery(); }
+
+  pickFilesBtn.addEventListener('click', ()=> imageInput.click());
+
+  /* Kitchen data (local + Firestore) */
+  function loadKitchenFromLocal(){
+    const s = localStorage.getItem(LOCAL_KITCHEN_KEY);
+    if(!s) return false;
+    try { kitchen = JSON.parse(s); return true; } catch(e){ return false; }
+  }
+  function saveKitchenToLocal(){ localStorage.setItem(LOCAL_KITCHEN_KEY, JSON.stringify(kitchen)); }
+
+  async function saveKitchen(){
+    try { saveKitchenToLocal(); } catch(e){ console.warn('local save failed', e); }
+    if(!adminDocRef || !db) return;
+    try { await setDoc(adminDocRef, { ...kitchen, updatedAt: serverTimestamp() }, { merge: true }); } catch(err){ console.warn('save to Firestore failed', err); }
+    renderAll();
+  }
+
+  async function ensureAdminDocExists(){
+    if(!adminDocRef || !db) return;
+    try {
+      const snap = await getDoc(adminDocRef);
+      if(!snap.exists()){
+        await setDoc(adminDocRef, { woods:[], extras:[], materials:[], floors:[], createdAt: serverTimestamp() });
+      }
+    } catch(e){ console.warn('ensureAdminDocExists error', e); }
+  }
+
+  /* Render lists as editable fields */
+  function renderStats(){
+    statWoods.textContent = (kitchen.woods||[]).length;
+    statFloors.textContent = (kitchen.floors||[]).length;
+  }
+
+  function renderList(type, containerId){
+    const box = document.getElementById(containerId);
+    box.innerHTML = '';
+    (kitchen[type] || []).forEach((it,i)=>{
+      const item = document.createElement('div'); item.className='item';
+
+      // name input (editable)
+      const nameInput = document.createElement('input');
+      nameInput.className = 'name';
+      nameInput.type = 'text';
+      nameInput.value = it.name || '';
+      nameInput.addEventListener('change', ()=> {
+        kitchen[type][i].name = nameInput.value.trim();
+        saveKitchen();
+      });
+
+      // price input
+      const priceInput = document.createElement('input');
+      priceInput.className = 'price';
+      priceInput.type = 'number';
+      priceInput.value = it.price || 0;
+      priceInput.addEventListener('change', ()=> {
+        kitchen[type][i].price = Number(priceInput.value) || 0;
+        saveKitchen();
+      });
+
+      // delete button
+      const del = document.createElement('button');
+      del.className = 'btn small';
+      del.textContent = '✕';
+      del.title = 'حذف';
+      del.addEventListener('click', ()=> {
+        kitchen[type].splice(i,1);
+        saveKitchen();
+      });
+
+      item.appendChild(nameInput);
+      item.appendChild(priceInput);
+      item.appendChild(del);
+      box.appendChild(item);
+    });
+  }
+
+  function renderWoods(){
+    woodsBox.innerHTML = '';
+    (kitchen.woods||[]).forEach((w,i)=>{
+      const item = document.createElement('div'); item.className='item';
+
+      const nameInput = document.createElement('input');
+      nameInput.className = 'name';
+      nameInput.type = 'text';
+      nameInput.value = w.name || '';
+      nameInput.addEventListener('change', ()=> { kitchen.woods[i].name = nameInput.value.trim(); saveKitchen(); });
+
+      const spacer = document.createElement('div'); spacer.style.width = '140px'; // placeholder for price column alignment
+
+      const del = document.createElement('button'); del.className='btn small'; del.textContent='✕';
+      del.title = 'حذف'; del.addEventListener('click', ()=> { kitchen.woods.splice(i,1); saveKitchen(); });
+
+      item.appendChild(nameInput);
+      item.appendChild(spacer);
+      item.appendChild(del);
+      woodsBox.appendChild(item);
+    });
+    renderStats();
+  }
+
+  function renderFloorsAdmin(){
+    floorList.innerHTML = '';
+    (kitchen.floors||[]).forEach((f,fi)=>{
+      const container = document.createElement('div'); container.className='floor-card';
+
+      // top row: editable floor name + delete
+      const top = document.createElement('div'); top.className = 'floor-top';
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text'; nameInput.value = f.name || ''; nameInput.placeholder = 'اسم الطابق';
+      nameInput.addEventListener('change', ()=> { kitchen.floors[fi].name = nameInput.value.trim(); saveKitchen(); });
+
+      const del = document.createElement('button'); del.className = 'btn small'; del.textContent='حذف';
+      del.addEventListener('click', ()=> { deleteFloor(fi); });
+
+      top.appendChild(nameInput);
+      top.appendChild(del);
+      container.appendChild(top);
+
+      // prices per wood: editable inputs
+      (kitchen.woods||[]).forEach((w,wi)=>{
+        if(!w.prices) w.prices = {};
+        const row = document.createElement('div'); row.className='floor-wood-row';
+        const span = document.createElement('span'); span.textContent = w.name || ('خشب '+(wi+1));
+        const input = document.createElement('input'); input.type = 'number'; input.value = w.prices[f.id] || 0;
+        input.addEventListener('change', ()=> updateFloorWoodPrice(wi, f.id, Number(input.value)||0));
+        row.appendChild(span); row.appendChild(input);
+        container.appendChild(row);
+      });
+
+      floorList.appendChild(container);
+    });
+    renderStats();
+  }
+
+  function renderAll(){
+    renderList('extras','extras');
+    renderList('materials','materials');
+    renderWoods();
+    renderFloorsAdmin();
+    loadGallery();
+    renderStats();
+  }
+
+  /* CRUD helpers */
+  function addWoodFromInput(){
+    const name = (document.getElementById('newWoodName').value||'').trim();
+    if(!name){ alert('ادخل اسم نوع الخشب'); return; }
+    kitchen.woods = kitchen.woods || [];
+    kitchen.woods.push({ id:'w'+Date.now(), name, prices:{} });
+    document.getElementById('newWoodName').value = '';
+    saveKitchen();
+  }
+  window.addWoodFromInput = addWoodFromInput;
+
+  function addWood(){ kitchen.woods = kitchen.woods || []; kitchen.woods.push({ id:'w'+Date.now(), name:'نوع خشب', prices:{} }); saveKitchen(); }
+  window.addWood = addWood;
+
+  function addExtraFromInput(){
+    const name = (document.getElementById('newExtraName').value||'').trim();
+    const price = Number(document.getElementById('newExtraPrice').value||0);
+    if(!name){ alert('ادخل اسم الإضافة'); return; }
+    kitchen.extras = kitchen.extras || [];
+    kitchen.extras.push({ name, price });
+    document.getElementById('newExtraName').value=''; document.getElementById('newExtraPrice').value='';
+    saveKitchen();
+  }
+  window.addExtraFromInput = addExtraFromInput;
+
+  function addMaterialFromInput(){
+    const name = (document.getElementById('newMaterialName').value||'').trim();
+    const price = Number(document.getElementById('newMaterialPrice').value||0);
+    if(!name){ alert('ادخل اسم المتريال'); return; }
+    kitchen.materials = kitchen.materials || [];
+    kitchen.materials.push({ name, price });
+    document.getElementById('newMaterialName').value=''; document.getElementById('newMaterialPrice').value='';
+    saveKitchen();
+  }
+  window.addMaterialFromInput = addMaterialFromInput;
+
+  function addItem(type){
+    kitchen[type] = kitchen[type] || [];
+    kitchen[type].push({ name:'', price:0 }); saveKitchen();
+  }
+  window.addItem = addItem;
+
+  function addFloorOption(){
+    const name = (document.getElementById('floorNameInput').value||'').trim();
+    if(!name){ alert('ادخل اسم الطابق'); return; }
+    const id = 'f'+Date.now();
+    kitchen.floors = kitchen.floors || [];
+    kitchen.floors.push({ id, name });
+    (kitchen.woods||[]).forEach(w=> { if(!w.prices) w.prices = {}; w.prices[id] = 0; });
+    document.getElementById('floorNameInput').value='';
+    saveKitchen();
+  }
+  window.addFloorOption = addFloorOption;
+
+  function updateFloorWoodPrice(woodIndex, floorId, value){
+    if(!kitchen.woods[woodIndex].prices) kitchen.woods[woodIndex].prices = {};
+    kitchen.woods[woodIndex].prices[floorId] = Number(value) || 0;
+    saveKitchen();
+  }
+  window.updateFloorWoodPrice = updateFloorWoodPrice;
+
+  function deleteFloor(i){
+    if(!kitchen.floors || !kitchen.floors[i]) return;
+    const id = kitchen.floors[i].id;
+    kitchen.floors.splice(i,1);
+    (kitchen.woods||[]).forEach(w=>{ if(w.prices && w.prices[id] !== undefined) delete w.prices[id]; });
+    saveKitchen();
+  }
+  window.deleteFloor = deleteFloor;
+
+  function clearAllFloors(){
+    if(!confirm('مسح كل الطوابق؟')) return;
+    kitchen.floors = []; (kitchen.woods||[]).forEach(w=> w.prices = {});
+    saveKitchen(); renderFloorsAdmin();
+  }
+  window.clearAllFloors = clearAllFloors;
+
+  /* Initialization */
+  async function initAdmin(){
+    const hadLocal = loadKitchenFromLocal();
+    if(hadLocal) renderAll();
+
+    if(adminDocRef && db){
+      try {
+        await ensureAdminDocExists();
+        onSnapshot(adminDocRef, snap => {
+          if(!snap.exists()) return;
+          const data = snap.data();
+          kitchen.woods = Array.isArray(data.woods) ? data.woods : (kitchen.woods || []);
+          kitchen.extras = Array.isArray(data.extras) ? data.extras : (kitchen.extras || []);
+          kitchen.materials = Array.isArray(data.materials) ? data.materials : (kitchen.materials || []);
+          kitchen.floors = Array.isArray(data.floors) ? data.floors : (kitchen.floors || []);
+          saveKitchenToLocal();
+          renderAll();
+        }, err => console.error('snapshot err', err));
+      } catch(e){
+        console.warn('Firestore init error — using local only', e);
+        renderAll();
+      }
+    } else {
+      renderAll();
+    }
+    loadGallery();
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAdmin);
+  else initAdmin();
+
+  function escapeHtml(str){
+    return String(str||'').replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+  }
+
+  // expose utilities
+  window.addImages = addImages;
+  window.clearGallery = clearGallery;
+  window.loadGallery = loadGallery;
+  window.renderFloorsAdmin = renderFloorsAdmin;
+  window.renderWoods = renderWoods;
+  window.renderAll = renderAll;
+
+  // initial stats update
+  setTimeout(()=>{ renderStats(); }, 400);
+</script>
+</body>
+</html>
