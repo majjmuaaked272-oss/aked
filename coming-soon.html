@@ -13,11 +13,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
  
 <style>
-/* ============================================================
-   DARK ORANGE THEME — قيد الإنشاء
-============================================================ */
- 
-/* ===== المتغيرات الأساسية ===== */
 :root {
   --orange:        #e8833a;
   --orange-2:      #f5a55c;
@@ -41,18 +36,15 @@
   --glow-lg:       0 0 40px rgba(232, 131, 58, 0.55);
 }
  
-/* ===== Reset ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, sans-serif; }
 html, body { height: 100%; direction: rtl; }
  
-/* ===== Body + خلفية المربعات ===== */
 body {
   background-color: var(--bg-main);
   color: var(--text);
   overflow-x: hidden;
 }
  
-/* خلفية شبكية مربعات صغيرة */
 body::before {
   content: "";
   position: fixed;
@@ -65,7 +57,6 @@ body::before {
   z-index: 0;
 }
  
-/* طبقة ضوء مركزي خفيف */
 body::after {
   content: "";
   position: fixed;
@@ -75,7 +66,6 @@ body::after {
   z-index: 0;
 }
  
-/* ===== Scrollbar ===== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-card); }
 ::-webkit-scrollbar-thumb {
@@ -86,7 +76,6 @@ html { scrollbar-width: none; }
 body { -ms-overflow-style: none; }
 body::-webkit-scrollbar { display: none; }
  
-/* ===== شريط التقدم العلوي ===== */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -100,7 +89,6 @@ body::-webkit-scrollbar { display: none; }
   box-shadow: 0 0 10px var(--orange);
 }
  
-/* ===== Header ===== */
 header {
   position: fixed;
   top: 0;
@@ -138,7 +126,6 @@ header h1 {
   text-shadow: var(--glow-sm);
 }
  
-/* ===== Navigation ===== */
 nav { display: flex; align-items: center; gap: 28px; }
  
 nav a {
@@ -164,7 +151,6 @@ nav a::after {
 nav a:hover { color: var(--orange); }
 nav a:hover::after { width: 100%; }
  
-/* ===== زر الأدمن ===== */
 .admin-btn {
   display: flex;
   align-items: center;
@@ -186,7 +172,6 @@ nav a:hover::after { width: 100%; }
  
 .admin-btn svg { width: 20px; height: 20px; fill: #fff; }
  
-/* ===== MAIN ===== */
 main {
   padding: 140px 24px 60px;
   max-width: 1200px;
@@ -195,7 +180,6 @@ main {
   z-index: 1;
 }
  
-/* ===== CONTROLS ===== */
 .controls {
   display: flex;
   justify-content: space-between;
@@ -239,7 +223,6 @@ main {
   color: var(--text);
 }
  
-/* ===== Right actions ===== */
 .actions-right {
   display: flex;
   align-items: center;
@@ -257,7 +240,6 @@ main {
   border-radius: 20px;
 }
  
-/* ===== Text Buttons ===== */
 .btn-text {
   background: none;
   border: none;
@@ -286,14 +268,12 @@ main {
 .btn-text.archive::after { background: linear-gradient(90deg, #e74c3c, #c0392b); }
 .btn-text.archive:hover { color: #c0392b; }
  
-/* ===== GRID ===== */
 #kitchenCards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 22px;
 }
  
-/* ===== CARD ===== */
 .card {
   background: var(--bg-card);
   border-radius: 16px;
@@ -309,7 +289,6 @@ main {
   overflow: hidden;
 }
  
-/* خط برتقالي علوي على الكارد */
 .card::before {
   content: "";
   position: absolute;
@@ -363,7 +342,6 @@ main {
   font-weight: 400;
 }
  
-/* ===== BADGE ===== */
 .badge {
   padding: 6px 14px;
   border-radius: 20px;
@@ -393,7 +371,6 @@ main {
   color: #2ecc71;
 }
  
-/* ===== Card Actions ===== */
 .action-icons {
   display: flex;
   flex-direction: column;
@@ -423,7 +400,6 @@ main {
   box-shadow: var(--glow-md) !important;
 }
  
-/* ===== EMPTY STATE ===== */
 .empty {
   text-align: center;
   padding: 40px;
@@ -435,7 +411,6 @@ main {
   font-size: 15px;
 }
  
-/* ===== MODAL ===== */
 .modal {
   position: fixed;
   inset: 0;
@@ -452,7 +427,6 @@ main {
  
 .modal.show { display: flex; }
  
-/* ===== MODAL BOX ===== */
 .modal-box {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -471,7 +445,6 @@ main {
  
 .modal-box::-webkit-scrollbar { display: none; }
  
-/* شريط برتقالي علوي */
 .modal-box::before {
   content: "";
   position: absolute;
@@ -489,7 +462,6 @@ main {
   text-shadow: var(--glow-sm);
 }
  
-/* ===== زر الإغلاق ===== */
 .modal .close {
   position: absolute;
   top: 16px; left: 16px;
@@ -516,14 +488,12 @@ main {
   box-shadow: var(--glow-sm);
 }
  
-/* ===== Modal Grid ===== */
 .modal .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px 18px;
 }
  
-/* ===== Labels ===== */
 .modal label {
   font-size: 13px;
   font-weight: 700;
@@ -532,7 +502,6 @@ main {
   display: block;
 }
  
-/* ===== Inputs inside modal ===== */
 .modal input, .modal textarea, .modal select {
   width: 100%;
   padding: 10px 14px;
@@ -572,7 +541,6 @@ main {
   color: var(--text);
 }
  
-/* ===== Readonly list ===== */
 .readonly-list {
   background: var(--bg-input);
   border-radius: 10px;
@@ -591,7 +559,6 @@ main {
  
 .readonly-list div:last-child { border-bottom: none; }
  
-/* ===== Modal Actions ===== */
 .modal-actions {
   display: flex;
   align-items: center;
@@ -603,7 +570,6 @@ main {
  
 .modal-actions .spacer { flex: 1; }
  
-/* ===== General btn ===== */
 .btn {
   padding: 10px 20px;
   border-radius: 10px;
@@ -649,7 +615,39 @@ main {
   box-shadow: 0 8px 20px rgba(192,57,43,0.4);
 }
  
-/* ===== ADMIN MODAL ===== */
+/* Summary box in modal */
+.price-summary-box {
+  background: rgba(232,131,58,0.06);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.price-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+ 
+.price-summary-row.total {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--orange);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 2px;
+}
+ 
+.price-summary-row.total span:last-child {
+  text-shadow: var(--glow-sm);
+}
+ 
 #adminModal {
   position: fixed;
   inset: 0;
@@ -746,17 +744,14 @@ main {
   font-weight: 700;
 }
  
-/* ===== Confirm Dialog ===== */
 #confirmDialog .modal-box {
   max-width: 420px;
   text-align: right;
 }
  
-/* ===== Animations ===== */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
  
-/* ===== Responsive ===== */
 @media (max-width: 900px) {
   .header-container { padding: 14px 20px; }
   header h1 { font-size: 20px; }
@@ -774,7 +769,6 @@ main {
 </head>
 <body>
  
-<!-- شريط التقدم -->
 <div class="scroll-progress" id="scrollProgress"></div>
  
 <header>
@@ -832,7 +826,6 @@ main {
 </div>
  
 <main>
-  <!-- Controls -->
   <div class="controls">
     <div class="left">
       <input id="searchInput" type="search" placeholder="ابحث باسم العميل أو الهاتف أو ملاحظة..." aria-label="بحث" />
@@ -857,7 +850,6 @@ main {
     </div>
   </div>
  
-  <!-- Cards -->
   <div id="kitchenCards" aria-live="polite"></div>
   <div id="emptyState" class="empty" style="display:none;">لا توجد مطابخ محفوظة</div>
 </main>
@@ -878,8 +870,40 @@ main {
         <input id="m_clientPhone" placeholder="رقم الهاتف">
       </div>
       <div>
-        <label for="m_colorCode">كود الألوان</label>
-        <input id="m_colorCode" placeholder="# كود">
+        <label for="m_contractNumber">رقم العقد</label>
+        <input id="m_contractNumber" placeholder="رقم العقد">
+      </div>
+      <div>
+        <label for="m_address">عنوان الزبون</label>
+        <input id="m_address" placeholder="عنوان الزبون">
+      </div>
+      <div>
+        <label>تاريخ ووقت الإنشاء</label>
+        <input id="m_createdAt" disabled>
+      </div>
+      <div>
+        <label for="m_deliveryDate">تاريخ ووقت التسليم</label>
+        <input type="datetime-local" id="m_deliveryDate">
+      </div>
+      <div>
+        <label for="m_colorCode">لون المطبخ الرئيسي</label>
+        <input id="m_colorCode" placeholder="# كود أو اسم اللون">
+      </div>
+      <div>
+        <label for="m_color2">لون ثانوي</label>
+        <input id="m_color2" placeholder="لون إضافي">
+      </div>
+      <div>
+        <label for="m_porcelainColor">لون البورسلين/الكوارتز</label>
+        <input id="m_porcelainColor" placeholder="لون الرخام أو الكوارتز">
+      </div>
+      <div>
+        <label for="m_extra1">إضافية 1</label>
+        <input id="m_extra1" placeholder="إضافية أولى">
+      </div>
+      <div>
+        <label for="m_extra2">إضافية 2</label>
+        <input id="m_extra2" placeholder="إضافية ثانية">
       </div>
       <div>
         <label for="m_status">الحالة</label>
@@ -890,17 +914,41 @@ main {
         </select>
       </div>
       <div>
-        <label>تاريخ الإنشاء</label>
-        <input id="m_createdAt" disabled>
+        <label for="m_discount">الخصم (د.ع)</label>
+        <input type="number" id="m_discount" placeholder="أدخل قيمة الخصم" min="0">
       </div>
       <div>
-        <label for="m_discount">الخصم</label>
-        <input type="number" id="m_discount" placeholder="أدخل قيمة الخصم">
+        <label for="m_arboon">العربون (د.ع)</label>
+        <input type="number" id="m_arboon" placeholder="أدخل مبلغ العربون" min="0">
       </div>
       <div style="grid-column:1 / -1;">
         <label for="m_notes">ملاحظات</label>
         <textarea id="m_notes" placeholder="ملاحظات"></textarea>
       </div>
+ 
+      <!-- Price Summary Box -->
+      <div style="grid-column:1 / -1;">
+        <label>ملخص المبالغ</label>
+        <div class="price-summary-box" id="priceSummaryBox">
+          <div class="price-summary-row">
+            <span>المبلغ الكلي</span>
+            <span id="summary_total">—</span>
+          </div>
+          <div class="price-summary-row" id="summary_discount_row" style="display:none;">
+            <span>الخصم</span>
+            <span id="summary_discount" style="color:#e74c3c;">—</span>
+          </div>
+          <div class="price-summary-row" id="summary_arboon_row" style="display:none;">
+            <span>العربون المدفوع</span>
+            <span id="summary_arboon" style="color:#2ecc71;">—</span>
+          </div>
+          <div class="price-summary-row total">
+            <span>المبلغ المتبقي</span>
+            <span id="summary_remaining">—</span>
+          </div>
+        </div>
+      </div>
+ 
       <div style="grid-column:1 / -1;">
         <label>الطوابق</label>
         <div id="floorsList_readonly" class="readonly-list">—</div>
@@ -910,7 +958,7 @@ main {
         <div id="extrasList_readonly" class="readonly-list">—</div>
       </div>
       <div style="grid-column:1 / -1;">
-        <label>المتريال</label>
+        <label>الأكسسوارات</label>
         <div id="materialsList_readonly" class="readonly-list">—</div>
       </div>
     </div>
@@ -957,7 +1005,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
  
-// DOM refs
 const kitchenCards = document.getElementById('kitchenCards');
 const emptyState = document.getElementById('emptyState');
 const counts = document.getElementById('counts');
@@ -971,10 +1018,18 @@ const closeModal = document.getElementById('closeModal');
 const m_clientName = document.getElementById('m_clientName');
 const m_clientPhone = document.getElementById('m_clientPhone');
 const m_colorCode = document.getElementById('m_colorCode');
+const m_color2 = document.getElementById('m_color2');
+const m_porcelainColor = document.getElementById('m_porcelainColor');
+const m_extra1 = document.getElementById('m_extra1');
+const m_extra2 = document.getElementById('m_extra2');
+const m_contractNumber = document.getElementById('m_contractNumber');
+const m_address = document.getElementById('m_address');
+const m_deliveryDate = document.getElementById('m_deliveryDate');
 const m_notes = document.getElementById('m_notes');
 const m_status = document.getElementById('m_status');
 const m_createdAt = document.getElementById('m_createdAt');
 const m_discount = document.getElementById('m_discount');
+const m_arboon = document.getElementById('m_arboon');
 const floorsList_readonly = document.getElementById('floorsList_readonly');
 const extrasList_readonly = document.getElementById('extrasList_readonly');
 const materialsList_readonly = document.getElementById('materialsList_readonly');
@@ -982,11 +1037,56 @@ const saveModal = document.getElementById('saveModal');
 const archiveModal = document.getElementById('archiveModal');
 const editInKitchens = document.getElementById('editInKitchens');
  
+// Price summary elements
+const summary_total = document.getElementById('summary_total');
+const summary_discount = document.getElementById('summary_discount');
+const summary_discount_row = document.getElementById('summary_discount_row');
+const summary_arboon = document.getElementById('summary_arboon');
+const summary_arboon_row = document.getElementById('summary_arboon_row');
+const summary_remaining = document.getElementById('summary_remaining');
+ 
 let currentId = null;
 let lastSnapshot = null;
 let lastItems = [];
+let currentKitchenTotal = 0;
  
-// Scroll progress
+// Update price summary in real time
+function updatePriceSummary() {
+  const total = currentKitchenTotal;
+  const discount = Number(m_discount.value) || 0;
+  const arboon = Number(m_arboon.value) || 0;
+  const remaining = Math.max(0, total - discount - arboon);
+ 
+  if (total > 0) {
+    summary_total.textContent = total.toLocaleString() + ' د.ع';
+  } else {
+    summary_total.textContent = '—';
+  }
+ 
+  if (discount > 0) {
+    summary_discount_row.style.display = 'flex';
+    summary_discount.textContent = '- ' + discount.toLocaleString() + ' د.ع';
+  } else {
+    summary_discount_row.style.display = 'none';
+  }
+ 
+  if (arboon > 0) {
+    summary_arboon_row.style.display = 'flex';
+    summary_arboon.textContent = arboon.toLocaleString() + ' د.ع';
+  } else {
+    summary_arboon_row.style.display = 'none';
+  }
+ 
+  if (total > 0) {
+    summary_remaining.textContent = remaining.toLocaleString() + ' د.ع';
+  } else {
+    summary_remaining.textContent = '—';
+  }
+}
+ 
+m_discount.addEventListener('input', updatePriceSummary);
+m_arboon.addEventListener('input', updatePriceSummary);
+ 
 window.addEventListener('scroll', function() {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
@@ -1035,11 +1135,12 @@ function buildCard(docId, k) {
  
   const totalAmountNum = Number(k.totalAmount || 0);
   const discountNum = Number(k.discount || 0);
-  const finalAmount = Math.max(0, totalAmountNum - discountNum);
+  const arboonNum = Number(k.arboon || 0);
+  const finalAmount = Math.max(0, totalAmountNum - discountNum - arboonNum);
  
   let priceHtml = '-';
   if (totalAmountNum > 0) {
-    if (discountNum > 0) {
+    if (discountNum > 0 || arboonNum > 0) {
       priceHtml = `
         <span class="orig-price">${totalAmountNum.toLocaleString()} د.ع</span>
         <span style="font-weight:800;color:var(--orange);">${finalAmount.toLocaleString()} د.ع</span>
@@ -1082,6 +1183,23 @@ function buildCard(docId, k) {
   return card;
 }
  
+function formatDateTimeForDisplay(timestamp) {
+  if (!timestamp) return '';
+  const date = timestamp.seconds ? new Date(timestamp.seconds * 1000) : new Date(timestamp);
+  return date.toLocaleString('ar-IQ', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+}
+ 
+function formatDateTimeForInput(timestamp) {
+  if (!timestamp) return '';
+  const date = timestamp.seconds ? new Date(timestamp.seconds * 1000) : new Date(timestamp);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
+ 
 async function printKitchenCard(docOrK) {
   let k = docOrK;
   try {
@@ -1111,85 +1229,257 @@ async function printKitchenCard(docOrK) {
   function buildPage(showPrice) {
     const totalAmountNum = Number(k.totalAmount || 0);
     const discountNum = Number(k.discount || 0);
+    const arboonNum = Number(k.arboon || 0);
     const finalTotal = Math.max(0, totalAmountNum - discountNum);
+    const remaining = Math.max(0, finalTotal - arboonNum);
  
     let totalHtml;
     if (showPrice) {
       if (totalAmountNum > 0) {
+        // السعر الكلي
+        let html = `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
+          <span style="font-weight:700;color:#333;">السعر الكلي:</span>
+          <span style="font-weight:800;font-size:15px;">`;
+        
         if (discountNum > 0) {
-          totalHtml = `
-            <span style="text-decoration:line-through;color:#c0392b;margin-right:8px;">${totalAmountNum.toLocaleString()} د.ع</span>
-            <span style="font-weight:800;color:#D35400;">${finalTotal.toLocaleString()} د.ع</span>
-            <div style="font-size:12px;color:#555;margin-top:4px;">(الخصم: ${discountNum.toLocaleString()} د.ع)</div>
-          `;
+          html += `<span style="text-decoration:line-through;color:#c0392b;margin-left:8px;">${totalAmountNum.toLocaleString()} د.ع</span>
+                   <span style="color:#D35400;font-size:16px;"> ${finalTotal.toLocaleString()} د.ع</span>`;
+          if (discountNum > 0) {
+            html += `<span style="font-size:11px;color:#888;margin-right:6px;">(خصم: ${discountNum.toLocaleString()} د.ع)</span>`;
+          }
         } else {
-          totalHtml = `<span style="font-weight:800;">${totalAmountNum.toLocaleString()} د.ع</span>`;
+          html += `${totalAmountNum.toLocaleString()} د.ع`;
         }
+        html += `</span></div>`;
+ 
+        // العربون
+        if (arboonNum > 0) {
+          html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
+            <span style="font-weight:700;color:#27ae60;">العربون المدفوع:</span>
+            <span style="font-weight:800;font-size:15px;color:#27ae60;">${arboonNum.toLocaleString()} د.ع</span>
+          </div>`;
+ 
+          // المبلغ المتبقي
+          html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;background:#fff8f0;border-radius:6px;padding:8px 12px;margin-top:4px;">
+            <span style="font-weight:900;color:#D35400;font-size:15px;">المبلغ المتبقي:</span>
+            <span style="font-weight:900;font-size:17px;color:#D35400;">${remaining.toLocaleString()} د.ع</span>
+          </div>`;
+        }
+ 
+        totalHtml = html;
       } else {
-        totalHtml = k.totalText || '—';
+        totalHtml = `<div>${k.totalText || '—'}</div>`;
       }
     } else {
-      totalHtml = '—';
+      totalHtml = '<div>—</div>';
     }
  
-    return `
+   const formatDateOnlyEnglish = (dateValue) => {
+  if (!dateValue) return '—';
 
+  let d;
 
+  // إذا كان Timestamp من فايربيس
+  if (dateValue?.toDate) {
+    d = dateValue.toDate();
+  } else {
+    d = new Date(dateValue);
+  }
 
+  if (isNaN(d)) return '—';
 
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
 
+  return `${year}/${month}/${day}`;
+};
 
+const createdAtDisplay = formatDateOnlyEnglish(k.createdAt);
 
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-    
+const deliveryDateDisplay = k.deliveryDate
+  ? formatDateOnlyEnglish(k.deliveryDate)
+  : '—';
+    const colorInfo = `
+      <div style="font-size:12px;color:#555;margin-top:6px;line-height:1.8;">
+        <div><b>اللون الرئيسي:</b> ${k.colorCode || '—'}</div>
+        ${k.color2 ? `<div><b>لون ثانوي:</b> ${k.color2}</div>` : ''}
+        ${k.porcelainColor ? `<div><b>البورسلين/الكوارتز:</b> ${k.porcelainColor}</div>` : ''}
+        ${k.extra1 ? `<div><b>إضافية 1:</b> ${k.extra1}</div>` : ''}
+        ${k.extra2 ? `<div><b>إضافية 2:</b> ${k.extra2}</div>` : ''}
+      </div>
+    `;
+ 
+    return `<!DOCTYPE html>
+<html dir="rtl">
+<head><meta charset="utf-8"><style>body{margin:0;font-family:Arial;direction:rtl;}.page{page-break-after:always}</style></head>
+<body>
 <div style="direction:rtl;font-family:Arial;width:210mm;min-height:297mm;padding:20mm;box-sizing:border-box;position:relative;">
-<div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:4px solid #FF8C00;;padding-bottom:10px;">
-<div style="font-size:14px;line-height:1.8;text-align:left;"><div>📞 07893000355</div><div>📞 07831840540</div></div>
-<div style="text-align:center;flex:1;">
-<div style="font-size:30px;font-weight:bold;">شركة <span style="font-size:44px;font-weight:900;color:#FF8C00;">أكد</span> للديكور والمطابخ الحديثة</div>
-<div style="font-size:14px;margin-top:6px;color:#555;">مطابخ تركية - اكسسوارات - مقاولات عامة - اجهزة كهربائية</div>
-<div style="height:4px;background:#FF8C00;;margin-top:8px;"></div>
-<div style="margin-top:6px;font-size:14px;">📍 النجف الأشرف - حي العسكري كبل - مقابل مول السنبلة</div>
+ 
+<!-- Header -->
+<div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:4px solid #FF8C00;padding-bottom:10px;margin-bottom:15px;">
+  <!-- أرقام الهاتف على اليسار -->
+  <div style="font-size:14px;line-height:1.8;text-align:left; margin-top:8px;
+  
+    position:relative;
+
+    top:-50px;          /* نزول وصعود */
+    right:-50px;        /* يمين */
+    left:0px;         /* يسار */
+
+   
+
+    width:120px;
+  ">
+    <div>📞 07893000355</div>
+    <div>📞 07831840540</div>
+    <!-- تاريخ الإنشاء وتاريخ التسليم مقابل أرقام الهاتف -->
+    <div style="margin-top:8px;font-size:12px;color:#555;border-top:1px solid #eee;padding-top:6px;
+    
+    
+
+
+ 
+    position:relative;
+
+    top:-50px;          /* نزول وصعود */
+    right:620px;        /* يمين */
+    left:px;         /* يسار */
+   
+    margin-top:0px;
+
+    width:120px;
+
+    
+    ">
+      <div><b style=color:#FF7F50;>تاريخ الإنشاء:</b> ${createdAtDisplay}</div>
+      <div><b  style=color:#27ae60;>تاريخ التسليم:</b> ${deliveryDateDisplay}</div>
+    </div>
+  </div>
+ 
+  <!-- اسم الشركة في الوسط -->
+  <div style="text-align:center;flex:1;">
+    <div style="font-size:30px;font-weight:bold;">مجمع <span style="font-size:44px;font-weight:900;color:#FF8C00;">أكد</span> للديكور والمطابخ الحديثة</div>
+    <div style="font-size:14px;margin-top:6px;color:#555;">مطابخ تركية - اكسسوارات - مقاولات عامة - اجهزة كهربائية</div>
+    <div style="height:4px;background:#FF8C00;margin-top:8px;"></div>
+    <div style="margin-top:6px;font-size:14px;">📍 النجف الأشرف - حي العسكري كبل - مقابل مول السنبلة</div>
+  </div>
 </div>
+ 
+<!-- بيانات الزبون - بدون حقل الحالة -->
+<table style="width:100%;border-collapse:collapse;margin-bottom:15px;font-size:13px;">
+<tr>
+<td style="border:1px solid #999;padding:8px;"><b>اسم الزبون:</b><br/>${k.clientName||'-'}</td>
+<td style="border:1px solid #999;padding:8px;"><b>رقم الهاتف:</b><br/>${k.clientPhone||'-'}</td>
+<td style="border:1px solid #999;padding:8px;"><b>رقم العقد:</b><br/>${k.contractNumber||'-'}</td>
+</tr>
+<tr>
+<td colspan="3" style="border:1px solid #999;padding:8px;"><b>العنوان:</b><br/>${k.address||'-'}</td>
+</tr>
+</table>
+ 
+${colorInfo}
+ 
+${floors.length ? `
+<table style="width:100%;border-collapse:collapse;margin-top:15px;margin-bottom:15px;">
+<thead style="background:#FFD700;"><tr>
+<th style="border:1px solid #ccc;padding:8px;">الطابق</th>
+<th style="border:1px solid #ccc;padding:8px;">نوع الخشب</th>
+<th style="border:1px solid #ccc;padding:8px;">طول</th>
+<th style="border:1px solid #ccc;padding:8px;">عرض</th>
+<th style="border:1px solid #ccc;padding:8px;">ارتفاع</th>
+</tr></thead>
+<tbody>
+${floors.map(f=>`<tr style="text-align:center;">
+<td style="border:1px solid #ccc;padding:6px;">${f.name||'-'}</td>
+<td style="border:1px solid #ccc;padding:6px;font-weight:bold;">${f._woodName}</td>
+<td style="border:1px solid #ccc;padding:6px;">${f.L||'-'} م</td>
+<td style="border:1px solid #ccc;padding:6px;">${f.W||'-'} م</td>
+<td style="border:1px solid #ccc;padding:6px;">${f.H||'-'} م</td>
+</tr>`).join('')}
+</tbody>
+</table>
+` : ''}
+ 
+<div style="display:flex;justify-content:space-between;gap:40px;margin-top:15px;">
+${k.extras?.length ? `<div style="width:50%;"><h3 style="color:#FF7F50;margin-bottom:8px;">الإضافات</h3><ul style="margin:0;padding-right:20px;font-size:12px;">${k.extras.map(e=>`<li>${e.name}: ${e.value} م</li>`).join('')}</ul></div>` : '<div style="width:50%;"></div>'}
+${k.materials?.length ? `<div style="width:50%;"><h3 style="color:#FF7F50;margin-bottom:8px;">الأكسسوارات</h3><ul style="margin:0;padding-right:20px;font-size:12px;">${k.materials.map(m=>`<li>${m.name} × ${m.qty}${showPrice&&m.price?' — '+Number(m.price).toLocaleString()+' د.ع':''}</li>`).join('')}</ul></div>` : ''}
 </div>
-<div style="margin-top:20px;font-size:14px;"><div><b>اسم الزبون:</b> ${k.clientName||'-'}</div><div><b>رقم الهاتف:</b> ${k.clientPhone||'-'}</div></div>
-${floors.length ? `<table style="width:100%;border-collapse:collapse;margin-top:10px;"><thead style="background:gold;"><tr><th style="border:1px solid #ccc;padding:8px;">الطابق</th><th style="border:1px solid #ccc;padding:8px;">نوع الخشب</th><th style="border:1px solid #ccc;padding:8px;">طول</th><th style="border:1px solid #ccc;padding:8px;">عرض</th><th style="border:1px solid #ccc;padding:8px;">ارتفاع</th></tr></thead><tbody>${floors.map(f=>`<tr style="text-align:center;"><td style="border:1px solid #ccc;">${f.name||'-'}</td><td style="border:1px solid #ccc;font-weight:bold;">${f._woodName}</td><td style="border:1px solid #ccc;">${f.L||'-'} م</td><td style="border:1px solid #ccc;">${f.W||'-'} م</td><td style="border:1px solid #ccc;">${f.H||'-'} م</td></tr>`).join('')}</tbody></table>` : ''}
-<div style="display:flex;justify-content:space-between;gap:40px;margin-top:20px;">
-${k.extras?.length ? `<div style="width:50%;"><h3 style="color:#FF7F50;">الإضافات</h3><ul>${k.extras.map(e=>`<li>${e.name}: ${e.value} م</li>`).join('')}</ul></div>` : '<div style="width:50%;"></div>'}
-${k.materials?.length ? `<div style="width:50%;"><h3 style="color:#FF7F50;">الأكسسوارات</h3><ul>${k.materials.map(m=>`<li>${m.name} × ${m.qty}${showPrice&&m.price?' — '+Number(m.price).toLocaleString()+' د.ع':''}</li>`).join('')}</ul></div>` : ''}
+ 
+<!-- المبالغ -->
+<div style="margin-top:20px;padding:15px;border:2px solid #FF8C00;border-radius:8px;background:#fffdf9;">
+  ${totalHtml}
 </div>
-<div style="margin-top:20px;font-size:16px;font-weight:bold;">المجموع: ${totalHtml}</div>
-<div style="margin-top:10px;font-size:14px;font-weight:bold;color:#FF7F50;">ملاحظات:<hr>${k.notes||'-'}</div>
+ 
+<div style="margin-top:15px;font-size:13px;"><b>ملاحظات:</b><hr style="margin:4px 0;">${k.notes||'—'}</div>
+ 
 <div style="position:absolute;bottom:38mm;left:20mm;right:20mm;display:flex;justify-content:space-between;">
-<div style="text-align:center;"><div style="color:#FF7F50;font-weight:600;">البائع</div><div style="font-weight:700;">شركة أكد</div></div>
+<div style="text-align:center;"><div style="color:#FF7F50;font-weight:600;">البائع</div><div style="font-weight:700;">مجمع أكد</div></div>
 <div style="text-align:center;"><div style="color:#FF7F50;font-weight:600;">المشتري</div><div style="font-weight:700;">${k.clientName||'-'}</div></div>
 </div>
-<div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:12px;border-top:2px solid #FF8C00;padding-top:8px;">ملاحظة: يتم تسليم المبلغ كاملاً قبل التنصيب<br>الكادر غير مسؤول عن تنصيب الماء والكهرباء<br>ضمان 5 سنوات</div>
-</div>`;
+ 
+<div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:11px;border-top:2px solid #FF8C00;padding-top:8px;">ملاحظة: يتم تسليم المبلغ كاملاً قبل التنصيب<br>الكادر غير مسؤول عن تنصيب الماء والكهرباء<br>ضمان 5 سنوات</div>
+</div>
+</body>
+</html>`;
   }
  
-  const html = `<html><head><meta charset="utf-8"><style>body{margin:0}.page{page-break-after:always}</style></head><body><div class="page">${buildPage(false)}</div><div class="page">${buildPage(true)}</div></body></html>`;
+  const html = `<html><head><meta charset="utf-8"><style>
+@page{
+  size: A4;
+  margin: 0;
+}
+
+html, body{
+  width: 210mm;
+  height: 297mm;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: Arial;
+  direction: rtl;
+}
+</style></head><body><div class="page">${buildPage(true)}</div></html>`;
   const w = window.open('', '_blank', 'width=900,height=1200');
   w.document.write(html);
   w.document.close();
   setTimeout(() => { w.print(); w.close(); }, 500);
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function renderReadonlyList(container, list, type, kitchenWoods = []) {
   container.innerHTML = '';
   if (!Array.isArray(list) || list.length === 0) { container.textContent = '—'; return; }
@@ -1271,15 +1561,26 @@ if (refreshBtn) refreshBtn.addEventListener('click', debouncedFilter);
  
 async function openModal(id, k) {
   currentId = id;
+  currentKitchenTotal = Number(k.totalAmount || 0);
+ 
   m_clientName.value = k.clientName || '';
   m_clientPhone.value = k.clientPhone || '';
   m_colorCode.value = k.colorCode || '';
+  m_color2.value = k.color2 || '';
+  m_porcelainColor.value = k.porcelainColor || '';
+  m_extra1.value = k.extra1 || '';
+  m_extra2.value = k.extra2 || '';
+  m_contractNumber.value = k.contractNumber || '';
+  m_address.value = k.address || '';
+  m_deliveryDate.value = formatDateTimeForInput(k.deliveryDate) || '';
   m_notes.value = k.notes || '';
   m_status.value = k.status || 'غير متفق عليه';
-  m_createdAt.value = k.createdAt
-    ? new Date(k.createdAt.seconds ? k.createdAt.seconds * 1000 : k.createdAt).toLocaleString('ar-IQ')
-    : '';
-  m_discount.value = k.discount || 0;
+  m_createdAt.value = formatDateTimeForDisplay(k.createdAt) || '';
+  m_discount.value = Number(k.discount) || 0;
+  m_arboon.value = Number(k.arboon) || 0;
+ 
+  // Update price summary
+  updatePriceSummary();
  
   const floors = Array.isArray(k.floors) ? k.floors.map(f => ({ ...f })) : [];
   const extras = Array.isArray(k.extras) ? k.extras : [];
@@ -1327,13 +1628,28 @@ if (closeModal) closeModal.addEventListener('click', () => {
  
 if (saveModal) saveModal.addEventListener('click', async () => {
   if (!currentId) return alert('لا يوجد مطبخ محدد للحفظ');
+  
+  const deliveryDateValue = m_deliveryDate.value;
+  let deliveryDateObj = null;
+  if (deliveryDateValue) {
+    deliveryDateObj = new Date(deliveryDateValue);
+  }
+ 
   const updates = {
     clientName: m_clientName.value || '',
     clientPhone: m_clientPhone.value || '',
     colorCode: m_colorCode.value || '',
+    color2: m_color2.value || '',
+    porcelainColor: m_porcelainColor.value || '',
+    extra1: m_extra1.value || '',
+    extra2: m_extra2.value || '',
+    contractNumber: m_contractNumber.value || '',
+    address: m_address.value || '',
+    deliveryDate: deliveryDateObj || null,
     notes: m_notes.value || '',
     status: m_status.value || '',
-    discount: Number(m_discount.value) || 0
+    discount: Number(m_discount.value) || 0,
+    arboon: Number(m_arboon.value) || 0
   };
   try {
     await updateDoc(doc(db, 'kitchens', currentId), updates);
@@ -1381,9 +1697,11 @@ if (editInKitchens) editInKitchens.addEventListener('click', () => {
 if (newBtn) newBtn.addEventListener('click', async () => {
   try {
     const docRef = await addDoc(collection(db, 'kitchens'), {
-      clientName: 'عميل جديد', clientPhone: '', colorCode: '',
+      clientName: 'عميل جديد', clientPhone: '', colorCode: '', color2: '', porcelainColor: '',
+      extra1: '', extra2: '', contractNumber: '', address: '', deliveryDate: null,
       notes: '', status: 'غير متفق عليه',
       floors: [], extras: [], materials: [],
+      discount: 0, arboon: 0,
       createdAt: new Date()
     });
     const snap = await getDoc(doc(db, 'kitchens', docRef.id));
@@ -1478,3 +1796,13 @@ if (saveNewBtn) saveNewBtn.addEventListener('click', async () => {
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
