@@ -886,24 +886,24 @@ main {
         <input type="datetime-local" id="m_deliveryDate">
       </div>
       <div>
-        <label for="m_colorCode">لون المطبخ الرئيسي</label>
+        <label for="m_colorCode">لون  الطابق الارضي </label>
         <input id="m_colorCode" placeholder="# كود أو اسم اللون">
       </div>
       <div>
-        <label for="m_color2">لون ثانوي</label>
-        <input id="m_color2" placeholder="لون إضافي">
+        <label for="m_color2">لون الطابق الاول </label>
+        <input id="m_color2" placeholder=" كود أو اسم اللون ">
       </div>
       <div>
-        <label for="m_porcelainColor">لون البورسلين/الكوارتز</label>
-        <input id="m_porcelainColor" placeholder="لون الرخام أو الكوارتز">
+        <label for="m_porcelainColor">الطابق الثاني  /</label>
+        <input id="m_porcelainColor" placeholder=" كود أو اسم اللون   ">
       </div>
       <div>
-        <label for="m_extra1">إضافية 1</label>
-        <input id="m_extra1" placeholder="إضافية أولى">
+        <label for="m_extra1">الكوارتز او  البورسلين   </label>
+        <input id="m_extra1" placeholder=" اضف لون الكوارتز او بورسلين  ">
       </div>
       <div>
-        <label for="m_extra2">إضافية 2</label>
-        <input id="m_extra2" placeholder="إضافية ثانية">
+        <label for="m_extra2"> اضافة اخرى  </label>
+        <input id="m_extra2" placeholder="اضافة اخرى ">
       </div>
       <div>
         <label for="m_status">الحالة</label>
@@ -1301,70 +1301,153 @@ const deliveryDateDisplay = k.deliveryDate
   ? formatDateOnlyEnglish(k.deliveryDate)
   : '—';
     const colorInfo = `
-      <div style="font-size:12px;color:#555;margin-top:6px;line-height:1.8;">
-        <div><b>اللون الرئيسي:</b> ${k.colorCode || '—'}</div>
-        ${k.color2 ? `<div><b>لون ثانوي:</b> ${k.color2}</div>` : ''}
-        ${k.porcelainColor ? `<div><b>البورسلين/الكوارتز:</b> ${k.porcelainColor}</div>` : ''}
-        ${k.extra1 ? `<div><b>إضافية 1:</b> ${k.extra1}</div>` : ''}
-        ${k.extra2 ? `<div><b>إضافية 2:</b> ${k.extra2}</div>` : ''}
+      <div style="font-size:12px;color:#000;margin-top:6px;line-height:1.8;">
+        <div><b>اللون طابق الارضي  :</b> ${k.colorCode || '—'}</div>
+        ${k.color2 ? `<div><b>لون طابق الاول  :</b> ${k.color2}</div>` : ''}
+        ${k.porcelainColor ? `<div><b>الطابق الثاني .:</b> ${k.porcelainColor}</div>` : ''}
+        ${k.extra1 ? `<div><b>لون  الكوارتز او البورسلين   .: </b> ${k.extra1}</div>` : ''}
+        ${k.extra2 ? `<div><b>اضافة  اخرى  .:</b> ${k.extra2}</div>` : ''}
       </div>
     `;
  
-    return `<!DOCTYPE html>
+return `<!DOCTYPE html>
 <html dir="rtl">
 <head><meta charset="utf-8"><style>body{margin:0;font-family:Arial;direction:rtl;}.page{page-break-after:always}</style></head>
 <body>
 <div style="direction:rtl;font-family:Arial;width:210mm;min-height:297mm;padding:20mm;box-sizing:border-box;position:relative;">
  
-<!-- Header -->
-<div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:4px solid #FF8C00;padding-bottom:10px;margin-bottom:15px;">
-  <!-- أرقام الهاتف على اليسار -->
-  <div style="font-size:14px;line-height:1.8;text-align:left; margin-top:8px;
-  
-    position:relative;
+<!-- ================= HEADER ================= -->
+<div style="
+position:relative;
+width:100%;
+height:80px;
+border-bottom:4px solid #FF8C00;
+margin-bottom:18px;
+">
 
-    top:-50px;          /* نزول وصعود */
-    right:-50px;        /* يمين */
-    left:0px;         /* يسار */
 
-   
 
-    width:120px;
+
+
+  <!-- اسم الشركة -->
+  <div style="
+    position:absolute;
+
+    top:-50px;      /* نزول وصعود */
+    right:130px;  /* يمين ويسار */
+
+    font-size:34px;
+    font-weight:900;
+    color:#000;
+    z-index:5;
   ">
-    <div>📞 07893000355</div>
-    <div>📞 07831840540</div>
-    <!-- تاريخ الإنشاء وتاريخ التسليم مقابل أرقام الهاتف -->
-    <div style="margin-top:8px;font-size:12px;color:#555;border-top:1px solid #eee;padding-top:6px;
-    
-    
-
-
- 
-    position:relative;
-
-    top:-50px;          /* نزول وصعود */
-    right:620px;        /* يمين */
-    left:px;         /* يسار */
-   
-    margin-top:0px;
-
-    width:120px;
-
-    
-    ">
-      <div><b style=color:#FF7F50;>تاريخ الإنشاء:</b> ${createdAtDisplay}</div>
-      <div><b  style=color:#27ae60;>تاريخ التسليم:</b> ${deliveryDateDisplay}</div>
-    </div>
+    مجمع <span style="color:#FF8C00;font-size:46px;">أكد</span>
+    للديكور والمطابخ الحديثة
   </div>
- 
-  <!-- اسم الشركة في الوسط -->
-  <div style="text-align:center;flex:1;">
-    <div style="font-size:30px;font-weight:bold;">مجمع <span style="font-size:44px;font-weight:900;color:#FF8C00;">أكد</span> للديكور والمطابخ الحديثة</div>
-    <div style="font-size:14px;margin-top:6px;color:#555;">مطابخ تركية - اكسسوارات - مقاولات عامة - اجهزة كهربائية</div>
-    <div style="height:4px;background:#FF8C00;margin-top:8px;"></div>
-    <div style="margin-top:6px;font-size:14px;">📍 النجف الأشرف - حي العسكري كبل - مقابل مول السنبلة</div>
+
+  <!-- النص تحت اسم الشركة -->
+  <div style="
+    position:absolute;
+
+    top:15px;
+    right:210px;
+
+    font-size:14px;
+    color:#555;
+  ">
+    مطابخ تركية - اكسسوارات  -  مقاولات عامة - اجهزة كهربائية
   </div>
+
+
+
+  <!-- موقع الشركة -->
+  <div style="
+    position:absolute;
+
+    top:45px;
+    right:205px;
+
+    font-size:14px;
+    color:#000;
+  ">
+    📍 النجف الأشرف - حي العسكري كبل - مقابل مول السنبلة
+  </div>
+
+
+
+  <!-- الخط البرتقالي -->
+  <div style="
+    position:absolute;
+
+    top:110px;
+    right:0px;
+
+    width:700px;
+    height:3px;
+    background:#FF8C00;
+    border-radius:20px;
+  "></div>
+
+
+  <!-- الهاتف الاول -->
+  <div style="
+    position:absolute;
+
+    top:-50px;
+    left:590px;
+
+    font-size:12px;
+    font-weight:bold;
+  ">
+    📞 07893000355
+  </div>
+
+  <!-- الهاتف الثاني -->
+  <div style="
+    position:absolute;
+
+    top:-15px;
+    left:590px;
+
+    font-size:12px;
+    font-weight:bold;
+  ">
+    📞 07831840540
+  </div>
+
+  <!-- تاريخ الانشاء -->
+  <div style="
+    position:absolute;
+
+    top:-50px;
+    left:-35px;
+
+    font-size:12px;
+    color:#444;
+  ">
+    <b style="color:#FF7F50;">تاريخ الإنشاء:</b>
+    <br>
+    ${createdAtDisplay}
+  </div>
+
+  <!-- تاريخ التسليم -->
+  <div style="
+    position:absolute;
+
+    top:-15px;
+    left:-35px;
+
+    font-size:12px;
+    color:#444;
+  ">
+    <b style="color:#27ae60;">تاريخ التسليم:</b>
+    <br>
+    ${deliveryDateDisplay}
+  </div>
+
 </div>
+<!-- ================= END HEADER ================= -->
+
  
 <!-- بيانات الزبون - بدون حقل الحالة -->
 <table style="width:100%;border-collapse:collapse;margin-bottom:15px;font-size:13px;">
@@ -1385,9 +1468,9 @@ ${floors.length ? `
 <thead style="background:#FFD700;"><tr>
 <th style="border:1px solid #ccc;padding:8px;">الطابق</th>
 <th style="border:1px solid #ccc;padding:8px;">نوع الخشب</th>
-<th style="border:1px solid #ccc;padding:8px;">طول</th>
-<th style="border:1px solid #ccc;padding:8px;">عرض</th>
-<th style="border:1px solid #ccc;padding:8px;">ارتفاع</th>
+<th style="border:1px solid #ccc;padding:8px;">الطول</th>
+<th style="border:1px solid #ccc;padding:8px;">العمق</th>
+<th style="border:1px solid #ccc;padding:8px;">الارتفاع</th>
 </tr></thead>
 <tbody>
 ${floors.map(f=>`<tr style="text-align:center;">
@@ -1776,19 +1859,6 @@ if (verifyOldBtn) verifyOldBtn.addEventListener('click', async () => {
     adminMsg.textContent = 'كلمة المرور القديمة غير صحيحة';
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
  
 if (saveNewBtn) saveNewBtn.addEventListener('click', async () => {
   const newPass = newPasswordInput.value.trim();
