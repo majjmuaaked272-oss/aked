@@ -11,8 +11,8 @@
 <!-- ===== FONTS ===== -->
 
 
-
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
 /* ===== RESET ===== */
@@ -1915,6 +1915,361 @@ button.save:active { transform: translateY(-1px); }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root {
+  /* الألوان الأساسية (البرتقالي/الذهبي) */
+  --orange:        #e8833a;
+  --orange-2:      #f5a55c;
+  --orange-glow:   #ff9a4d;
+  --orange-deep:   #c05e1a;
+ 
+  /* الخلفيات */
+  --bg-main:       #0d0d0d;
+  --bg-card:       #161616;
+  --bg-hover:      #1e1e1e;
+  --bg-input:      #1a1a1a;
+ 
+  /* الحدود */
+  --border:        rgba(232, 131, 58, 0.2);
+  --border-active: rgba(232, 131, 58, 0.7);
+ 
+  /* النصوص */
+  --text:          #e8e2d9;
+  --text-dim:      #8a8278;
+  --text-muted:    #555050;
+ 
+  /* الألوان الأساسية */
+  --white:         #ffffff;
+  --black:         #000000;
+ 
+  /* التأثيرات (Glow Effects) */
+  --glow-sm:       0 0 12px rgba(232, 131, 58, 0.25);
+  --glow-md:       0 0 24px rgba(232, 131, 58, 0.4);
+  --glow-lg:       0 0 40px rgba(232, 131, 58, 0.55);
+}
+ 
+
+
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+}
+ 
+html, body {
+  height: 100%;
+  direction: rtl; /* من اليمين إلى اليسار */
+}
+ 
+body {
+  background-color: var(--bg-main);
+  color: var(--text);
+  overflow-x: hidden;
+}
+ 
+
+
+
+
+ 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), var(--orange-2));
+  width: 0%;
+  transform-origin: left;
+  z-index: 9999;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px var(--orange);
+}
+ 
+
+
+
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(13, 13, 13, 0.92); /* خلفية شبه شفافة */
+  backdrop-filter: blur(18px);         /* تأثير الزجاج */
+  -webkit-backdrop-filter: blur(18px); /* دعم Safari */
+  border-bottom: 1px solid var(--border);
+  z-index: 7000;
+}
+ 
+/* الخط البرتقالي الأول في أعلى الـ Header */
+.header-top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--orange);
+  z-index: 2000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+ 
+/* Container داخل الـ Header */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* العنوان يمين، الروابط يسار */
+  align-items: center;             /* محاذاة عمودية */
+  padding: 18px 60px;
+}
+ 
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. العنوان الرئيسي (H1 في الـ Header)
+   ═══════════════════════════════════════════════════════════════════════════ */
+ 
+header h1 {
+  font-size: 26px;
+  font-weight: 900;     /* Black weight */
+  letter-spacing: 2px;  /* مسافات واسعة بين الأحرف */
+  color: var(--orange);
+  text-shadow: var(--glow-sm); /* توهج خفيف */
+}
+ 
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. شريط التنقل (Navigation Bar)
+   ═══════════════════════════════════════════════════════════════════════════ */
+ 
+nav {
+  display: flex;
+  align-items: center;
+  gap: 28px; /* المسافة بين الروابط */
+}
+ 
+/* الروابط الفردية */
+nav a {
+  font-size: 14px;
+  font-weight: 600;        /* Semibold */
+  color: var(--text-dim);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+}
+ 
+/* خط تحتي ديناميكي للروابط */
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-2));
+  transition: width 0.35s ease; /* انتقال سلس */
+}
+ 
+/* تفاعل الـ Hover على الروابط */
+nav a:hover {
+  color: var(--orange);
+}
+ 
+nav a:hover::after {
+  width: 100%; /* الخط يملأ كامل العرض */
+}
+ 
+
+.admin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  border-radius: 50%; /* دائري كامل */
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--border-active);
+}
+ 
+/* تفاعل الـ Hover على الزر */
+.admin-btn:hover {
+  transform: scale(1.1) rotate(8deg); /* تكبير + تدوير */
+  box-shadow: var(--glow-md);         /* توهج */
+}
+ 
+/* الأيقونة داخل الزر */
+.admin-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+ 
+
+main {
+  padding: 140px 24px 60px; 
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+ 
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+ 
+::-webkit-scrollbar-track {
+  background: var(--bg-card);
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--orange), var(--orange-deep));
+  border-radius: 10px;
+}
+ 
+
+html {
+  scrollbar-width: none;
+}
+ 
+body {
+  -ms-overflow-style: none;
+}
+ 
+body::-webkit-scrollbar {
+  display: none;
+}
+ 
+
+@media (max-width: 900px) {
+  .header-container {
+    padding: 14px 20px; /* تقليل الحشو */
+  }
+ 
+  header h1 {
+    font-size: 20px; /* تقليل حجم العنوان */
+  }
+ 
+  main {
+    padding-top: 120px; /* تقليل الحشو العلوي */
+  }
+}
+ 
+@media (max-width: 600px) {
+  nav {
+    gap: 14px; /* تقليل المسافة بين الروابط */
+  }
+ 
+  nav a {
+    font-size: 12px; /* تقليل حجم النص */
+  }
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 
 
@@ -1937,7 +2292,7 @@ button.save:active { transform: translateY(-1px); }
     <nav>
       <a href="#">الرئيسية</a>
       <a href="kitchens.html">مطابخ</a>
-      <a href="#">------ </a>
+      <a href="Contracting.html">المقاولات </a>
       <a href="#">------</a>
       <a href="coming-soon.html">قيد الأنشاء</a>
       <a class="admin-btn" title="الأدمن" aria-label="الأدمن">
