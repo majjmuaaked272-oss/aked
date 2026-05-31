@@ -2,13 +2,16 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>مجمع أكد للمقاولات</title>
+<title>قيد الإنشاء - Luxury Studio (مطور)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0d0d0d">
+<meta name="msapplication-navbutton-color" content="#0d0d0d">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+ 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-
+ 
 <style>
 :root {
   --orange:        #e8833a;
@@ -19,162 +22,1032 @@
   --bg-card:       #161616;
   --bg-hover:      #1e1e1e;
   --bg-input:      #1a1a1a;
-  --border:        rgba(232,131,58,0.2);
-  --border-active: rgba(232,131,58,0.7);
+  --border:        rgba(232, 131, 58, 0.2);
+  --border-active: rgba(232, 131, 58, 0.7);
   --text:          #e8e2d9;
   --text-dim:      #8a8278;
   --text-muted:    #555050;
   --white:         #ffffff;
-  --glow-sm:       0 0 12px rgba(232,131,58,0.25);
-  --glow-md:       0 0 24px rgba(232,131,58,0.4);
-  --card-shadow:   0 8px 32px rgba(0,0,0,0.6);
-  --hover-shadow:  0 15px 35px rgba(232,131,58,0.35);
+  --black:         #000000;
+  --hover-shadow:  0 15px 35px rgba(232, 131, 58, 0.35);
+  --card-shadow:   0 8px 32px rgba(0, 0, 0, 0.6);
+  --glow-sm:       0 0 12px rgba(232, 131, 58, 0.25);
+  --glow-md:       0 0 24px rgba(232, 131, 58, 0.4);
+  --glow-lg:       0 0 40px rgba(232, 131, 58, 0.55);
 }
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo','Tajawal','Segoe UI',Tahoma,sans-serif;}
-html,body{height:100%;direction:rtl;}
-body{background-color:var(--bg-main);color:var(--text);overflow-x:hidden;}
-
-body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(232,131,58,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(232,131,58,0.06) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;}
-body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(232,131,58,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;}
-
-body::-webkit-scrollbar{display:none;}
-html{scrollbar-width:none;}
-
-.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--orange-deep),var(--orange),var(--orange-2));width:0%;z-index:9999;box-shadow:0 0 10px var(--orange);}
-
-/* ===== HEADER ===== */
-header{position:fixed;top:0;width:100%;background:rgba(13,13,13,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);z-index:7000;}
-.header-container{display:flex;justify-content:space-between;align-items:center;padding:18px 60px;}
-header h1{font-size:26px;font-weight:900;letter-spacing:2px;color:var(--orange);text-shadow:var(--glow-sm);}
-nav{display:flex;align-items:center;gap:28px;}
-nav a{font-size:14px;font-weight:600;color:var(--text-dim);text-decoration:none;position:relative;padding-bottom:5px;transition:color 0.3s ease;letter-spacing:0.5px;cursor:pointer;}
-nav a::after{content:"";position:absolute;bottom:0;right:0;width:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange-2));transition:width 0.35s ease;}
-nav a:hover{color:var(--orange);}
-nav a:hover::after{width:100%;}
-nav a.active{color:var(--orange);}
-nav a.active::after{width:100%;}
-
-.admin-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:linear-gradient(135deg,var(--orange-deep),var(--orange));border-radius:50%;color:#fff;cursor:pointer;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;border:1px solid var(--border-active);}
-.admin-btn:hover{transform:scale(1.1) rotate(8deg);box-shadow:var(--glow-md);}
-
-/* ===== MAIN ===== */
-main{padding:140px 24px 60px;max-width:1200px;margin:auto;position:relative;z-index:1;}
-
-/* ===== TABS ===== */
-.tabs-bar{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;}
-.tab-btn{padding:9px 22px;border-radius:22px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-dim);font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.3s;letter-spacing:.3px;}
-.tab-btn:hover{border-color:var(--orange);color:var(--orange);}
-.tab-btn.active{background:linear-gradient(135deg,var(--orange-deep),var(--orange));color:#fff;border-color:var(--orange);box-shadow:0 4px 14px rgba(232,131,58,.3);}
-
-/* ===== CONTROLS ===== */
-.controls{display:flex;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap;align-items:center;}
-.controls .left{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-.controls input,.controls select{background:var(--bg-card);border:1px solid var(--border);padding:10px 16px;border-radius:10px;color:var(--text);min-width:200px;font-family:'Cairo',sans-serif;font-size:13px;transition:.3s;outline:none;box-shadow:inset 0 1px 4px rgba(0,0,0,.4);}
-.controls input::placeholder{color:var(--text-muted);}
-.controls input:focus,.controls select:focus{border-color:var(--orange);background:rgba(232,131,58,.04);box-shadow:var(--glow-sm),inset 0 1px 4px rgba(0,0,0,.3);}
-.controls select option{background:var(--bg-card);color:var(--text);}
-.actions-right{display:flex;align-items:center;gap:14px;}
-#counts{font-size:12px;color:var(--text-muted);font-weight:600;letter-spacing:.5px;padding:6px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;}
-
-.btn-text{background:none;border:none;color:var(--text-dim);font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;position:relative;padding:6px 8px;transition:color .25s ease;}
-.btn-text::after{content:'';position:absolute;left:0;bottom:-2px;height:2px;width:0;background:linear-gradient(90deg,var(--orange),var(--orange-2));transition:width .35s ease;}
-.btn-text:hover{color:var(--orange);}
-.btn-text:hover::after{width:100%;}
-.btn-text.danger::after{background:linear-gradient(90deg,#e74c3c,#c0392b);}
-.btn-text.danger:hover{color:#c0392b;}
-
-/* ===== CARDS GRID ===== */
-#projectCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
-
-.card{background:var(--bg-card);border-radius:16px;padding:22px;border:1px solid var(--border);box-shadow:var(--card-shadow);transition:.35s;position:relative;cursor:pointer;display:flex;justify-content:space-between;align-items:center;overflow:hidden;}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange-deep),var(--orange),transparent);opacity:0;transition:opacity .3s ease;}
-.card:hover{transform:translateY(-5px);box-shadow:var(--hover-shadow);border-color:var(--border-active);background:var(--bg-hover);}
-.card:hover::before{opacity:1;}
-.card h3{font-size:15px;font-weight:900;color:var(--text);margin-bottom:8px;}
-.card .meta{color:var(--text-muted);font-size:13px;line-height:1.7;}
-.card .meta strong{color:var(--text-dim);}
-.card .price{margin-top:8px;font-size:15px;font-weight:900;color:var(--orange);text-shadow:var(--glow-sm);}
-
-/* ===== BADGES ===== */
-.badge{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap;margin-bottom:10px;display:inline-block;}
-.badge.pending{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.5);color:#e74c3c;}
-.badge.building{background:rgba(41,128,185,.15);border:1px solid rgba(41,128,185,.5);color:#5dade2;}
-.badge.done{background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.5);color:#2ecc71;}
-.badge.paused{background:rgba(241,196,15,.12);border:1px solid rgba(241,196,15,.5);color:#f1c40f;}
-
-.action-icons{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-
-.btn-print-fancy{background:linear-gradient(135deg,var(--orange-deep),var(--orange))!important;color:#fff!important;border:none!important;width:36px!important;height:36px!important;border-radius:10px!important;cursor:pointer!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:15px!important;box-shadow:0 4px 12px rgba(232,131,58,.3)!important;transition:transform .2s ease,box-shadow .2s ease!important;}
-.btn-print-fancy:hover{transform:scale(1.12)!important;box-shadow:var(--glow-md)!important;}
-
-.empty{text-align:center;padding:40px;color:var(--text-muted);background:var(--bg-card);border-radius:16px;border:1px dashed var(--border);font-weight:700;font-size:15px;}
-
-/* ===== MODAL ===== */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;justify-content:center;align-items:center;z-index:9999;padding:24px;animation:fadeIn .3s ease;}
-.modal.show{display:flex;}
-.modal-box{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:28px 30px;max-width:860px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--glow-sm),0 30px 80px rgba(0,0,0,.8);animation:slideUp .35s ease;position:relative;text-align:right;scrollbar-width:none;}
-.modal-box::-webkit-scrollbar{display:none;}
-.modal-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange-deep),var(--orange),var(--orange-2),transparent);border-radius:16px 16px 0 0;}
-.modal-box h2{font-size:18px;font-weight:900;color:var(--orange);margin-bottom:18px;text-shadow:var(--glow-sm);}
-.modal .close{position:absolute;top:16px;left:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg-hover);color:var(--text-dim);font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;}
-.modal .close:hover{background:linear-gradient(135deg,var(--orange-deep),var(--orange));color:#fff;border-color:var(--orange);transform:scale(1.1) rotate(90deg);}
-
-.modal .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;}
-.modal label{font-size:13px;font-weight:700;color:var(--text-dim);margin-bottom:6px;display:block;}
-.modal input,.modal textarea,.modal select{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-family:'Cairo',sans-serif;font-size:13px;transition:.2s;outline:none;box-shadow:inset 0 1px 4px rgba(0,0,0,.4);}
-.modal input::placeholder,.modal textarea::placeholder{color:var(--text-muted);}
-.modal input:focus,.modal textarea:focus,.modal select:focus{border-color:var(--orange);background:rgba(232,131,58,.04);box-shadow:var(--glow-sm),inset 0 1px 4px rgba(0,0,0,.3);}
-.modal input:disabled{opacity:.5;cursor:not-allowed;}
-.modal textarea{min-height:80px;resize:vertical;}
-.modal select option{background:var(--bg-card);color:var(--text);}
-
-.price-summary-box{background:rgba(232,131,58,.06);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-top:4px;display:flex;flex-direction:column;gap:6px;}
-.price-summary-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text-dim);}
-.price-summary-row.total{font-size:15px;font-weight:900;color:var(--orange);border-top:1px solid var(--border);padding-top:8px;margin-top:2px;}
-
-.modal-actions{display:flex;align-items:center;gap:16px;margin-top:20px;padding-top:12px;border-top:1px solid var(--border);}
-.modal-actions .spacer{flex:1;}
-
-.btn{padding:10px 20px;border-radius:10px;border:none;font-weight:700;font-size:13px;font-family:'Cairo',sans-serif;cursor:pointer;transition:.3s;}
-.btn.gold{background:linear-gradient(135deg,var(--orange-deep),var(--orange));color:#fff;box-shadow:0 4px 14px rgba(232,131,58,.3);}
-.btn.gold:hover{transform:translateY(-2px);box-shadow:var(--glow-md);}
-.btn.gray{background:var(--bg-hover);color:var(--text-dim);border:1px solid var(--border);}
-.btn.gray:hover{background:var(--bg-input);color:var(--text);border-color:var(--border-active);}
-.btn.danger{background:linear-gradient(135deg,#8b1a1a,#c0392b);color:#fff;}
-.btn.danger:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,57,43,.4);}
-
-/* Admin Modal */
-#adminModal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:none;justify-content:center;align-items:center;z-index:9999;padding:24px;animation:fadeIn .3s ease;}
-#adminModal.show{display:flex;}
-#adminModal .modal-box{max-width:400px;}
-#adminModal input{width:100%!important;height:42px!important;padding:0 12px!important;border-radius:8px!important;border:1px solid var(--border)!important;background:var(--bg-input)!important;color:var(--text)!important;font-family:'Cairo',sans-serif!important;font-size:14px!important;box-sizing:border-box!important;margin-top:8px!important;transition:.25s!important;outline:none!important;}
-#adminModal input:focus{border-color:var(--orange)!important;box-shadow:var(--glow-sm)!important;}
-#adminMsg{margin-top:10px;font-size:13px;color:#e74c3c;font-weight:700;}
-
-/* Items list in modal */
-.items-section{margin-top:16px;}
-.items-section h4{font-size:13px;font-weight:700;color:var(--text-dim);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-.item-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
-.item-row input{flex:1;}
-.item-row .qty{width:80px!important;flex:none;}
-.item-row .price-inp{width:110px!important;flex:none;}
-.item-row .rm-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(192,57,43,.4);background:rgba(192,57,43,.1);color:#e74c3c;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:.2s;flex-shrink:0;}
-.item-row .rm-btn:hover{background:rgba(192,57,43,.25);}
-.add-item-btn{background:rgba(232,131,58,.08);border:1px dashed var(--border-active);color:var(--orange);border-radius:8px;padding:7px 14px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:.2s;margin-top:4px;}
-.add-item-btn:hover{background:rgba(232,131,58,.15);}
-
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
-
-@media(max-width:900px){.header-container{padding:14px 20px;}header h1{font-size:20px;}main{padding-top:120px;}.modal .grid{grid-template-columns:1fr;}}
-@media(max-width:600px){nav{gap:14px;}nav a{font-size:12px;}.controls input,.controls select{min-width:140px;}}
+ 
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, sans-serif; }
+html, body { height: 100%; direction: rtl; }
+ 
+body {
+  background-color: var(--bg-main);
+  color: var(--text);
+  overflow-x: hidden;
+}
+ 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(232,131,58,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,131,58,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+ 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(232,131,58,0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+ 
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-card); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--orange), var(--orange-deep));
+  border-radius: 10px;
+}
+html { scrollbar-width: none; }
+body { -ms-overflow-style: none; }
+body::-webkit-scrollbar { display: none; }
+ 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), var(--orange-2));
+  width: 0%;
+  transform-origin: left;
+  z-index: 9999;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px var(--orange);
+}
+ 
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  z-index: 7000;
+}
+ 
+.header-top-line {
+  position: absolute;
+  top: 0; left: 0;
+  height: 3px; width: 100%;
+  background: var(--orange);
+  z-index: 2000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+ 
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+}
+ 
+header h1 {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--orange);
+  text-shadow: var(--glow-sm);
+}
+ 
+nav { display: flex; align-items: center; gap: 28px; }
+ 
+nav a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+}
+ 
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-2));
+  transition: width 0.35s ease;
+}
+ 
+nav a:hover { color: var(--orange); }
+nav a:hover::after { width: 100%; }
+ 
+.admin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--border-active);
+}
+ 
+.admin-btn:hover {
+  transform: scale(1.1) rotate(8deg);
+  box-shadow: var(--glow-md);
+}
+ 
+.admin-btn svg { width: 20px; height: 20px; fill: #fff; }
+ 
+main {
+  padding: 140px 24px 60px;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+ 
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+ 
+.controls .left {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+ 
+.controls input, .controls select {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: var(--text);
+  min-width: 200px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px;
+  transition: .3s;
+  outline: none;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+}
+ 
+.controls input::placeholder { color: var(--text-muted); }
+ 
+.controls input:focus, .controls select:focus {
+  border-color: var(--orange);
+  background: rgba(232,131,58,0.04);
+  box-shadow: var(--glow-sm), inset 0 1px 4px rgba(0,0,0,0.3);
+}
+ 
+.controls select option {
+  background: var(--bg-card);
+  color: var(--text);
+}
+ 
+.actions-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+ 
+#counts {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+ 
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  padding: 6px 8px;
+  transition: color 0.25s ease;
+}
+ 
+.btn-text::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--orange), var(--orange-2));
+  transition: width 0.35s ease;
+}
+ 
+.btn-text:hover { color: var(--orange); }
+.btn-text:hover::after { width: 100%; }
+ 
+.btn-text.archive::after { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+.btn-text.archive:hover { color: #c0392b; }
+ 
+#kitchenCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+ 
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  transition: .35s;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+ 
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+ 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+  border-color: var(--border-active);
+  background: var(--bg-hover);
+}
+ 
+.card:hover::before { opacity: 1; }
+ 
+.card h3 {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+ 
+.card .meta {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.7;
+  max-height: 70px;
+  overflow-y: auto;
+}
+ 
+.card .meta strong { color: var(--text-dim); }
+ 
+.card .price {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--orange);
+  text-shadow: var(--glow-sm);
+  letter-spacing: 0.5px;
+}
+ 
+.orig-price {
+  text-decoration: line-through;
+  opacity: 0.6;
+  margin-left: 6px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+ 
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+ 
+.badge.pending {
+  background: rgba(192,57,43,0.15);
+  border: 1px solid rgba(192,57,43,0.5);
+  color: #e74c3c;
+}
+ 
+.badge.building {
+  background: rgba(41,128,185,0.15);
+  border: 1px solid rgba(41,128,185,0.5);
+  color: #5dade2;
+}
+ 
+.badge.done {
+  background: rgba(39,174,96,0.15);
+  border: 1px solid rgba(39,174,96,0.5);
+  color: #2ecc71;
+}
+ 
+.action-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+ 
+.btn-print-fancy {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange)) !important;
+  color: #fff !important;
+  border: none !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  box-shadow: 0 4px 12px rgba(232,131,58,0.3) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  position: static !important;
+}
+ 
+.btn-print-fancy:hover {
+  transform: scale(1.12) !important;
+  box-shadow: var(--glow-md) !important;
+}
+ 
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px dashed var(--border);
+  font-weight: 700;
+  font-size: 15px;
+}
+ 
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 24px;
+  animation: fadeIn .3s ease;
+}
+ 
+.modal.show { display: flex; }
+ 
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 30px;
+  max-width: 820px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: var(--glow-sm), 0 30px 80px rgba(0,0,0,0.8);
+  animation: slideUp .35s ease;
+  position: relative;
+  text-align: right;
+  scrollbar-width: none;
+}
+ 
+.modal-box::-webkit-scrollbar { display: none; }
+ 
+.modal-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), var(--orange-2), transparent);
+  border-radius: 16px 16px 0 0;
+}
+ 
+.modal-box h2 {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--orange);
+  margin-bottom: 18px;
+  text-shadow: var(--glow-sm);
+}
+ 
+.modal .close {
+  position: absolute;
+  top: 16px; left: 16px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-hover);
+  color: var(--text-dim);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  line-height: 1;
+}
+ 
+.modal .close:hover {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  border-color: var(--orange);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: var(--glow-sm);
+}
+ 
+.modal .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+}
+ 
+.modal label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  display: block;
+}
+ 
+.modal input, .modal textarea, .modal select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px;
+  transition: .2s;
+  outline: none;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+}
+ 
+.modal input::placeholder, .modal textarea::placeholder {
+  color: var(--text-muted);
+}
+ 
+.modal input:focus, .modal textarea:focus, .modal select:focus {
+  border-color: var(--orange);
+  background: rgba(232,131,58,0.04);
+  box-shadow: var(--glow-sm), inset 0 1px 4px rgba(0,0,0,0.3);
+}
+ 
+.modal input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+ 
+.modal textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+ 
+.modal select option {
+  background: var(--bg-card);
+  color: var(--text);
+}
+ 
+.readonly-list {
+  background: var(--bg-input);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  min-height: 46px;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.7;
+}
+ 
+.readonly-list div {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(232,131,58,0.06);
+}
+ 
+.readonly-list div:last-child { border-bottom: none; }
+ 
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+ 
+.modal-actions .spacer { flex: 1; }
+ 
+.btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  transition: 0.3s;
+}
+ 
+.btn.gold {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(232,131,58,0.3);
+}
+ 
+.btn.gold:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-md);
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+}
+ 
+.btn.gray {
+  background: var(--bg-hover);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+ 
+.btn.gray:hover {
+  background: var(--bg-input);
+  color: var(--text);
+  border-color: var(--border-active);
+}
+ 
+.btn.danger {
+  background: linear-gradient(135deg, #8b1a1a, #c0392b);
+  color: #fff;
+}
+ 
+.btn.danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(192,57,43,0.4);
+}
+ 
+.price-summary-box {
+  background: rgba(232,131,58,0.06);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.price-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+ 
+.price-summary-row.total {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--orange);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 2px;
+}
+ 
+.price-summary-row.total span:last-child {
+  text-shadow: var(--glow-sm);
+}
+ 
+.agreed-price-wrapper {
+  background: rgba(232,131,58,0.08);
+  border: 1px solid var(--border-active);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 4px;
+  position: relative;
+}
+ 
+.agreed-price-wrapper label {
+  color: var(--orange) !important;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+ 
+.agreed-price-wrapper label::before {
+  content: "★";
+  color: var(--orange);
+  font-size: 12px;
+}
+ 
+.agreed-price-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+ 
+.agreed-price-hint.active {
+  color: #2ecc71;
+  font-weight: 600;
+}
+ 
+.photos-section {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+ 
+.photos-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+ 
+.photos-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ 
+.photos-section-title i {
+  color: var(--orange);
+  font-size: 16px;
+}
+ 
+.photos-count-badge {
+  background: rgba(232,131,58,0.15);
+  border: 1px solid var(--border);
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+ 
+.photos-upload-area {
+  background: var(--bg-input);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 22px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+ 
+.photos-upload-area:hover {
+  border-color: var(--border-active);
+  background: rgba(232,131,58,0.04);
+}
+ 
+.photos-upload-area.dragover {
+  border-color: var(--orange);
+  background: rgba(232,131,58,0.08);
+  transform: scale(1.01);
+}
+ 
+.photos-upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+ 
+.photos-upload-icon {
+  font-size: 32px;
+  color: var(--orange);
+  margin-bottom: 8px;
+  display: block;
+  pointer-events: none;
+}
+ 
+.photos-upload-text {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 600;
+  pointer-events: none;
+}
+ 
+.photos-upload-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  pointer-events: none;
+}
+ 
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+ 
+.photo-thumb-wrap {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+ 
+.photo-thumb-wrap:hover {
+  border-color: var(--border-active);
+  transform: scale(1.04);
+  box-shadow: var(--hover-shadow);
+}
+ 
+.photo-thumb-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+}
+ 
+.photo-thumb-wrap:hover img { opacity: 0.85; }
+ 
+.photo-delete-btn {
+  position: absolute;
+  top: 5px; left: 5px;
+  width: 24px; height: 24px;
+  background: rgba(192,57,43,0.9);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+ 
+.photo-thumb-wrap:hover .photo-delete-btn { opacity: 1; }
+ 
+.photo-zoom-icon {
+  position: absolute;
+  bottom: 5px; right: 5px;
+  width: 22px; height: 22px;
+  background: rgba(232,131,58,0.85);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+ 
+.photo-thumb-wrap:hover .photo-zoom-icon { opacity: 1; }
+ 
+.photos-empty {
+  text-align: center;
+  padding: 14px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+ 
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.25s ease;
+}
+ 
+.photo-lightbox.show { display: flex; }
+ 
+.photo-lightbox img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 2px solid var(--border-active);
+  box-shadow: 0 0 60px rgba(232,131,58,0.3);
+  animation: slideUp 0.3s ease;
+}
+ 
+.lightbox-close {
+  position: absolute;
+  top: 20px; left: 20px;
+  width: 44px; height: 44px;
+  background: rgba(232,131,58,0.15);
+  border: 1px solid var(--border-active);
+  border-radius: 50%;
+  color: var(--orange);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  z-index: 2;
+}
+ 
+.lightbox-close:hover {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  transform: scale(1.1) rotate(90deg);
+}
+ 
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  background: rgba(232,131,58,0.15);
+  border: 1px solid var(--border-active);
+  border-radius: 50%;
+  color: var(--orange);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  z-index: 2;
+}
+ 
+.lightbox-nav:hover {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  box-shadow: var(--glow-md);
+}
+ 
+.lightbox-prev { right: 20px; }
+.lightbox-next { left: 20px; }
+ 
+.lightbox-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(232,131,58,0.15);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+ 
+.lightbox-filename {
+  position: absolute;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  max-width: 80vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ 
+#adminModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 24px;
+  animation: fadeIn 0.3s ease;
+}
+ 
+#adminModal.show { display: flex; }
+#adminModal .modal-box { max-width: 400px; text-align: right; }
+#adminModal .modal-box h2 { font-size: 18px; font-weight: 900; color: var(--orange); margin-bottom: 18px; }
+ 
+#adminModal .close {
+  position: absolute;
+  top: 16px; left: 16px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-hover);
+  color: var(--text-dim);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+}
+ 
+#adminModal .close:hover {
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange));
+  color: #fff;
+  border-color: var(--orange);
+  transform: scale(1.1) rotate(90deg);
+}
+ 
+#adminModal input {
+  width: 100% !important; max-width: 100% !important; height: 42px !important;
+  min-height: 0 !important; padding: 0 12px !important; border-radius: 8px !important;
+  border: 1px solid var(--border) !important; background: var(--bg-input) !important;
+  color: var(--text) !important; font-family: 'Cairo', sans-serif !important;
+  font-size: 14px !important; line-height: normal !important; box-sizing: border-box !important;
+  margin-top: 8px !important; transition: 0.25s !important; outline: none !important;
+}
+ 
+#adminModal input:focus {
+  border-color: var(--orange) !important;
+  box-shadow: var(--glow-sm) !important;
+  background: rgba(232,131,58,0.04) !important;
+}
+ 
+#adminModal label { color: var(--text-dim); font-size: 13px; font-weight: 600; }
+ 
+#adminModal .modal-actions {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 18px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+ 
+#adminMsg { margin-top: 10px; font-size: 13px; color: #e74c3c; font-weight: 700; }
+#confirmDialog .modal-box { max-width: 420px; text-align: right; }
+ 
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+ 
+@media (max-width: 900px) {
+  .header-container { padding: 14px 20px; }
+  header h1 { font-size: 20px; }
+  main { padding-top: 120px; }
+  #kitchenCards { gap: 16px; }
+  .modal .grid { grid-template-columns: 1fr; }
+  .photos-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+}
+ 
+@media (max-width: 600px) {
+  nav { gap: 14px; }
+  nav a { font-size: 12px; }
+  .controls input, .controls select { min-width: 140px; }
+}
 </style>
 </head>
 <body>
-
+ 
 <div class="scroll-progress" id="scrollProgress"></div>
-
+ 
 <header>
   <div class="header-top-line" id="headerTopLine"></div>
   <div class="header-container">
@@ -193,8 +1066,7 @@ main{padding:140px 24px 60px;max-width:1200px;margin:auto;position:relative;z-in
     </nav>
   </div>
 </header>
-
-<!-- Admin Modal -->
+ 
 <div id="adminModal" aria-hidden="true">
   <div class="modal-box">
     <button class="close" id="closeAdminModal">✕</button>
@@ -202,224 +1074,172 @@ main{padding:140px 24px 60px;max-width:1200px;margin:auto;position:relative;z-in
     <div id="adminStep1">
       <label>أدخل كلمة المرور:</label>
       <input type="password" id="adminPassword" placeholder="كلمة المرور">
-      <div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end;">
+      <div style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end;">
         <button id="adminLoginBtn" class="btn gold">دخول</button>
         <button id="adminChangeBtn" class="btn gray">تغيير كلمة المرور</button>
       </div>
     </div>
     <div id="adminStep2" style="display:none;">
-      <label>كلمة المرور القديمة:</label>
+      <label>أدخل كلمة المرور القديمة:</label>
       <input type="password" id="oldPassword" placeholder="كلمة المرور القديمة">
-      <div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end;">
+      <div style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end;">
         <button id="verifyOldBtn" class="btn gold">تحقق</button>
       </div>
     </div>
     <div id="adminStep3" style="display:none;">
-      <label>كلمة المرور الجديدة:</label>
+      <label>أدخل كلمة المرور الجديدة:</label>
       <input type="password" id="newPassword" placeholder="كلمة المرور الجديدة">
-      <div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end;">
+      <div style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end;">
         <button id="saveNewBtn" class="btn gold">حفظ</button>
       </div>
     </div>
     <p id="adminMsg"></p>
   </div>
 </div>
-
-
-
-
-
-
-
+ 
 <main>
-  <div class="tabs-bar">
-    <button class="tab-btn active" onclick="switchTab('all')" id="tab-all">الكل</button>
-    <button class="tab-btn" onclick="switchTab('building')" id="tab-building">بناء</button>
-    <button class="tab-btn" onclick="switchTab('electrical')" id="tab-electrical"> كهرباء</button>
-    <button class="tab-btn" onclick="switchTab('plumbing')" id="tab-plumbing"> ماء وصحي</button>
-    <button class="tab-btn" onclick="switchTab('finishing')" id="tab-finishing"> تشطيب وديكور</button>
-   
-  </div>
-
-
-
-
-
   <div class="controls">
     <div class="left">
-      <input id="searchInput" type="search" placeholder="ابحث باسم العميل أو الهاتف أو الملاحظة..." />
-      <select id="statusFilter">
+      <input id="searchInput" type="search" placeholder="ابحث باسم العميل أو الهاتف أو ملاحظة..." aria-label="بحث" />
+      <select id="statusFilter" aria-label="فلتر الحالة">
         <option value="">كل الحالات</option>
         <option value="غير متفق عليه">غير متفق عليه</option>
-        <option value="قيد التنفيذ">قيد التنفيذ</option>
-        <option value="متوقف">متوقف</option>
+        <option value="قيد الإنشاء">قيد الإنشاء</option>
         <option value="تم التسليم">تم التسليم</option>
       </select>
-      <select id="sortBy">
+      <select id="sortBy" aria-label="ترتيب">
         <option value="createdAt_desc">الأحدث أولاً</option>
         <option value="createdAt_asc">الأقدم أولاً</option>
         <option value="clientName_asc">اسم العميل أ→ي</option>
         <option value="clientName_desc">اسم العميل ي→أ</option>
       </select>
     </div>
-    <div class="actions-right">
-      <div id="counts">جاري التحميل...</div>
-      <button class="btn-text" id="refreshBtn">تحديث</button>
-      <button class="btn-text" id="newBtn">+ مشروع جديد</button>
+    <div class="right actions-right">
+      <div class="counts" id="counts">جاري التحميل...</div>
+      <button id="refreshBtn" class="btn-text">تحديث</button>
+      <button id="newBtn" class="btn-text">مطبخ جديد</button>
     </div>
   </div>
-
-
-
-
-
-  <div id="projectCards"></div>
-  <div id="emptyState" class="empty" style="display:none;">لا توجد مشاريع محفوظة</div>
+  <div id="kitchenCards" aria-live="polite"></div>
+  <div id="emptyState" class="empty" style="display:none;">لا توجد مطابخ محفوظة</div>
 </main>
-
-
-
-
-
-<!-- Details Modal -->
-<div id="detailsModal" class="modal" aria-hidden="true">
-  <div class="modal-box">
+ 
+<div id="detailsModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal-box" role="document">
     <button class="close" id="closeModal">✕</button>
-    <h2 id="modalTitle">تفاصيل المشروع</h2>
-
+    <h2>تفاصيل المطبخ</h2>
     <div class="grid" style="align-items:start;">
+      <div><label for="m_clientName">اسم الزبون</label><input id="m_clientName" placeholder="اسم العميل"></div>
+      <div><label for="m_clientPhone">رقم الهاتف</label><input id="m_clientPhone" placeholder="رقم الهاتف"></div>
+      <div><label for="m_contractNumber">رقم العقد</label><input id="m_contractNumber" placeholder="رقم العقد"></div>
+      <div><label for="m_address">عنوان الزبون</label><input id="m_address" placeholder="عنوان الزبون"></div>
+      <div><label>تاريخ ووقت الإنشاء</label><input id="m_createdAt" disabled></div>
+      <div><label for="m_deliveryDate">تاريخ ووقت التسليم</label><input type="datetime-local" id="m_deliveryDate"></div>
+      <div><label for="m_colorCode">لون الطابق الارضي</label><input id="m_colorCode" placeholder="# كود أو اسم اللون"></div>
+      <div><label for="m_color2">لون الطابق الاول</label><input id="m_color2" placeholder=" كود أو اسم اللون "></div>
+      <div><label for="m_porcelainColor">الطابق الثاني /</label><input id="m_porcelainColor" placeholder=" كود أو اسم اللون   "></div>
+      <div><label for="m_extra1">الكوارتز او البورسلين</label><input id="m_extra1" placeholder=" اضف لون الكوارتز او بورسلين  "></div>
+      <div><label for="m_extra2">اضافة اخرى</label><input id="m_extra2" placeholder="اضافة اخرى "></div>
       <div>
-        <label>اسم الزبون</label>
-        <input id="m_clientName" placeholder="اسم العميل">
-      </div>
-      <div>
-        <label>رقم الهاتف</label>
-        <input id="m_clientPhone" placeholder="رقم الهاتف">
-      </div>
-      <div>
-        <label>رقم العقد</label>
-        <input id="m_contractNumber" placeholder="رقم العقد">
-      </div>
-      <div>
-        <label>عنوان المشروع</label>
-        <input id="m_address" placeholder="عنوان الزبون / الموقع">
-      </div>
-      <div>
-        <label>نوع المشروع</label>
-        <select id="m_projectType">
-          <option value="building">بناء</option>
-          <option value="electrical">كهرباء</option>
-          <option value="plumbing">ماء وصحي</option>
-          <option value="finishing">تشطيب وديكور</option>
-          <option value="ac">تكييف</option>
-          <option value="other">متنوع</option>
-        </select>
-      </div>
-      <div>
-        <label>الحالة</label>
+        <label for="m_status">الحالة</label>
         <select id="m_status">
           <option value="غير متفق عليه">غير متفق عليه</option>
-          <option value="قيد التنفيذ">قيد التنفيذ</option>
-          <option value="متوقف">متوقف</option>
+          <option value="قيد الإنشاء">قيد الإنشاء</option>
           <option value="تم التسليم">تم التسليم</option>
         </select>
       </div>
-      <div>
-        <label>تاريخ الإنشاء</label>
-        <input id="m_createdAt" disabled>
-      </div>
-      <div>
-        <label>تاريخ التسليم المتوقع</label>
-        <input type="datetime-local" id="m_deliveryDate">
-      </div>
-      <div>
-        <label>المبلغ الكلي (د.ع)</label>
-        <input type="number" id="m_totalAmount" placeholder="المبلغ الكلي" min="0">
-      </div>
-      <div>
-        <label>الخصم (د.ع)</label>
-        <input type="number" id="m_discount" placeholder="الخصم" min="0">
-      </div>
-      <div>
-        <label>العربون المدفوع (د.ع)</label>
-        <input type="number" id="m_arboon" placeholder="العربون" min="0">
-      </div>
-      <div>
-        <label>المهندس / المشرف</label>
-        <input id="m_engineer" placeholder="اسم المهندس أو المشرف">
-      </div>
       <div style="grid-column:1 / -1;">
-        <label>ملاحظات</label>
-        <textarea id="m_notes" placeholder="ملاحظات عامة عن المشروع"></textarea>
+        <div class="agreed-price-wrapper">
+          <label for="m_agreedPrice">السعر المتفق عليه (د.ع)</label>
+          <input type="number" id="m_agreedPrice" placeholder="اتركه فارغاً لاعتماد السعر المحسوب تلقائياً" min="0">
+          <p class="agreed-price-hint" id="agreedPriceHint">💡 إذا أدخلت سعراً هنا، سيُستخدم بدلاً من السعر المحسوب تلقائياً كمبلغ كلي.</p>
+        </div>
       </div>
-
-      <!-- Price Summary -->
+      <div><label for="m_discount">الخصم (د.ع)</label><input type="number" id="m_discount" placeholder="أدخل قيمة الخصم" min="0"></div>
+      <div><label for="m_arboon">العربون (د.ع)</label><input type="number" id="m_arboon" placeholder="أدخل مبلغ العربون" min="0"></div>
+      <div style="grid-column:1 / -1;"><label for="m_notes">ملاحظات</label><textarea id="m_notes" placeholder="ملاحظات"></textarea></div>
       <div style="grid-column:1 / -1;">
         <label>ملخص المبالغ</label>
         <div class="price-summary-box" id="priceSummaryBox">
+          <div class="price-summary-row" id="summary_auto_row">
+            <span>السعر المحسوب تلقائياً</span><span id="summary_auto">—</span>
+          </div>
+          <div class="price-summary-row" id="summary_agreed_row" style="display:none;">
+            <span style="color:var(--orange);font-weight:800;">✔ السعر المتفق عليه</span>
+            <span id="summary_agreed_val" style="color:var(--orange);font-weight:800;">—</span>
+          </div>
           <div class="price-summary-row">
-            <span>المبلغ الكلي</span>
-            <span id="sum_total">—</span>
+            <span>المبلغ الكلي المعتمد</span><span id="summary_total">—</span>
           </div>
-          <div class="price-summary-row" id="sum_discount_row" style="display:none;">
-            <span>الخصم</span>
-            <span id="sum_discount" style="color:#e74c3c;">—</span>
+          <div class="price-summary-row" id="summary_discount_row" style="display:none;">
+            <span>الخصم</span><span id="summary_discount" style="color:#e74c3c;">—</span>
           </div>
-          <div class="price-summary-row" id="sum_arboon_row" style="display:none;">
-            <span>العربون المدفوع</span>
-            <span id="sum_arboon" style="color:#2ecc71;">—</span>
+          <div class="price-summary-row" id="summary_arboon_row" style="display:none;">
+            <span>العربون المدفوع</span><span id="summary_arboon" style="color:#2ecc71;">—</span>
           </div>
           <div class="price-summary-row total">
-            <span>المبلغ المتبقي</span>
-            <span id="sum_remaining">—</span>
+            <span>المبلغ المتبقي</span><span id="summary_remaining">—</span>
           </div>
         </div>
       </div>
-
-      <!-- Work Items -->
-      <div style="grid-column:1 / -1;" class="items-section">
-        <h4>بنود العمل</h4>
-        <div id="workItemsList"></div>
-        <button class="add-item-btn" id="addWorkItem">+ إضافة بند</button>
-      </div>
-
-      <!-- Materials -->
-      <div style="grid-column:1 / -1;" class="items-section">
-        <h4>المواد والمستلزمات</h4>
-        <div id="materialsList"></div>
-        <button class="add-item-btn" id="addMaterial">+ إضافة مادة</button>
+      <div style="grid-column:1 / -1;"><label>الطوابق</label><div id="floorsList_readonly" class="readonly-list">—</div></div>
+      <div style="grid-column:1 / -1;"><label>الإضافات</label><div id="extrasList_readonly" class="readonly-list">—</div></div>
+      <div style="grid-column:1 / -1;"><label>الأكسسوارات</label><div id="materialsList_readonly" class="readonly-list">—</div></div>
+      <div class="photos-section">
+        <div class="photos-section-header">
+          <div class="photos-section-title">
+            <i class="fa-solid fa-images"></i>
+            <span>صور المشروع</span>
+            <span class="photos-count-badge" id="photosCountBadge">0 صورة</span>
+          </div>
+          <span style="font-size:11px;color:var(--text-muted);">محفوظة على جهازك فقط · لا تظهر في الطباعة</span>
+        </div>
+        <div class="photos-upload-area" id="photosUploadArea">
+          <input type="file" id="photosFileInput" accept="image/*" multiple>
+          <span class="photos-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+          <div class="photos-upload-text">اضغط أو اسحب الصور هنا</div>
+          <div class="photos-upload-hint">PNG · JPG · WEBP — يمكن إضافة أكثر من صورة دفعة واحدة</div>
+        </div>
+        <div id="photosGrid" class="photos-grid"></div>
+        <div id="photosEmpty" class="photos-empty" style="display:none;">لا توجد صور مضافة لهذا المشروع بعد</div>
       </div>
     </div>
-
     <div class="modal-actions">
       <button id="saveModal" class="btn-text">حفظ</button>
-      <button id="printModal" class="btn-text">طباعة</button>
+      <button id="editInKitchens" class="btn-text">تعديل</button>
       <div class="spacer"></div>
-      <button id="archiveModal" class="btn-text danger"><b>حذف</b></button>
+      <button id="archiveModal" class="btn-text archive"><b>حذف</b></button>
     </div>
   </div>
 </div>
-
-<!-- Confirm Dialog -->
+ 
 <div id="confirmDialog" class="modal" aria-hidden="true" style="display:none;">
-  <div class="modal-box" style="max-width:420px;text-align:right;">
+  <div class="modal-box" role="document" style="max-width:420px;text-align:right;">
     <h2 style="color:#e74c3c;margin-bottom:8px;">تأكيد الحذف</h2>
-    <p style="color:var(--text-dim);line-height:1.6;">هل أنت متأكد من حذف هذا المشروع؟ سيتم نقل السجل إلى الأرشيف.</p>
+    <p style="color:var(--text-dim);line-height:1.6;">هل أنت متأكد من حذف هذا المطبخ؟ عند الحذف سيتم نقل السجل إلى الأرشيف ولا يمكن التراجع عن ذلك بسهولة.</p>
     <div style="display:flex;gap:12px;margin-top:18px;justify-content:flex-end;">
       <button id="confirmNo" class="btn gray">إلغاء</button>
       <button id="confirmYes" class="btn danger">نعم، احذف</button>
     </div>
   </div>
 </div>
-
+ 
+<div id="photoLightbox" class="photo-lightbox" role="dialog" aria-modal="true" aria-label="عرض الصورة">
+  <button class="lightbox-close" id="lightboxClose" title="إغلاق">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" title="السابق"><i class="fa-solid fa-chevron-right"></i></button>
+  <img id="lightboxImg" src="" alt="صورة المشروع">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" title="التالي"><i class="fa-solid fa-chevron-left"></i></button>
+  <div class="lightbox-filename" id="lightboxFilename"></div>
+  <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
+</div>
+ 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import {
   getFirestore, collection, query, onSnapshot,
-  doc, updateDoc, deleteDoc, setDoc, addDoc, getDoc
+  doc, updateDoc, deleteDoc, setDoc, addDoc, getDoc, arrayUnion
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
-// *** ضع إعدادات Firebase الخاصة بك هنا ***
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyDXaE9TwULY1qHj_fSTUI2d0jvC5Y5u1TI",
   authDomain: "averg-aked.firebaseapp.com",
@@ -427,508 +1247,909 @@ const firebaseConfig = {
   projectId: "averg-aked",
   storageBucket: "averg-aked.firebasestorage.app",
   messagingSenderId: "421708534064",
-  appId: "1:421708534064:web:0da1394f7f056f8a5bf8f5"
+  appId: "1:421708534064:web:0da1394f7f056f8a5bf8f5",
+  measurementId: "G-Q0WT14XHTP"
 };
-
+ 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// ===== STATE =====
-let currentId = null;
-let lastItems = [];
-let currentTab = 'all';
-const backupPass = "272311";
-
-// ===== SCROLL PROGRESS =====
-window.addEventListener('scroll', () => {
-  const prog = document.body.scrollHeight - window.innerHeight;
-  document.getElementById('scrollProgress').style.width = (prog > 0 ? (window.scrollY / prog) * 100 : 0) + '%';
-});
-
-// ===== TABS =====
-window.switchTab = function(tab) {
-  currentTab = tab;
-  ['all','building','electrical','plumbing','finishing','ac'].forEach(t => {
-    document.getElementById('tab-' + t)?.classList.remove('active');
-    document.getElementById('nav-' + t)?.classList.remove('active');
+ 
+// =====================================================================
+// دوال تحويل الأرقام الى انجليزية - تُستخدم في كل مكان
+// =====================================================================
+ 
+// تحويل اي ارقام عربية/فارسية الى انجليزية
+function toEn(val) {
+  if (val === null || val === undefined) return '';
+  return String(val).replace(/[٠-٩]/g, d => String(d.charCodeAt(0) - 1632))
+                    .replace(/[۰-۹]/g, d => String(d.charCodeAt(0) - 1776));
+}
+ 
+// تنسيق رقم بفواصل انجليزية
+function fmtNum(num) {
+  const n = Number(num);
+  if (!num && num !== 0) return '—';
+  if (isNaN(n)) return '—';
+  return n.toLocaleString('en-US');
+}
+ 
+// تنسيق مبلغ مع عملة
+function fmtMoney(num) {
+  const n = Number(num);
+  if (!num && num !== 0) return '—';
+  if (isNaN(n) || n === 0) return '—';
+  return n.toLocaleString('en-US') + ' د.ع';
+}
+ 
+// تنسيق مبلغ للطباعة (يعرض الصفر ايضا)
+function printMoney(num) {
+  const n = Number(num);
+  if (isNaN(n)) return '0 د.ع';
+  return n.toLocaleString('en-US') + ' د.ع';
+}
+ 
+// =====================================================================
+// IndexedDB
+// =====================================================================
+const IDB_NAME  = 'KitchenPhotosDB';
+const IDB_STORE = 'photos';
+const IDB_VER   = 1;
+let _idb = null;
+ 
+function openIDB() {
+  return new Promise((resolve, reject) => {
+    if (_idb) { resolve(_idb); return; }
+    const req = indexedDB.open(IDB_NAME, IDB_VER);
+    req.onupgradeneeded = e => {
+      const d = e.target.result;
+      if (!d.objectStoreNames.contains(IDB_STORE)) {
+        const s = d.createObjectStore(IDB_STORE, { keyPath: 'id', autoIncrement: true });
+        s.createIndex('kitchenId', 'kitchenId', { unique: false });
+      }
+    };
+    req.onsuccess  = e => { _idb = e.target.result; resolve(_idb); };
+    req.onerror    = e => reject(e.target.error);
   });
-  document.getElementById('tab-' + tab)?.classList.add('active');
-  document.getElementById('nav-' + tab)?.classList.add('active');
-  renderCards();
-};
-
-// ===== PRICE SUMMARY =====
-function updateSummary() {
-  const total = Number(document.getElementById('m_totalAmount').value) || 0;
-  const discount = Number(document.getElementById('m_discount').value) || 0;
-  const arboon = Number(document.getElementById('m_arboon').value) || 0;
-  const remaining = Math.max(0, total - discount - arboon);
-
-  document.getElementById('sum_total').textContent = total > 0 ? total.toLocaleString() + ' د.ع' : '—';
-  const dr = document.getElementById('sum_discount_row');
-  const ar = document.getElementById('sum_arboon_row');
-  if (discount > 0) { dr.style.display = 'flex'; document.getElementById('sum_discount').textContent = '- ' + discount.toLocaleString() + ' د.ع'; } else dr.style.display = 'none';
-  if (arboon > 0) { ar.style.display = 'flex'; document.getElementById('sum_arboon').textContent = arboon.toLocaleString() + ' د.ع'; } else ar.style.display = 'none';
-  document.getElementById('sum_remaining').textContent = total > 0 ? remaining.toLocaleString() + ' د.ع' : '—';
 }
-['m_totalAmount','m_discount','m_arboon'].forEach(id => document.getElementById(id)?.addEventListener('input', updateSummary));
-
-// ===== DYNAMIC ITEMS =====
-function makeItemRow(container, item = {}, type = 'work') {
-  const row = document.createElement('div');
-  row.className = 'item-row';
-  const nameInput = document.createElement('input');
-  nameInput.placeholder = type === 'work' ? 'بند العمل (مثال: حفر أساسات)' : 'اسم المادة';
-  nameInput.value = item.name || '';
-  nameInput.dataset.field = 'name';
-
-  if (type === 'work') {
-    const unitInput = document.createElement('input');
-    unitInput.placeholder = 'الوحدة / الكمية';
-    unitInput.value = item.unit || '';
-    unitInput.className = 'qty';
-    unitInput.dataset.field = 'unit';
-
-    const priceInput = document.createElement('input');
-    priceInput.type = 'number';
-    priceInput.placeholder = 'السعر';
-    priceInput.value = item.price || '';
-    priceInput.className = 'price-inp';
-    priceInput.dataset.field = 'price';
-    priceInput.min = '0';
-
-    row.append(nameInput, unitInput, priceInput);
+ 
+async function idbSavePhoto(kitchenId, file) {
+  const d = await openIDB();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const tx  = d.transaction(IDB_STORE, 'readwrite');
+      const req = tx.objectStore(IDB_STORE).add({
+        kitchenId, name: file.name, type: file.type,
+        size: file.size, dataUrl: e.target.result, addedAt: Date.now()
+      });
+      req.onsuccess = () => resolve(req.result);
+      req.onerror   = ev => reject(ev.target.error);
+    };
+    reader.onerror = () => reject(new Error('فشل قراءة الملف'));
+    reader.readAsDataURL(file);
+  });
+}
+ 
+async function idbGetPhotos(kitchenId) {
+  const d = await openIDB();
+  return new Promise((resolve, reject) => {
+    const tx  = d.transaction(IDB_STORE, 'readonly');
+    const req = tx.objectStore(IDB_STORE).index('kitchenId').getAll(kitchenId);
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror   = e => reject(e.target.error);
+  });
+}
+ 
+async function idbDeletePhoto(photoId) {
+  const d = await openIDB();
+  return new Promise((resolve, reject) => {
+    const tx  = d.transaction(IDB_STORE, 'readwrite');
+    const req = tx.objectStore(IDB_STORE).delete(photoId);
+    req.onsuccess = () => resolve();
+    req.onerror   = e => reject(e.target.error);
+  });
+}
+ 
+// =====================================================================
+// Lightbox
+// =====================================================================
+let lbPhotos = [], lbIdx = 0;
+ 
+const photoLightbox   = document.getElementById('photoLightbox');
+const lightboxImg     = document.getElementById('lightboxImg');
+const lightboxClose   = document.getElementById('lightboxClose');
+const lightboxPrev    = document.getElementById('lightboxPrev');
+const lightboxNext    = document.getElementById('lightboxNext');
+const lightboxCounter  = document.getElementById('lightboxCounter');
+const lightboxFilename = document.getElementById('lightboxFilename');
+ 
+function lbShow(photos, idx) {
+  lbPhotos = photos; lbIdx = idx;
+  lbRender();
+  photoLightbox.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+ 
+function lbClose() {
+  photoLightbox.classList.remove('show');
+  document.body.style.overflow = '';
+  lightboxImg.src = '';
+  lbPhotos = [];
+}
+ 
+function lbRender() {
+  if (!lbPhotos.length) return;
+  const p = lbPhotos[lbIdx];
+  lightboxImg.src = p.dataUrl;
+  lightboxFilename.textContent = p.name || '';
+  // ارقام انجليزية في عداد الصور
+  lightboxCounter.textContent = `${lbIdx + 1} / ${lbPhotos.length}`;
+  lightboxPrev.style.display = lbPhotos.length > 1 ? 'flex' : 'none';
+  lightboxNext.style.display = lbPhotos.length > 1 ? 'flex' : 'none';
+}
+ 
+lightboxClose.addEventListener('click', lbClose);
+photoLightbox.addEventListener('click', e => { if (e.target === photoLightbox) lbClose(); });
+lightboxPrev.addEventListener('click', e => {
+  e.stopPropagation();
+  lbIdx = (lbIdx - 1 + lbPhotos.length) % lbPhotos.length;
+  lbRender();
+});
+lightboxNext.addEventListener('click', e => {
+  e.stopPropagation();
+  lbIdx = (lbIdx + 1) % lbPhotos.length;
+  lbRender();
+});
+document.addEventListener('keydown', e => {
+  if (!photoLightbox.classList.contains('show')) return;
+  if (e.key === 'Escape')      lbClose();
+  if (e.key === 'ArrowRight')  { lbIdx = (lbIdx - 1 + lbPhotos.length) % lbPhotos.length; lbRender(); }
+  if (e.key === 'ArrowLeft')   { lbIdx = (lbIdx + 1) % lbPhotos.length; lbRender(); }
+});
+ 
+// =====================================================================
+// الصور
+// =====================================================================
+let currentPhotos = [];
+ 
+async function loadPhotos(kitchenId) {
+  const grid  = document.getElementById('photosGrid');
+  const empty = document.getElementById('photosEmpty');
+  const badge = document.getElementById('photosCountBadge');
+  grid.innerHTML = '';
+ 
+  try { currentPhotos = await idbGetPhotos(kitchenId); }
+  catch (err) { currentPhotos = []; console.error('فشل تحميل الصور:', err); }
+ 
+  // رقم انجليزي في شارة عدد الصور
+  badge.textContent = `${currentPhotos.length} صورة`;
+ 
+  if (!currentPhotos.length) { empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+ 
+  currentPhotos.forEach((photo, idx) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'photo-thumb-wrap';
+    const img = document.createElement('img');
+    img.src = photo.dataUrl;
+    img.alt = photo.name || 'صورة';
+    img.loading = 'lazy';
+    img.addEventListener('click', () => lbShow(currentPhotos, idx));
+    const del = document.createElement('button');
+    del.className = 'photo-delete-btn';
+    del.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    del.title = 'حذف الصورة';
+    del.addEventListener('click', async e => {
+      e.stopPropagation();
+      if (!confirm('هل تريد حذف هذه الصورة؟')) return;
+      try { await idbDeletePhoto(photo.id); await loadPhotos(kitchenId); }
+      catch (err) { alert('فشل حذف الصورة: ' + err.message); }
+    });
+    const zoom = document.createElement('div');
+    zoom.className = 'photo-zoom-icon';
+    zoom.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+    wrap.append(img, del, zoom);
+    grid.appendChild(wrap);
+  });
+}
+ 
+const photosFileInput  = document.getElementById('photosFileInput');
+const photosUploadArea = document.getElementById('photosUploadArea');
+ 
+photosFileInput.addEventListener('change', async e => {
+  if (!currentId) return;
+  const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+  for (const file of files) { try { await idbSavePhoto(currentId, file); } catch (err) { console.error(err); } }
+  photosFileInput.value = '';
+  await loadPhotos(currentId);
+});
+ 
+photosUploadArea.addEventListener('dragover', e => { e.preventDefault(); photosUploadArea.classList.add('dragover'); });
+photosUploadArea.addEventListener('dragleave', () => photosUploadArea.classList.remove('dragover'));
+photosUploadArea.addEventListener('drop', async e => {
+  e.preventDefault();
+  photosUploadArea.classList.remove('dragover');
+  if (!currentId) return;
+  const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+  for (const file of files) { try { await idbSavePhoto(currentId, file); } catch {} }
+  await loadPhotos(currentId);
+});
+ 
+// =====================================================================
+// المتغيرات الرئيسية
+// =====================================================================
+const kitchenCards           = document.getElementById('kitchenCards');
+const emptyState             = document.getElementById('emptyState');
+const counts                 = document.getElementById('counts');
+const searchInput            = document.getElementById('searchInput');
+const statusFilter           = document.getElementById('statusFilter');
+const sortBy                 = document.getElementById('sortBy');
+const refreshBtn             = document.getElementById('refreshBtn');
+const newBtn                 = document.getElementById('newBtn');
+const detailsModal           = document.getElementById('detailsModal');
+const closeModal             = document.getElementById('closeModal');
+const m_clientName           = document.getElementById('m_clientName');
+const m_clientPhone          = document.getElementById('m_clientPhone');
+const m_colorCode            = document.getElementById('m_colorCode');
+const m_color2               = document.getElementById('m_color2');
+const m_porcelainColor       = document.getElementById('m_porcelainColor');
+const m_extra1               = document.getElementById('m_extra1');
+const m_extra2               = document.getElementById('m_extra2');
+const m_contractNumber       = document.getElementById('m_contractNumber');
+const m_address              = document.getElementById('m_address');
+const m_deliveryDate         = document.getElementById('m_deliveryDate');
+const m_notes                = document.getElementById('m_notes');
+const m_status               = document.getElementById('m_status');
+const m_createdAt            = document.getElementById('m_createdAt');
+const m_discount             = document.getElementById('m_discount');
+const m_arboon               = document.getElementById('m_arboon');
+const m_agreedPrice          = document.getElementById('m_agreedPrice');
+const agreedPriceHint        = document.getElementById('agreedPriceHint');
+const floorsList_readonly    = document.getElementById('floorsList_readonly');
+const extrasList_readonly    = document.getElementById('extrasList_readonly');
+const materialsList_readonly = document.getElementById('materialsList_readonly');
+const saveModal              = document.getElementById('saveModal');
+const archiveModal           = document.getElementById('archiveModal');
+const editInKitchens         = document.getElementById('editInKitchens');
+const summary_auto           = document.getElementById('summary_auto');
+const summary_auto_row       = document.getElementById('summary_auto_row');
+const summary_agreed_row     = document.getElementById('summary_agreed_row');
+const summary_agreed_val     = document.getElementById('summary_agreed_val');
+const summary_total          = document.getElementById('summary_total');
+const summary_discount       = document.getElementById('summary_discount');
+const summary_discount_row   = document.getElementById('summary_discount_row');
+const summary_arboon         = document.getElementById('summary_arboon');
+const summary_arboon_row     = document.getElementById('summary_arboon_row');
+const summary_remaining      = document.getElementById('summary_remaining');
+ 
+let currentId = null;
+let lastSnapshot = null;
+let lastItems = [];
+let currentKitchenAutoTotal = 0;
+ 
+// تحديث ملخص الاسعار - كل الارقام انجليزية
+function updatePriceSummary() {
+  const autoTotal      = currentKitchenAutoTotal;
+  const agreedVal      = Number(m_agreedPrice.value) || 0;
+  const effectiveTotal = agreedVal > 0 ? agreedVal : autoTotal;
+  const discount       = Number(m_discount.value) || 0;
+  const arboon         = Number(m_arboon.value) || 0;
+  const remaining      = Math.max(0, effectiveTotal - discount - arboon);
+ 
+  summary_auto.textContent = autoTotal > 0 ? fmtMoney(autoTotal) : '—';
+ 
+  if (agreedVal > 0) {
+    summary_agreed_row.style.display = 'flex';
+    summary_agreed_val.textContent = fmtMoney(agreedVal);
+    agreedPriceHint.textContent = '✔ يتم اعتماد هذا السعر كمبلغ كلي بدلاً من السعر المحسوب تلقائياً.';
+    agreedPriceHint.classList.add('active');
   } else {
-    const qtyInput = document.createElement('input');
-    qtyInput.placeholder = 'الكمية';
-    qtyInput.value = item.qty || '';
-    qtyInput.className = 'qty';
-    qtyInput.dataset.field = 'qty';
-
-    const priceInput = document.createElement('input');
-    priceInput.type = 'number';
-    priceInput.placeholder = 'السعر';
-    priceInput.value = item.price || '';
-    priceInput.className = 'price-inp';
-    priceInput.dataset.field = 'price';
-    priceInput.min = '0';
-
-    row.append(nameInput, qtyInput, priceInput);
+    summary_agreed_row.style.display = 'none';
+    agreedPriceHint.textContent = '💡 إذا أدخلت سعراً هنا، سيُستخدم بدلاً من السعر المحسوب تلقائياً كمبلغ كلي.';
+    agreedPriceHint.classList.remove('active');
   }
-
-  const rmBtn = document.createElement('button');
-  rmBtn.className = 'rm-btn';
-  rmBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-  rmBtn.onclick = () => row.remove();
-  row.appendChild(rmBtn);
-  container.appendChild(row);
+ 
+  summary_total.textContent = effectiveTotal > 0 ? fmtMoney(effectiveTotal) : '—';
+ 
+  if (discount > 0) {
+    summary_discount_row.style.display = 'flex';
+    summary_discount.textContent = '- ' + fmtMoney(discount);
+  } else { summary_discount_row.style.display = 'none'; }
+ 
+  if (arboon > 0) {
+    summary_arboon_row.style.display = 'flex';
+    summary_arboon.textContent = fmtMoney(arboon);
+  } else { summary_arboon_row.style.display = 'none'; }
+ 
+  summary_remaining.textContent = effectiveTotal > 0 ? fmtMoney(remaining) : '—';
 }
-
-function collectItems(container, type = 'work') {
-  const rows = container.querySelectorAll('.item-row');
-  return Array.from(rows).map(row => {
-    const obj = {};
-    row.querySelectorAll('[data-field]').forEach(inp => { obj[inp.dataset.field] = inp.value; });
-    return obj;
-  }).filter(o => o.name?.trim());
+ 
+m_discount.addEventListener('input', updatePriceSummary);
+m_arboon.addEventListener('input', updatePriceSummary);
+m_agreedPrice.addEventListener('input', updatePriceSummary);
+ 
+window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const progress  = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('scrollProgress').style.width = progress + '%';
+});
+ 
+function el(tag, attrs = {}, ...children) {
+  const e = document.createElement(tag);
+  for (const k in attrs) {
+    if (k === 'class') e.className = attrs[k];
+    else if (k === 'html') e.innerHTML = attrs[k];
+    else if (k.startsWith('on') && typeof attrs[k] === 'function') e.addEventListener(k.slice(2), attrs[k]);
+    else e.setAttribute(k, attrs[k]);
+  }
+  children.flat().forEach(c => {
+    if (typeof c === 'string') e.appendChild(document.createTextNode(c));
+    else if (c instanceof Node) e.appendChild(c);
+  });
+  return e;
 }
-
-document.getElementById('addWorkItem').onclick = () => makeItemRow(document.getElementById('workItemsList'), {}, 'work');
-document.getElementById('addMaterial').onclick = () => makeItemRow(document.getElementById('materialsList'), {}, 'material');
-
-// ===== CARD BUILDER =====
-const typeLabels = { building:'بناء', electrical:'كهرباء', plumbing:'ماء وصحي', finishing:'تشطيب وديكور', ac:'تكييف', other:'متنوع' };
-const typeIcons = { building:'fa-building', electrical:'fa-bolt', plumbing:'fa-faucet', finishing:'fa-paint-roller', ac:'fa-snowflake', other:'fa-hard-hat' };
-
-function buildCard(id, k) {
+ 
+function debounce(fn, wait = 250) {
+  let t;
+  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), wait); };
+}
+ 
+function buildCard(docId, k) {
   const status = k.status || 'غير متفق عليه';
-  const badgeClass = status === 'قيد التنفيذ' ? 'building' : status === 'تم التسليم' ? 'done' : status === 'متوقف' ? 'paused' : 'pending';
-
-  const card = document.createElement('article');
-  card.className = 'card';
-
-  const total = Number(k.totalAmount || 0);
-  const disc = Number(k.discount || 0);
-  const arb = Number(k.arboon || 0);
-  const remaining = Math.max(0, total - disc - arb);
-
-  const priceStr = total > 0
-    ? (disc > 0 || arb > 0
-      ? `<span style="text-decoration:line-through;opacity:.6;margin-left:6px;font-size:12px;">${total.toLocaleString()} د.ع</span> <span>${remaining.toLocaleString()} د.ع</span>`
-      : `${total.toLocaleString()} د.ع`)
-    : '—';
-
-  const icon = typeIcons[k.projectType] || 'fa-hard-hat';
-  const typeLabel = typeLabels[k.projectType] || 'متنوع';
-
-  card.innerHTML = `
-    <div style="flex:1;">
-      <h3><i class="fa-solid ${icon}" style="color:var(--orange);margin-left:8px;font-size:13px;"></i>${k.clientName || 'بدون اسم'}</h3>
-      <p class="meta"><strong>الهاتف:</strong> ${k.clientPhone || '-'}</p>
-      <p class="meta"><strong>النوع:</strong> ${typeLabel} ${k.address ? ' | ' + k.address : ''}</p>
-      <p class="meta">${k.notes ? k.notes.slice(0,70) + (k.notes.length > 70 ? '...' : '') : ''}</p>
-      <p class="price">${priceStr}</p>
-    </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;margin-right:16px;">
-      <span class="badge ${badgeClass}">${status}</span>
-      <div class="action-icons">
-        <button class="btn-text detail-btn">تفاصيل</button>
-        <button class="btn-print-fancy print-btn" title="طباعة"><i class="fa-solid fa-print"></i></button>
-      </div>
-    </div>`;
-
-  card.querySelector('.detail-btn').onclick = e => { e.stopPropagation(); openModal(id, k); };
-  card.querySelector('.print-btn').onclick = e => { e.stopPropagation(); printProject(k); };
-  card.onclick = () => openModal(id, k);
+  let badgeClass = 'pending';
+  if (status === 'قيد الإنشاء') badgeClass = 'building';
+  else if (status === 'تم التسليم') badgeClass = 'done';
+ 
+  const card    = el('article', { class: 'card', tabindex: 0 });
+  const leftDiv = el('div', { style: 'flex:1' });
+  const title   = el('h3', {}, k.clientName || 'بدون اسم');
+  const phone   = el('p', { class: 'meta' }, el('strong', {}, 'الهاتف: '), ' ', k.clientPhone || '-');
+  const note    = el('p', { class: 'meta' }, k.notes ? k.notes : '-');
+ 
+  // ارقام انجليزية في الميتا
+  const metaText = [];
+  if (k.floors?.length)    metaText.push(`${k.floors.length} طابق`);
+  if (k.materials?.length) metaText.push(`${k.materials.length} مادة`);
+  if (k.extras?.length)    metaText.push(`${k.extras.length} إضافة`);
+  const meta = el('p', { class: 'meta' }, metaText.join(' • '));
+ 
+  const autoTotal      = Number(k.totalAmount || 0);
+  const agreedPrice    = Number(k.agreedPrice || 0);
+  const effectiveTotal = agreedPrice > 0 ? agreedPrice : autoTotal;
+  const discountNum    = Number(k.discount || 0);
+  const arboonNum      = Number(k.arboon || 0);
+  const finalAmount    = Math.max(0, effectiveTotal - discountNum - arboonNum);
+ 
+  // ارقام انجليزية في السعر على الكارت
+  let priceHtml = '-';
+  if (effectiveTotal > 0) {
+    if (discountNum > 0 || arboonNum > 0) {
+      priceHtml = `<span class="orig-price">${fmtMoney(effectiveTotal)}</span><span style="font-weight:800;color:var(--orange);">${fmtMoney(finalAmount)}</span>`;
+    } else {
+      priceHtml = fmtMoney(effectiveTotal);
+      if (agreedPrice > 0) priceHtml += ` <span style="font-size:10px;color:var(--orange-2);opacity:0.8;">(متفق)</span>`;
+    }
+  } else { priceHtml = k.totalText || '-'; }
+ 
+  const priceEl = el('p', { class: 'price', html: priceHtml });
+  leftDiv.append(title, phone, note, meta, priceEl);
+ 
+  const rightDiv    = el('div', { style: 'display:flex;flex-direction:column;align-items:flex-end;gap:8px;margin-right:16px;' });
+  const badge       = el('span', { class: `badge ${badgeClass}` }, status);
+  const actionsWrap = el('div', { class: 'action-icons' });
+ 
+  const detailBtn = el('button', {
+    class: 'btn-text',
+    onclick: (e) => { e.stopPropagation(); openModal(docId, k); }
+  }, 'تفاصيل');
+ 
+  const printBtn = el('button', {
+    class: 'btn-print-fancy',
+    onclick: (e) => { e.stopPropagation(); printKitchenCard(docId); }
+  });
+  const icon = document.createElement('i');
+  icon.className = 'fa-solid fa-print';
+  printBtn.appendChild(icon);
+ 
+  actionsWrap.append(detailBtn, printBtn);
+  rightDiv.append(badge, actionsWrap);
+  card.append(leftDiv, rightDiv);
+  card.addEventListener('click', () => openModal(docId, k));
+  card.addEventListener('keydown', e => { if (e.key === 'Enter') openModal(docId, k); });
   return card;
 }
-
-// ===== RENDER =====
-function renderCards() {
-  const search = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
-  const statusVal = document.getElementById('statusFilter')?.value || '';
-  const sortVal = document.getElementById('sortBy')?.value || 'createdAt_desc';
-
-  let filtered = lastItems.filter(i => {
-    if (currentTab !== 'all' && (i.projectType || 'building') !== currentTab) return false;
-    if (statusVal && (i.status || '') !== statusVal) return false;
-    if (search) return `${i.clientName||''} ${i.clientPhone||''} ${i.notes||''} ${i.address||''}`.toLowerCase().includes(search);
-    return true;
+ 
+// تنسيق التاريخ بارقام انجليزية للعرض في النافذة
+function formatDateTimeForDisplay(timestamp) {
+  if (!timestamp) return '';
+  const date = timestamp.seconds ? new Date(timestamp.seconds * 1000) : new Date(timestamp);
+  if (isNaN(date)) return '';
+  // استخدام en-US لضمان ارقام انجليزية 100%
+  return date.toLocaleString('en-US', {
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hour12: false
   });
-
-  if (sortVal === 'createdAt_desc') filtered.sort((a,b) => (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0));
-  else if (sortVal === 'createdAt_asc') filtered.sort((a,b) => (a.createdAt?.seconds||0) - (b.createdAt?.seconds||0));
-  else if (sortVal === 'clientName_asc') filtered.sort((a,b) => (a.clientName||'').localeCompare(b.clientName||''));
-  else if (sortVal === 'clientName_desc') filtered.sort((a,b) => (b.clientName||'').localeCompare(a.clientName||''));
-
-  const total = lastItems.length;
-  const done = lastItems.filter(x => x.status === 'تم التسليم').length;
-  const active = lastItems.filter(x => x.status === 'قيد التنفيذ').length;
-  document.getElementById('counts').textContent = `الكل: ${total} • تنفيذ: ${active} • تسليم: ${done}`;
-
-  const cards = document.getElementById('projectCards');
-  const empty = document.getElementById('emptyState');
-  cards.innerHTML = '';
-  if (filtered.length === 0) { empty.style.display = 'block'; } else {
-    empty.style.display = 'none';
-    filtered.forEach(item => cards.appendChild(buildCard(item.id, item)));
-  }
 }
-
-// ===== FIREBASE LISTENER =====
-onSnapshot(query(collection(db, 'projects')), snap => {
-  lastItems = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  renderCards();
-}, err => console.error('Firestore error:', err));
-
-['searchInput','statusFilter','sortBy'].forEach(id => {
-  document.getElementById(id)?.addEventListener('input', renderCards);
-  document.getElementById(id)?.addEventListener('change', renderCards);
-});
-document.getElementById('refreshBtn')?.addEventListener('click', renderCards);
-
-// ===== MODAL =====
-function fmtDate(ts) {
-  if (!ts) return '';
-  const d = ts.seconds ? new Date(ts.seconds * 1000) : new Date(ts);
-  return d.toLocaleString('ar-IQ', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+ 
+function formatDateTimeForInput(timestamp) {
+  if (!timestamp) return '';
+  const date = timestamp.seconds ? new Date(timestamp.seconds * 1000) : new Date(timestamp);
+  if (isNaN(date)) return '';
+  const year    = date.getFullYear();
+  const month   = String(date.getMonth() + 1).padStart(2, '0');
+  const day     = String(date.getDate()).padStart(2, '0');
+  const hours   = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
-function fmtDateInput(ts) {
-  if (!ts) return '';
-  const d = ts.seconds ? new Date(ts.seconds * 1000) : new Date(ts);
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+ 
+// تنسيق التاريخ للطباعة - ارقام انجليزية
+function fmtDate(v) {
+  if (!v) return '—';
+  let d = v?.toDate ? v.toDate() : new Date(v);
+  if (isNaN(d)) return '—';
+  const yyyy = d.getFullYear();
+  const mm   = String(d.getMonth() + 1).padStart(2, '0');
+  const dd   = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}/${mm}/${dd}`;
 }
-
-function openModal(id, k) {
-  currentId = id;
-  document.getElementById('m_clientName').value = k.clientName || '';
-  document.getElementById('m_clientPhone').value = k.clientPhone || '';
-  document.getElementById('m_contractNumber').value = k.contractNumber || '';
-  document.getElementById('m_address').value = k.address || '';
-  document.getElementById('m_projectType').value = k.projectType || 'building';
-  document.getElementById('m_status').value = k.status || 'غير متفق عليه';
-  document.getElementById('m_createdAt').value = fmtDate(k.createdAt);
-  document.getElementById('m_deliveryDate').value = fmtDateInput(k.deliveryDate);
-  document.getElementById('m_totalAmount').value = k.totalAmount || 0;
-  document.getElementById('m_discount').value = k.discount || 0;
-  document.getElementById('m_arboon').value = k.arboon || 0;
-  document.getElementById('m_engineer').value = k.engineer || '';
-  document.getElementById('m_notes').value = k.notes || '';
-
-  // Work items
-  const wl = document.getElementById('workItemsList');
-  wl.innerHTML = '';
-  (k.workItems || []).forEach(i => makeItemRow(wl, i, 'work'));
-
-  // Materials
-  const ml = document.getElementById('materialsList');
-  ml.innerHTML = '';
-  (k.materials || []).forEach(i => makeItemRow(ml, i, 'material'));
-
-  updateSummary();
-  document.getElementById('detailsModal').classList.add('show');
-}
-
-document.getElementById('closeModal').onclick = () => document.getElementById('detailsModal').classList.remove('show');
-
-document.getElementById('saveModal').onclick = async () => {
-  if (!currentId) return;
-  const dd = document.getElementById('m_deliveryDate').value;
-  const updates = {
-    clientName: document.getElementById('m_clientName').value,
-    clientPhone: document.getElementById('m_clientPhone').value,
-    contractNumber: document.getElementById('m_contractNumber').value,
-    address: document.getElementById('m_address').value,
-    projectType: document.getElementById('m_projectType').value,
-    status: document.getElementById('m_status').value,
-    deliveryDate: dd ? new Date(dd) : null,
-    totalAmount: Number(document.getElementById('m_totalAmount').value) || 0,
-    discount: Number(document.getElementById('m_discount').value) || 0,
-    arboon: Number(document.getElementById('m_arboon').value) || 0,
-    engineer: document.getElementById('m_engineer').value,
-    notes: document.getElementById('m_notes').value,
-    workItems: collectItems(document.getElementById('workItemsList'), 'work'),
-    materials: collectItems(document.getElementById('materialsList'), 'material')
-  };
+ 
+async function printKitchenCard(docOrK) {
+  let k = docOrK;
   try {
-    await updateDoc(doc(db, 'projects', currentId), updates);
-    document.getElementById('detailsModal').classList.remove('show');
-  } catch (e) { alert('فشل الحفظ: ' + e.message); }
-};
-
-document.getElementById('printModal').onclick = async () => {
-  if (!currentId) return;
-  const snap = await getDoc(doc(db, 'projects', currentId));
-  if (snap.exists()) printProject(snap.data());
-};
-
-// Archive
-const confirmDialog = document.getElementById('confirmDialog');
-document.getElementById('archiveModal').onclick = () => { confirmDialog.style.display='flex'; confirmDialog.classList.add('show'); };
-document.getElementById('confirmNo').onclick = () => { confirmDialog.classList.remove('show'); confirmDialog.style.display='none'; };
-document.getElementById('confirmYes').onclick = async () => {
-  try {
-    const ref = doc(db, 'projects', currentId);
-    const snap = await getDoc(ref);
-    await setDoc(doc(db, 'projects_archive', currentId), snap.exists() ? snap.data() : {});
-    await deleteDoc(ref);
-    document.getElementById('detailsModal').classList.remove('show');
-    confirmDialog.classList.remove('show');
-    confirmDialog.style.display='none';
-  } catch (e) { alert('فشل الحذف: ' + e.message); }
-};
-
-// New project
-document.getElementById('newBtn').onclick = async () => {
-  try {
-    const ref = await addDoc(collection(db, 'projects'), {
-      clientName: 'عميل جديد', clientPhone: '', contractNumber: '', address: '',
-      projectType: currentTab === 'all' ? 'building' : currentTab,
-      status: 'غير متفق عليه', notes: '', engineer: '',
-      totalAmount: 0, discount: 0, arboon: 0,
-      workItems: [], materials: [], deliveryDate: null,
-      createdAt: new Date()
-    });
-    const snap = await getDoc(doc(db, 'projects', ref.id));
-    openModal(ref.id, snap.data());
-  } catch (e) { alert('فشل الإنشاء: ' + e.message); }
-};
-
-// ===== PRINT =====
-function printProject(k) {
-  const typeLabel = typeLabels[k.projectType] || 'مقاولات';
-  const total = Number(k.totalAmount||0);
-  const disc = Number(k.discount||0);
-  const arb = Number(k.arboon||0);
-  const afterDisc = Math.max(0, total - disc);
-  const remaining = Math.max(0, afterDisc - arb);
-
-  const fmtDateOnly = ts => {
-    if (!ts) return '—';
-    const d = ts.toDate ? ts.toDate() : (ts.seconds ? new Date(ts.seconds*1000) : new Date(ts));
-    if (isNaN(d)) return '—';
-    return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-  };
-
-  const workRows = (k.workItems||[]).map((w,i) =>
-    `<tr><td style="border:1px solid #ccc;padding:7px;text-align:center;">${i+1}</td>
-     <td style="border:1px solid #ccc;padding:7px;">${w.name||'-'}</td>
-     <td style="border:1px solid #ccc;padding:7px;text-align:center;">${w.unit||'-'}</td>
-     <td style="border:1px solid #ccc;padding:7px;text-align:center;">${w.price ? Number(w.price).toLocaleString()+' د.ع' : '-'}</td>
-     </tr>`).join('');
-
-  const matRows = (k.materials||[]).map(m =>
-    `<li style="margin-bottom:5px;font-size:13px;">${m.name||'-'} × ${m.qty||'-'}${m.price ? ' — '+Number(m.price).toLocaleString()+' د.ع':''}</li>`
-  ).join('');
-
-  let priceHtml = '';
-  if (total > 0) {
-    priceHtml += `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee;">
-      <span style="font-weight:700;">المبلغ الكلي:</span>
-      <span style="font-weight:800;">${disc > 0 ? `<span style="text-decoration:line-through;color:#c0392b;margin-left:8px;">${total.toLocaleString()} د.ع</span> <span style="color:#D35400;">${afterDisc.toLocaleString()} د.ع</span>` : total.toLocaleString()+' د.ع'}</span></div>`;
-    if (arb > 0) {
-      priceHtml += `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee;">
-        <span style="font-weight:700;color:#27ae60;">العربون المدفوع:</span>
-        <span style="font-weight:800;color:#27ae60;">${arb.toLocaleString()} د.ع</span></div>
-        <div style="display:flex;justify-content:space-between;padding:9px 12px;background:#fff8f0;border-radius:6px;margin-top:6px;">
-        <span style="font-weight:900;color:#D35400;font-size:15px;">المبلغ المتبقي:</span>
-        <span style="font-weight:900;font-size:17px;color:#D35400;">${remaining.toLocaleString()} د.ع</span></div>`;
+    if (typeof docOrK === 'string') {
+      const snap = await getDoc(doc(db, 'kitchens', docOrK));
+      if (!snap.exists()) { alert('البيانات غير موجودة للطباعة'); return; }
+      k = snap.data();
     }
-  } else { priceHtml = '<div>—</div>'; }
-
-  const html = `<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8">
+  } catch (err) { alert('فشل جلب بيانات الطباعة'); return; }
+ 
+  const getWoodName = w => {
+    if (!w && w !== 0) return null;
+    if (typeof w === 'string') return w;
+    if (typeof w === 'object' && w !== null) return w.name || w.displayName || w.label || null;
+    return null;
+  };
+ 
+  let globalWood = null;
+  for (const key of ['woodType','wood','woodName','selectedWood','selectedWoodName','globalWood']) {
+    if (k[key]) { globalWood = getWoodName(k[key]); if (globalWood) break; }
+  }
+ 
+  const floors = Array.isArray(k.floors)
+    ? k.floors.map(f => ({ ...f, _woodName: getWoodName(f.woodType) || getWoodName(f.wood) || globalWood || 'غير محدد' }))
+    : [];
+ 
+  function buildPage(showPrice) {
+    const autoTotalNum   = Number(k.totalAmount || 0);
+    const agreedPriceNum = Number(k.agreedPrice || 0);
+    const totalAmountNum = agreedPriceNum > 0 ? agreedPriceNum : autoTotalNum;
+    const discountNum    = Number(k.discount || 0);
+    const arboonNum      = Number(k.arboon || 0);
+    const finalTotal     = Math.max(0, totalAmountNum - discountNum);
+    const remaining      = Math.max(0, finalTotal - arboonNum);
+ 
+    let totalHtml;
+    if (showPrice) {
+      if (totalAmountNum > 0) {
+        // كل الارقام انجليزية في الطباعة
+        let html = `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
+          <span style="font-weight:700;color:#333;">السعر الكلي${agreedPriceNum > 0 ? ' (متفق عليه)' : ''}:</span>
+          <span style="font-weight:800;font-size:15px;">`;
+        if (discountNum > 0) {
+          html += `<span style="text-decoration:line-through;color:#c0392b;margin-left:8px;">${printMoney(totalAmountNum)}</span>
+                   <span style="color:#D35400;font-size:16px;"> ${printMoney(finalTotal)}</span>`;
+          html += `<span style="font-size:11px;color:#888;margin-right:6px;">(خصم: ${printMoney(discountNum)})</span>`;
+        } else {
+          html += printMoney(totalAmountNum);
+        }
+        html += `</span></div>`;
+        if (arboonNum > 0) {
+          html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
+            <span style="font-weight:700;color:#27ae60;">العربون المدفوع:</span>
+            <span style="font-weight:800;font-size:15px;color:#27ae60;">${printMoney(arboonNum)}</span></div>`;
+          html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#fff8f0;border-radius:6px;margin-top:4px;">
+            <span style="font-weight:900;color:#D35400;font-size:15px;">المبلغ المتبقي:</span>
+            <span style="font-weight:900;font-size:17px;color:#D35400;">${printMoney(remaining)}</span></div>`;
+        }
+        totalHtml = html;
+      } else { totalHtml = `<div>${k.totalText || '—'}</div>`; }
+    } else { totalHtml = '<div>—</div>'; }
+ 
+    const colorInfo = `<div style="font-size:12px;color:#000;margin-top:6px;line-height:1.8;">
+      <div><b>اللون طابق الارضي  :</b> ${k.colorCode || '—'}</div>
+      ${k.color2 ? `<div><b>لون طابق الاول  :</b> ${k.color2}</div>` : ''}
+      ${k.porcelainColor ? `<div><b>الطابق الثاني .:</b> ${k.porcelainColor}</div>` : ''}
+      ${k.extra1 ? `<div><b>لون  الكوارتز او البورسلين   .: </b> ${k.extra1}</div>` : ''}
+      ${k.extra2 ? `<div><b>اضافة  اخرى  .:</b> ${k.extra2}</div>` : ''}
+    </div>`;
+ 
+    // ارقام ابعاد الطوابق انجليزية
+    const floorsRows = floors.map(f => `<tr style="text-align:center;">
+      <td style="border:1px solid #ccc;padding:6px;">${f.name||'-'}</td>
+      <td style="border:1px solid #ccc;padding:6px;font-weight:bold;">${f._woodName}</td>
+      <td style="border:1px solid #ccc;padding:6px;">${f.L||'-'} م</td>
+      <td style="border:1px solid #ccc;padding:6px;">${f.W||'-'} م</td>
+      <td style="border:1px solid #ccc;padding:6px;">${f.H||'-'} م</td>
+    </tr>`).join('');
+ 
+    // ارقام الاكسسوارات انجليزية
+    const materialsItems = k.materials?.map(m =>
+      `<li>${m.name} × ${m.qty}${showPrice && m.price ? ' — ' + Number(m.price).toLocaleString('en-US') + ' د.ع' : ''}</li>`
+    ).join('') || '';
+ 
+    const extrasItems = k.extras?.map(e => `<li>${e.name}: ${e.value} م</li>`).join('') || '';
+ 
+    return `<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8">
 <style>
-@page{size:A4;margin:0;}
-html,body{width:210mm;
-height:200mm;
-margin:0;
-padding:0;
-font-family:
-Arial,sans-serif;}
-
-
-
-body{direction:rtl;}
-
-
+  body{margin:0;font-family:Arial;direction:rtl;}
+  .page{page-break-after:always}
+  * { font-variant-numeric: lining-nums; }
+  td, th, span, div, p, li { font-variant-numeric: lining-nums; }
 </style></head><body>
-
-
-<div style="padding:18mm 20mm 15mm;position:relative;min-height:297mm;box-sizing:border-box;">
-
-<!-- HEADER -->
-<div style="position:relative;width:100%;padding-bottom:16px;border-bottom:4px solid #FF8C00;margin-bottom:20px;">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-    <div>
-      <div style="font-size:32px;font-weight:900;color:#000;">مجمع <span style="color:#FF8C00;font-size:42px;">أكد</span> للمقاولات</div>
-      <div style="font-size:13px;color:#555;margin-top:4px;">بناء - كهرباء - ماء وصحي - تشطيب وديكور - تكييف</div>
-      <div style="font-size:13px;color:#000;margin-top:4px;">📍 النجف الأشرف - حي العسكري كبل - مقابل مول السنبلة</div>
-    </div>
-    <div style="text-align:left;font-size:12px;font-weight:bold;line-height:2;">
-      <div>📞 07893000355</div>
-      <div>📞 07831840540</div>
-      <div style="margin-top:8px;color:#FF7F50;"><b>تاريخ الإنشاء:</b><br>${fmtDateOnly(k.createdAt)}</div>
-      <div style="color:#27ae60;"><b>تاريخ التسليم:</b><br>${fmtDateOnly(k.deliveryDate)}</div>
-    </div>
-  </div>
+<div style="direction:rtl;font-family:Arial;width:210mm;min-height:297mm;padding:20mm;box-sizing:border-box;position:relative;">
+<div style="position:relative;width:100%;height:80px;border-bottom:4px solid #FF8C00;margin-bottom:18px;">
+  <div style="position:absolute;top:-50px;right:130px;font-size:34px;font-weight:900;color:#000;z-index:5;">مجمع <span style="color:#FF8C00;font-size:46px;">أكد</span> للديكور والمطابخ الحديثة</div>
+  <div style="position:absolute;top:15px;right:210px;font-size:14px;color:#555;">مطابخ تركية - اكسسوارات  -  مقاولات عامة - اجهزة كهربائية</div>
+  <div style="position:absolute;top:45px;right:205px;font-size:14px;color:#000;">📍 النجف الأشرف - حي العسكري كبل - مقابل مول السنبلة</div>
+  <div style="position:absolute;top:110px;right:0px;width:700px;height:3px;background:#FF8C00;border-radius:20px;"></div>
+  <div style="position:absolute;top:-50px;left:590px;font-size:12px;font-weight:bold;">📞 07893000355</div>
+  <div style="position:absolute;top:-15px;left:590px;font-size:12px;font-weight:bold;">📞 07831840540</div>
+  <div style="position:absolute;top:-50px;left:-35px;font-size:12px;color:#444;"><b style="color:#FF7F50;">تاريخ الإنشاء:</b><br>${fmtDate(k.createdAt)}</div>
+  <div style="position:absolute;top:-15px;left:-35px;font-size:12px;color:#444;"><b style="color:#27ae60;">تاريخ التسليم:</b><br>${k.deliveryDate ? fmtDate(k.deliveryDate) : '—'}</div>
 </div>
-
-<!-- CLIENT INFO -->
-<table style="width:100%;border-collapse:collapse;margin-bottom:16px;font-size:13px;">
+<table style="width:100%;border-collapse:collapse;margin-bottom:15px;font-size:13px;">
 <tr>
-  <td style="border:1px solid #999;padding:8px;"><b>اسم الزبون:</b><br>${k.clientName||'-'}</td>
-  <td style="border:1px solid #999;padding:8px;"><b>رقم الهاتف:</b><br>${k.clientPhone||'-'}</td>
-  <td style="border:1px solid #999;padding:8px;"><b>رقم العقد:</b><br>${k.contractNumber||'-'}</td>
+<td style="border:1px solid #999;padding:8px;"><b>اسم الزبون:</b><br/>${k.clientName||'-'}</td>
+<td style="border:1px solid #999;padding:8px;"><b>رقم الهاتف:</b><br/>${k.clientPhone||'-'}</td>
+<td style="border:1px solid #999;padding:8px;"><b>رقم العقد:</b><br/>${k.contractNumber||'-'}</td>
 </tr>
-<tr>
-  <td style="border:1px solid #999;padding:8px;"><b>نوع المشروع:</b><br>${typeLabel}</td>
-  <td style="border:1px solid #999;padding:8px;"><b>المهندس / المشرف:</b><br>${k.engineer||'-'}</td>
-  <td style="border:1px solid #999;padding:8px;"><b>الحالة:</b><br>${k.status||'-'}</td>
-</tr>
-<tr>
-  <td colspan="3" style="border:1px solid #999;padding:8px;"><b>الموقع / العنوان:</b><br>${k.address||'-'}</td>
-</tr>
+<tr><td colspan="3" style="border:1px solid #999;padding:8px;"><b>العنوان:</b><br/>${k.address||'-'}</td></tr>
 </table>
-
-<!-- WORK ITEMS -->
-${workRows ? `
-<h3 style="color:#FF7F50;margin:16px 0 8px;font-size:14px;border-right:4px solid #FF8C00;padding-right:10px;">بنود العمل</h3>
-<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
-<thead style="background:#FFD700;">
-  <tr>
-    <th style="border:1px solid #ccc;padding:8px;width:40px;">#</th>
-    <th style="border:1px solid #ccc;padding:8px;">البند</th>
-    <th style="border:1px solid #ccc;padding:8px;width:120px;">الوحدة / الكمية</th>
-    <th style="border:1px solid #ccc;padding:8px;width:130px;">السعر</th>
-  </tr>
-</thead>
-<tbody>${workRows}</tbody>
-</table>` : ''}
-
-<!-- MATERIALS -->
-${matRows ? `
-<h3 style="color:#FF7F50;margin:16px 0 8px;font-size:14px;border-right:4px solid #FF8C00;padding-right:10px;">المواد والمستلزمات</h3>
-<ul style="margin:0 0 16px 0;padding-right:20px;">${matRows}</ul>` : ''}
-
-<!-- PRICE BOX -->
-<div style="margin-top:20px;padding:15px;border:2px solid #FF8C00;border-radius:8px;background:#fffdf9;">
-  <h3 style="margin:0 0 10px;color:#D35400;font-size:14px;">ملخص المبالغ</h3>
-  ${priceHtml}
+${colorInfo}
+${floors.length ? `<table style="width:100%;border-collapse:collapse;margin-top:15px;margin-bottom:15px;">
+<thead style="background:#FFD700;"><tr>
+<th style="border:1px solid #ccc;padding:8px;">الطابق</th>
+<th style="border:1px solid #ccc;padding:8px;">نوع الخشب</th>
+<th style="border:1px solid #ccc;padding:8px;">الطول</th>
+<th style="border:1px solid #ccc;padding:8px;">العمق</th>
+<th style="border:1px solid #ccc;padding:8px;">الارتفاع</th>
+</tr></thead>
+<tbody>${floorsRows}</tbody></table>` : ''}
+<div style="display:flex;justify-content:space-between;gap:40px;margin-top:15px;">
+${k.extras?.length ? `<div style="width:50%;"><h3 style="color:#FF7F50;margin-bottom:8px;">الإضافات</h3><ul style="margin:0;padding-right:20px;font-size:12px;">${extrasItems}</ul></div>` : '<div style="width:50%;"></div>'}
+${k.materials?.length ? `<div style="width:50%;"><h3 style="color:#FF7F50;margin-bottom:8px;">الأكسسوارات</h3><ul style="margin:0;padding-right:20px;font-size:12px;">${materialsItems}</ul></div>` : ''}
 </div>
-
-<!-- NOTES -->
+<div style="margin-top:20px;padding:15px;border:2px solid #FF8C00;border-radius:8px;background:#fffdf9;">${totalHtml}</div>
 <div style="margin-top:15px;font-size:13px;"><b>ملاحظات:</b><hr style="margin:4px 0;">${k.notes||'—'}</div>
-
-<!-- SIGNATURES -->
 <div style="position:absolute;bottom:38mm;left:20mm;right:20mm;display:flex;justify-content:space-between;">
-  <div style="text-align:center;"><div style="color:#FF7F50;font-weight:600;">البائع</div><div style="font-weight:700;">مجمع أكد للمقاولات</div></div>
-  <div style="text-align:center;"><div style="color:#FF7F50;font-weight:600;">المشتري</div><div style="font-weight:700;">${k.clientName||'-'}</div></div>
+<div style="text-align:center;"><div style="color:#FF7F50;font-weight:600;">البائع</div><div style="font-weight:700;">مجمع أكد</div></div>
+<div style="text-align:center;"><div style="color:#FF7F50;font-weight:600;">المشتري</div><div style="font-weight:700;">${k.clientName||'-'}</div></div>
 </div>
-
-<!-- FOOTER -->
-<div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:11px;border-top:2px solid #FF8C00;padding-top:8px;">
-  ملاحظة: يتم دفع المبلغ كاملاً قبل الانتهاء من العمل<br>
-  الشركة غير مسؤولة عن التأخير بسبب ظروف خارجة عن الإرادة<br>
-  ضمان سنة كاملة على جميع الأعمال
-</div>
-
+<div style="position:absolute;bottom:15mm;left:20mm;right:20mm;text-align:center;font-size:11px;border-top:2px solid #FF8C00;padding-top:8px;">ملاحظة: يتم تسليم المبلغ كاملاً قبل التنصيب<br>الكادر غير مسؤول عن تنصيب الماء والكهرباء<br>ضمان 5 سنوات</div>
 </div></body></html>`;
-
-  const w = window.open('','_blank','width=900,height=1200');
+  }
+ 
+  const html = `<html><head><meta charset="utf-8"><style>@page{size:A4;margin:0;}html,body{width:210mm;height:297mm;margin:0;padding:0;}body{font-family:Arial;direction:rtl;}</style></head><body><div class="page">${buildPage(true)}</div></html>`;
+  const w = window.open('', '_blank', 'width=900,height=1200');
   w.document.write(html);
   w.document.close();
-  setTimeout(() => { w.print(); w.close(); }, 600);
+  setTimeout(() => { w.print(); w.close(); }, 500);
 }
-
-// ===== ADMIN =====
-async function getAdminPass() {
-  try {
-    const snap = await getDoc(doc(db, 'config', 'admin'));
-    return snap.exists() ? (snap.data().password || backupPass) : backupPass;
-  } catch { return backupPass; }
+ 
+function renderReadonlyList(container, list, type, kitchenWoods = []) {
+  container.innerHTML = '';
+  if (!Array.isArray(list) || !list.length) { container.textContent = '—'; return; }
+  list.forEach(item => {
+    const div = document.createElement('div');
+    if (type === 'floors') {
+      const woodName = item._woodName || item.woodType || item.woodName || item.wood || 'غير محدد';
+      // ارقام ابعاد الطوابق انجليزية في النافذة
+      const L = item.L ?? '-';
+      const W = item.W ?? '-';
+      const H = item.H ?? '-';
+      div.innerHTML = `<strong>${item.name||'-'}</strong><br>الخشب: <b>${woodName}</b><br>L: ${L} م &nbsp; W: ${W} م &nbsp; H: ${H} م`;
+    } else if (type === 'extras') {
+      div.textContent = `${item.name||'-'}: ${item.value ?? item.price ?? '-'}`;
+    } else if (type === 'materials') {
+      const qty   = item.qty ?? item.quantity ?? '-';
+      // ارقام الاكسسوارات انجليزية
+      const price = item.price ? ` — ${fmtMoney(item.price)}` : '';
+      div.textContent = `${item.name||'-'} × ${qty}${price}`;
+    }
+    container.appendChild(div);
+  });
 }
-
-document.getElementById('adminOpenBtn').onclick = () => {
-  document.getElementById('adminModal').classList.add('show');
-  ['adminStep2','adminStep3'].forEach(id => document.getElementById(id).style.display='none');
-  document.getElementById('adminStep1').style.display='block';
-  document.getElementById('adminMsg').textContent='';
-  document.getElementById('adminPassword').value='';
-};
-document.getElementById('closeAdminModal').onclick = () => document.getElementById('adminModal').classList.remove('show');
-
-document.getElementById('adminLoginBtn').onclick = async () => {
-  const pass = document.getElementById('adminPassword').value.trim();
-  const saved = await getAdminPass();
-  if (pass === saved || pass === backupPass) {
-    document.getElementById('adminModal').classList.remove('show');
-    alert('تم تسجيل الدخول بنجاح ✓');
-  } else { document.getElementById('adminMsg').textContent='كلمة المرور غير صحيحة'; }
-};
-document.getElementById('adminChangeBtn').onclick = () => {
-  document.getElementById('adminStep1').style.display='none';
-  document.getElementById('adminStep2').style.display='block';
-};
-document.getElementById('verifyOldBtn').onclick = async () => {
-  const old = document.getElementById('oldPassword').value.trim();
-  const saved = await getAdminPass();
-  if (old === saved || old === backupPass) {
-    document.getElementById('adminStep2').style.display='none';
-    document.getElementById('adminStep3').style.display='block';
-  } else { document.getElementById('adminMsg').textContent='كلمة المرور القديمة خاطئة'; }
-};
-document.getElementById('saveNewBtn').onclick = async () => {
-  const np = document.getElementById('newPassword').value.trim();
-  if (np.length < 4) { document.getElementById('adminMsg').textContent='4 أحرف على الأقل'; return; }
+ 
+const kitchensCol = collection(db, 'kitchens');
+const qKitchens   = query(kitchensCol);
+ 
+function renderSnapshot(snapshot) {
+  lastSnapshot = snapshot;
+  const docs = snapshot.docs.map(d => {
+    const data = d.data() || {};
+    return { id: d.id, ...data, woods: Array.isArray(data.woods) ? data.woods : [] };
+  });
+  lastItems = docs;
+  applyClientFilterAndRender(docs);
+}
+ 
+onSnapshot(qKitchens,
+  snapshot => { try { renderSnapshot(snapshot); } catch (err) { console.error(err); } },
+  err => console.error('onSnapshot error', err)
+);
+ 
+function applyClientFilterAndRender(items) {
+  if (!kitchenCards) return;
+  const s         = (searchInput?.value || '').trim().toLowerCase();
+  const statusVal = statusFilter?.value || '';
+  let filtered = items.filter(i => {
+    if (statusVal && (i.status || '') !== statusVal) return false;
+    if (!s) return true;
+    return `${i.clientName||''} ${i.clientPhone||''} ${i.notes||''}`.toLowerCase().includes(s);
+  });
+ 
+  const sortVal = sortBy?.value || 'createdAt_desc';
+  if (sortVal === 'createdAt_desc')     filtered.sort((a,b) => (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0));
+  else if (sortVal === 'createdAt_asc') filtered.sort((a,b) => (a.createdAt?.seconds||0) - (b.createdAt?.seconds||0));
+  else if (sortVal === 'clientName_asc')  filtered.sort((a,b) => (a.clientName||'').localeCompare(b.clientName||''));
+  else if (sortVal === 'clientName_desc') filtered.sort((a,b) => (b.clientName||'').localeCompare(a.clientName||''));
+ 
+  const total     = items.length;
+  const delivered = items.filter(x => x.status === 'تم التسليم').length;
+  const building  = items.filter(x => x.status === 'قيد الإنشاء').length;
+  const pending   = items.filter(x => x.status === 'غير متفق عليه').length;
+  // ارقام انجليزية في شريط الاحصاءات (الاعداد الصحيحة دائماً انجليزية في JS)
+  if (counts) counts.innerText = `الكل: ${total} • تسليم: ${delivered} • قيد: ${building} • غير متفق: ${pending}`;
+ 
+  kitchenCards.innerHTML = '';
+  if (!filtered.length) {
+    emptyState.style.display = 'block';
+  } else {
+    emptyState.style.display = 'none';
+    filtered.forEach(item => { try { kitchenCards.appendChild(buildCard(item.id, item)); } catch(e) { console.error(e); } });
+  }
+}
+ 
+const debouncedFilter = debounce(() => {
+  if (!lastSnapshot) return;
+  const items = lastSnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+  applyClientFilterAndRender(items);
+}, 250);
+ 
+if (searchInput)  searchInput.addEventListener('input', debouncedFilter);
+if (statusFilter) statusFilter.addEventListener('change', debouncedFilter);
+if (sortBy)       sortBy.addEventListener('change', debouncedFilter);
+if (refreshBtn)   refreshBtn.addEventListener('click', debouncedFilter);
+ 
+async function openModal(id, k) {
+  currentId = id;
+  currentKitchenAutoTotal = Number(k.totalAmount || 0);
+ 
+  m_clientName.value      = k.clientName || '';
+  m_clientPhone.value     = k.clientPhone || '';
+  m_colorCode.value       = k.colorCode || '';
+  m_color2.value          = k.color2 || '';
+  m_porcelainColor.value  = k.porcelainColor || '';
+  m_extra1.value          = k.extra1 || '';
+  m_extra2.value          = k.extra2 || '';
+  m_contractNumber.value  = k.contractNumber || '';
+  m_address.value         = k.address || '';
+  m_deliveryDate.value    = formatDateTimeForInput(k.deliveryDate) || '';
+  m_notes.value           = k.notes || '';
+  m_status.value          = k.status || 'غير متفق عليه';
+  // تاريخ الانشاء بارقام انجليزية
+  m_createdAt.value       = formatDateTimeForDisplay(k.createdAt) || '';
+  m_discount.value        = Number(k.discount) || 0;
+  m_arboon.value          = Number(k.arboon) || 0;
+  m_agreedPrice.value     = Number(k.agreedPrice) > 0 ? Number(k.agreedPrice) : '';
+ 
+  updatePriceSummary();
+ 
+  const floors        = Array.isArray(k.floors)    ? k.floors.map(f => ({ ...f })) : [];
+  const extras        = Array.isArray(k.extras)    ? k.extras    : [];
+  const materials     = Array.isArray(k.materials) ? k.materials : [];
+  const kitchenWoods  = Array.isArray(k.woods)     ? k.woods     : [];
+ 
+  const getWoodName = w => {
+    if (!w && w !== 0) return null;
+    if (typeof w === 'string') return w;
+    if (typeof w === 'object' && w !== null) return w.name || w.displayName || w.label || null;
+    return null;
+  };
+ 
+  let globalWood = null;
+  for (const key of ['woodType','wood','woodName','selectedWood','selectedWoodName','globalWood']) {
+    if (k[key]) { globalWood = getWoodName(k[key]); if (globalWood) break; }
+  }
+ 
+  floors.forEach(f => {
+    let name = f.woodType ?? f.woodName ?? f.wood ?? null;
+    if (!name) {
+      for (const w of kitchenWoods) {
+        if (!w) continue;
+        const prices = w.prices || w.price || null;
+        if (prices && typeof prices === 'object' && Object.prototype.hasOwnProperty.call(prices, f.id)) {
+          name = w.name || w.woodName || null; break;
+        }
+      }
+    }
+    f._woodName = name || globalWood || 'غير محدد';
+  });
+ 
+  renderReadonlyList(floorsList_readonly,    floors,    'floors',    kitchenWoods);
+  renderReadonlyList(extrasList_readonly,    extras,    'extras',    kitchenWoods);
+  renderReadonlyList(materialsList_readonly, materials, 'materials', kitchenWoods);
+ 
+  await loadPhotos(id);
+ 
+  detailsModal.classList.add('show');
+  detailsModal.setAttribute('aria-hidden', 'false');
+}
+ 
+if (closeModal) closeModal.addEventListener('click', () => {
+  detailsModal.classList.remove('show');
+  detailsModal.setAttribute('aria-hidden', 'true');
+});
+ 
+if (saveModal) saveModal.addEventListener('click', async () => {
+  if (!currentId) return alert('لا يوجد مطبخ محدد للحفظ');
+  const deliveryDateValue = m_deliveryDate.value;
+  let deliveryDateObj = null;
+  if (deliveryDateValue) deliveryDateObj = new Date(deliveryDateValue);
+  const agreedPriceVal = Number(m_agreedPrice.value) || 0;
+  const updates = {
+    clientName:     m_clientName.value || '',
+    clientPhone:    m_clientPhone.value || '',
+    colorCode:      m_colorCode.value || '',
+    color2:         m_color2.value || '',
+    porcelainColor: m_porcelainColor.value || '',
+    extra1:         m_extra1.value || '',
+    extra2:         m_extra2.value || '',
+    contractNumber: m_contractNumber.value || '',
+    address:        m_address.value || '',
+    deliveryDate:   deliveryDateObj || null,
+    notes:          m_notes.value || '',
+    status:         m_status.value || '',
+    discount:       Number(m_discount.value) || 0,
+    arboon:         Number(m_arboon.value) || 0,
+    agreedPrice:    agreedPriceVal
+  };
   try {
-    await setDoc(doc(db, 'config', 'admin'), { password: np });
-    const msg = document.getElementById('adminMsg');
-    msg.style.color='#2ecc71';
-    msg.textContent='تم التحديث بنجاح';
-    setTimeout(() => { document.getElementById('adminModal').classList.remove('show'); msg.style.color='#e74c3c'; }, 1200);
-  } catch { document.getElementById('adminMsg').textContent='فشل التحديث'; }
-};
-
+    await updateDoc(doc(db, 'kitchens', currentId), updates);
+    detailsModal.classList.remove('show');
+    detailsModal.setAttribute('aria-hidden', 'true');
+  } catch (err) { alert('فشل الحفظ: ' + err.message); }
+});
+ 
+const confirmDialog = document.getElementById('confirmDialog');
+const confirmYes    = document.getElementById('confirmYes');
+const confirmNo     = document.getElementById('confirmNo');
+ 
+if (archiveModal) archiveModal.addEventListener('click', e => {
+  e.stopPropagation();
+  if (!currentId) return alert('لا يوجد مطبخ محدد');
+  confirmDialog.style.display = 'flex';
+  confirmDialog.classList.add('show');
+});
+ 
+async function doArchive() {
+  try {
+    const ref  = doc(db, 'kitchens', currentId);
+    const snap = await getDoc(ref);
+    await setDoc(doc(db, 'kitchens_archive', currentId), snap.exists() ? snap.data() : {});
+    await deleteDoc(ref);
+    detailsModal.classList.remove('show');
+    detailsModal.setAttribute('aria-hidden', 'true');
+    confirmDialog.classList.remove('show');
+    confirmDialog.style.display = 'none';
+  } catch (err) { alert('فشل الأرشفة: ' + err.message); }
+}
+ 
+if (confirmNo)  confirmNo.addEventListener('click', () => { confirmDialog.classList.remove('show'); confirmDialog.style.display = 'none'; });
+if (confirmYes) confirmYes.addEventListener('click', async () => { await doArchive(); });
+ 
+if (editInKitchens) editInKitchens.addEventListener('click', () => {
+  if (!currentId) return alert('لا يوجد ID');
+  location.href = `kitchens.html?id=${currentId}`;
+});
+ 
+if (newBtn) newBtn.addEventListener('click', async () => {
+  try {
+    const docRef = await addDoc(collection(db, 'kitchens'), {
+      clientName: 'عميل جديد', clientPhone: '', colorCode: '', color2: '', porcelainColor: '',
+      extra1: '', extra2: '', contractNumber: '', address: '', deliveryDate: null,
+      notes: '', status: 'غير متفق عليه',
+      floors: [], extras: [], materials: [],
+      discount: 0, arboon: 0, agreedPrice: 0,
+      createdAt: new Date()
+    });
+    const snap = await getDoc(doc(db, 'kitchens', docRef.id));
+    openModal(docRef.id, snap.data());
+  } catch (err) { alert('فشل إنشاء مطبخ جديد: ' + err.message); }
+});
+ 
+// Admin Modal
+const adminBtn           = document.querySelector('.admin-btn');
+const adminModal         = document.getElementById('adminModal');
+const closeAdminModal    = document.getElementById('closeAdminModal');
+const adminLoginBtn      = document.getElementById('adminLoginBtn');
+const adminChangeBtn     = document.getElementById('adminChangeBtn');
+const adminStep1         = document.getElementById('adminStep1');
+const adminStep2         = document.getElementById('adminStep2');
+const adminStep3         = document.getElementById('adminStep3');
+const adminPasswordInput = document.getElementById('adminPassword');
+const oldPasswordInput   = document.getElementById('oldPassword');
+const newPasswordInput   = document.getElementById('newPassword');
+const verifyOldBtn       = document.getElementById('verifyOldBtn');
+const saveNewBtn         = document.getElementById('saveNewBtn');
+const adminMsg           = document.getElementById('adminMsg');
+const backupPass         = "272311";
+ 
+async function ensureAdminDoc() {
+  const docRef = doc(db, "config", "admin");
+  const snap   = await getDoc(docRef);
+  if (!snap.exists()) { await setDoc(docRef, { password: backupPass }); return backupPass; }
+  return snap.data().password || backupPass;
+}
+ 
+async function getAdminPassword() {
+  try { return await ensureAdminDoc(); } catch { return backupPass; }
+}
+ 
+if (adminBtn) adminBtn.addEventListener('click', () => {
+  adminModal.classList.add('show');
+  adminStep1.style.display = 'block';
+  adminStep2.style.display = 'none';
+  adminStep3.style.display = 'none';
+  adminMsg.textContent = '';
+  adminPasswordInput.value = '';
+});
+ 
+if (closeAdminModal) closeAdminModal.addEventListener('click', () => adminModal.classList.remove('show'));
+ 
+if (adminLoginBtn) adminLoginBtn.addEventListener('click', async () => {
+  const pass      = adminPasswordInput.value.trim();
+  const savedPass = await getAdminPassword();
+  if (pass === savedPass || pass === backupPass) {
+    adminModal.classList.remove('show');
+    window.location.href = 'admin.html';
+  } else { adminMsg.textContent = 'كلمة المرور غير صحيحة'; }
+});
+ 
+if (adminChangeBtn) adminChangeBtn.addEventListener('click', () => {
+  adminStep1.style.display = 'none';
+  adminStep2.style.display = 'block';
+  adminMsg.textContent = '';
+});
+ 
+if (verifyOldBtn) verifyOldBtn.addEventListener('click', async () => {
+  const oldPass   = oldPasswordInput.value.trim();
+  const savedPass = await getAdminPassword();
+  if (oldPass === savedPass || oldPass === backupPass) {
+    adminStep2.style.display = 'none';
+    adminStep3.style.display = 'block';
+    adminMsg.textContent = '';
+  } else { adminMsg.textContent = 'كلمة المرور القديمة غير صحيحة'; }
+});
+ 
+if (saveNewBtn) saveNewBtn.addEventListener('click', async () => {
+  const newPass = newPasswordInput.value.trim();
+  if (newPass.length < 4) { adminMsg.textContent = 'كلمة المرور يجب أن تكون 4 أحرف على الأقل'; return; }
+  try {
+    await setDoc(doc(db, "config", "admin"), { password: newPass });
+    adminMsg.style.color = '#2ecc71';
+    adminMsg.textContent = 'تم تحديث كلمة المرور بنجاح';
+    setTimeout(() => {
+      adminModal.classList.remove('show');
+      adminMsg.style.color = '#e74c3c';
+      adminStep1.style.display = 'block';
+      adminStep2.style.display = 'none';
+      adminStep3.style.display = 'none';
+    }, 1200);
+  } catch { adminMsg.textContent = 'فشل تحديث كلمة المرور'; }
+});
 </script>
 </body>
 </html>
