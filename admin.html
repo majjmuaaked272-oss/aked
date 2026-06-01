@@ -24,7 +24,6 @@
     --field-gap:10px;
   }
 
-  /* Reset */
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
@@ -37,7 +36,7 @@
     line-height:1.5;
   }
 
-  /* Header */
+
   header{
     position:fixed; inset:0 auto auto 0; height:72px;
     width:100%; display:flex; align-items:center;
@@ -57,7 +56,7 @@
   }
   nav.header-nav a:hover{ color:var(--gold); background:rgba(255,255,255,0.02) }
 
-  /* admin icon button */
+
   .admin-btn{
     width:44px; height:44px; border-radius:999px; display:inline-grid; place-items:center;
     background: linear-gradient(135deg,var(--gold),#d4b873);
@@ -66,16 +65,16 @@
   }
   .admin-btn:hover{ transform:scale(1.06) }
 
-  /* Page container */
+ 
   .page {
     max-width:var(--max-width); margin:106px auto 60px auto; padding: 0 18px;
     display:grid; grid-template-columns: 1fr 360px; gap:28px;
   }
 
-  /* Main column */
+
   .main { display:flex; flex-direction:column; gap:var(--gap); }
 
-  /* Sidebar */
+ 
   .sidebar { display:flex; flex-direction:column; gap:var(--gap); position:relative; }
 
   /* Card */
@@ -89,7 +88,7 @@
   .card h3{ color:var(--gold); margin-bottom:10px; font-size:18px }
   .card .muted { color:var(--muted-text); font-size:13px; margin-top:8px }
 
-  /* NEW: Form field wrapper (consistent styled inputs) */
+
   .field {
     display:flex;
     gap:var(--field-gap);
@@ -97,7 +96,7 @@
     margin-top:12px;
     width:100%;
   }
-  /* label appears on the right (rtl) */
+  
   .field .label {
     min-width:140px;
     color:var(--muted-text);
@@ -111,7 +110,7 @@
     gap:8px;
     align-items:center;
   }
-  /* uniform input look */
+
   .control input[type="text"],
   .control input[type="number"],
   .control textarea,
@@ -130,10 +129,10 @@
   .control input:focus, .control textarea:focus, .control select:focus {
     outline:none; border-color:var(--gold); box-shadow:0 8px 28px rgba(191,163,108,0.08);
   }
-  /* small helper text */
+
   .field .hint { color:var(--muted-text); font-size:12px; margin-top:6px }
 
-  /* improved list items with inline editable fields */
+
   .list { display:flex; flex-direction:column; gap:10px; margin-top:10px }
   .list .item {
     display:grid; grid-template-columns: 1fr 140px 48px; gap:10px; align-items:center;
@@ -143,7 +142,7 @@
   .list .item input.price { width:100%; height:40px; padding:8px 10px; text-align:left; font-weight:700; border-radius:8px; background:#090909; border:1px solid rgba(255,255,255,0.03); color:var(--text); }
   .list .item button { height:38px; width:40px; border-radius:8px; border:none; background:rgba(255,0,0,0.12); color:var(--danger); font-weight:800; cursor:pointer }
 
-  /* gallery cards: tighten layout */
+  
   .gallery-grid{ display:grid; gap:12px; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); margin-top:12px }
   .img-card{
     background:#0b0b0b; border-radius:10px; padding:12px; border:1px solid var(--muted);
@@ -153,7 +152,7 @@
   .img-card input, .img-card textarea{ background:#090909; border:1px solid rgba(255,255,255,0.03); padding:8px 10px; border-radius:8px; color:var(--text); width:100%; }
   .img-card textarea{ min-height:64px; resize:vertical; }
 
-  /* Floors special layout */
+
   .floor-card{ display:flex; flex-direction:column; gap:8px; padding:10px; border-radius:10px; background:#080808; border:1px solid var(--muted) }
   .floor-top{ display:flex; gap:8px; align-items:center; justify-content:space-between }
   .floor-top input { flex:1; height:40px; padding:8px 10px; border-radius:8px; background:#090909; border:1px solid rgba(255,255,255,0.03); color:var(--text) }
@@ -162,12 +161,12 @@
   .floor-wood-row span{ min-width:120px; color:var(--gold); font-weight:700; }
   .floor-wood-row input{ width:120px; height:36px; padding:6px 8px; border-radius:8px; background:#090909; border:1px solid rgba(255,255,255,0.03); color:var(--text) }
 
-  /* Sidebar summary */
+
   .summary{ display:flex; flex-direction:column; gap:12px; margin-top:8px }
   .stat{ background:#070707; padding:12px; border-radius:10px; border:1px solid var(--muted); display:flex; justify-content:space-between; align-items:center }
   .stat strong{ color:var(--gold); font-size:18px }
 
-  /* Buttons row (consistent) */
+ 
   .actions { display:flex; gap:10px; justify-content:flex-end; align-items:center; margin-top:14px; flex-wrap:wrap }
   .btn {
     padding:10px 18px; border-radius:10px; border:none; cursor:pointer; font-weight:800;
@@ -178,7 +177,6 @@
   .btn.danger{ background:var(--danger); color:#fff }
   .btn.small{ padding:7px 10px; font-weight:700; border-radius:8px }
 
-  /* Responsive */
   @media (max-width:1024px){
     .page{ grid-template-columns: 1fr 320px; padding:0 12px }
   }
@@ -192,7 +190,7 @@
 
 
   
-/* small UX tweak: nicer number input spin visibility */
+
 input[type=number] {
   -moz-appearance: textfield; /* Firefox */
   -webkit-appearance: none;    /* Chrome, Safari, Edge */
@@ -261,12 +259,9 @@ input[type=number]::-webkit-outer-spin-button {
     width: 100%;
   }
 }
-
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <header>
   <div class="header-inner">
     <div class="brand">
@@ -280,7 +275,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     <div style="display:flex;gap:12px;align-items:center">
       <button class="admin-btn" title="لوحة الأدمن" aria-label="الأدمن">
-        <!-- user icon -->
+    
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M8 8a3 3 0 100-6 3 3 0 000 6z" fill="#fff"/>
           <path d="M2 14s1.5-4 6-4 6 4 6 4H2z" fill="#fff"/>
@@ -290,13 +285,12 @@ input[type=number]::-webkit-outer-spin-button {
   </div>
 </header>
 
-<!-- PAGE -->
 <div class="page">
 
-  <!-- MAIN -->
+  
   <div class="main">
 
-    <!-- Gallery -->
+
     <section class="card" aria-labelledby="gallery-title">
       <h3 id="gallery-title">إدارة معرض الأعمال</h3>
 
@@ -313,12 +307,12 @@ input[type=number]::-webkit-outer-spin-button {
       <div id="galleryPreview" class="gallery-grid" aria-live="polite"></div>
     </section>
 
-    <!-- Kitchen Management -->
+   
     <section class="card" aria-labelledby="kitchen-title">
       <h3 id="kitchen-title">إعدادات المطابخ</h3>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <!-- Woods -->
+    
         <div>
           <div class="field">
             <div class="label">أضف نوع خشب</div>
@@ -332,7 +326,7 @@ input[type=number]::-webkit-outer-spin-button {
           <div class="list" id="woods" aria-live="polite"></div>
         </div>
 
-        <!-- Floors -->
+     
         <div>
           <div class="field">
             <div class="label">أضف طابق (زر يظهر في صفحة المطابخ)</div>
@@ -351,10 +345,9 @@ input[type=number]::-webkit-outer-spin-button {
         </div>
       </div>
 
-      <!-- Extras & Materials -->
+    
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px">
 
-  <!-- الإضافات -->
   <div>
     <h3 style="margin-bottom:8px">الإضافات</h3>
     <div class="list" id="extras"></div>
@@ -366,7 +359,7 @@ input[type=number]::-webkit-outer-spin-button {
     </div>
   </div>
 
-  <!-- المتريال -->
+  
   <div>
     <h3 style="margin-bottom:8px">المتريال</h3>
     <div class="list" id="materials"></div>
@@ -381,7 +374,6 @@ input[type=number]::-webkit-outer-spin-button {
 
   </div>
 
-  <!-- SIDEBAR -->
   <aside class="sidebar" aria-labelledby="sidebar-title">
     <div class="card" id="sidebar-summary">
       <h3 id="sidebar-title">خلاصة سريعة</h3>
@@ -403,9 +395,8 @@ input[type=number]::-webkit-outer-spin-button {
   </aside>
 </div>
 
-<!-- Firebase + Script -->
 <script type="module">
-  /* سكربت الإدارة: جاهز للعمل محلياً (localStorage) وبإمكانه المزامنة مع Firestore إن قمت بوضع إعداداتك */
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
   import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
@@ -428,8 +419,6 @@ const firebaseConfig = {
     console.warn("Firebase init failed or skipped — using local fallback only.", e);
     db = null; adminDocRef = null;
   }
-
-  // DOM refs
   const imageInput = document.getElementById('imageInput');
   const pickFilesBtn = document.getElementById('pickFilesBtn');
   const galleryPreview = document.getElementById('galleryPreview');
@@ -447,7 +436,6 @@ const firebaseConfig = {
 
   let kitchen = { woods: [], extras: [], materials: [], floors: [] };
 
-  /* Gallery (local) */
   function loadGallery(){
     const data = JSON.parse(localStorage.getItem(LOCAL_GALLERY_KEY) || '[]');
     galleryPreview.innerHTML = '';
@@ -457,7 +445,7 @@ const firebaseConfig = {
       const nameInput = document.createElement('input');
       nameInput.placeholder = 'اسم الصورة';
       nameInput.value = it.name || '';
-      // descInput declared after but used in handler — it's fine because handler runs later
+   
       const descInput = document.createElement('textarea');
       descInput.placeholder = 'تفاصيل الصورة';
       descInput.value = it.desc || '';
@@ -513,7 +501,7 @@ const firebaseConfig = {
 
   pickFilesBtn.addEventListener('click', ()=> imageInput.click());
 
-  /* Kitchen data (local + Firestore) */
+  
   function loadKitchenFromLocal(){
     const s = localStorage.getItem(LOCAL_KITCHEN_KEY);
     if(!s) return false;
@@ -538,7 +526,6 @@ const firebaseConfig = {
     } catch(e){ console.warn('ensureAdminDocExists error', e); }
   }
 
-  /* Render lists as editable fields */
   function renderStats(){
     statWoods.textContent = (kitchen.woods||[]).length;
     statFloors.textContent = (kitchen.floors||[]).length;
@@ -560,7 +547,6 @@ const firebaseConfig = {
         saveKitchen();
       });
 
-      // price input
       const priceInput = document.createElement('input');
       priceInput.className = 'price';
       priceInput.type = 'number';
@@ -616,7 +602,6 @@ const firebaseConfig = {
     (kitchen.floors||[]).forEach((f,fi)=>{
       const container = document.createElement('div'); container.className='floor-card';
 
-      // top row: editable floor name + delete
       const top = document.createElement('div'); top.className = 'floor-top';
       const nameInput = document.createElement('input');
       nameInput.type = 'text'; nameInput.value = f.name || ''; nameInput.placeholder = 'اسم الطابق';
@@ -654,7 +639,6 @@ const firebaseConfig = {
     renderStats();
   }
 
-  /* CRUD helpers */
   function addWoodFromInput(){
     const name = (document.getElementById('newWoodName').value||'').trim();
     if(!name){ alert('ادخل اسم نوع الخشب'); return; }
@@ -731,7 +715,6 @@ const firebaseConfig = {
   }
   window.clearAllFloors = clearAllFloors;
 
-  /* Initialization */
   async function initAdmin(){
     const hadLocal = loadKitchenFromLocal();
     if(hadLocal) renderAll();
@@ -766,7 +749,7 @@ const firebaseConfig = {
     return String(str||'').replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
   }
 
-  // expose utilities
+
   window.addImages = addImages;
   window.clearGallery = clearGallery;
   window.loadGallery = loadGallery;
@@ -774,7 +757,6 @@ const firebaseConfig = {
   window.renderWoods = renderWoods;
   window.renderAll = renderAll;
 
-  // initial stats update
   setTimeout(()=>{ renderStats(); }, 400);
 </script>
 </body>
